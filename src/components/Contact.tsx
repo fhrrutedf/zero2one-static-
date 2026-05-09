@@ -5,7 +5,7 @@ import { useLanguage } from './LanguageProvider';
 import { MapPin, Phone, Mail, Clock, Send, Instagram, Twitter, Linkedin, Facebook } from 'lucide-react';
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -40,7 +40,7 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Form */}
-          <div className={`${visible ? 'animate-fade-in-right' : 'opacity-0'}`}>
+          <div className={`${visible ? (isRTL ? 'animate-fade-in-right' : 'animate-fade-in-left') : 'opacity-0'}`}>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_name')}</label>
@@ -90,13 +90,13 @@ export default function Contact() {
           </div>
 
           {/* Contact Info + Map */}
-          <div className={`${visible ? 'animate-fade-in-left' : 'opacity-0'}`}>
+          <div className={`${visible ? (isRTL ? 'animate-fade-in-left' : 'animate-fade-in-right') : 'opacity-0'}`}>
             {/* Map */}
             <div className="rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-8 shadow-lg">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463877.0239189283!2d46.54271704999999!3d24.725195199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2z2KfZhNix2YrYp9i2!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa"
                 width="100%"
-                height="200"
+                height="220"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"

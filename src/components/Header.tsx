@@ -18,7 +18,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const { lang, toggleLang, t } = useLanguage();
+  const { lang, toggleLang, t, isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,7 +135,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`mobile-menu fixed top-0 right-0 w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden ${
+        className={`mobile-menu fixed top-0 ${isRTL ? 'right-0' : 'left-0'} w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden ${
           isMobileMenuOpen ? 'open' : ''
         }`}
       >

@@ -11,11 +11,11 @@ export default function WhatsAppButton() {
       href="https://wa.me/966500000000"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-50 group"
+      className="fixed bottom-4 sm:bottom-6 end-4 sm:end-6 z-50 group"
       aria-label={t('whatsapp_tooltip')}
     >
       {/* Tooltip */}
-      <span className="absolute bottom-full left-0 mb-2 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-white bg-gray-800 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+      <span className="absolute bottom-full start-0 mb-2 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-white bg-gray-800 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         {t('whatsapp_tooltip')}
       </span>
       {/* Button */}

@@ -48,6 +48,22 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
+        {/* Inline script to prevent RTL/LTR flash on language switch */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('lang');
+                  if (stored === 'en') {
+                    document.documentElement.lang = 'en';
+                    document.documentElement.dir = 'ltr';
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
         {/* Google Analytics */}
         <script
           async

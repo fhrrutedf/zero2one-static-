@@ -5,7 +5,7 @@ import { useLanguage } from './LanguageProvider';
 import { Award, Users, Clock } from 'lucide-react';
 
 export default function About() {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -23,7 +23,7 @@ export default function About() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Image Side */}
-          <div className={`relative ${visible ? 'animate-fade-in-right' : 'opacity-0'}`}>
+          <div className={`relative ${visible ? (isRTL ? 'animate-fade-in-right' : 'animate-fade-in-left') : 'opacity-0'}`}>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
               <div className="aspect-[4/3] bg-gradient-to-br from-gold/20 via-violet/10 to-gold/5 flex items-center justify-center">
                 <div className="text-center p-6 sm:p-8">
@@ -36,7 +36,7 @@ export default function About() {
               </div>
             </div>
             {/* Floating stat card */}
-            <div className="absolute -bottom-4 -left-2 sm:-bottom-6 sm:-left-6 bg-white rounded-lg sm:rounded-xl shadow-xl p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+            <div className={`absolute -bottom-4 ${isRTL ? '-left-2 sm:-left-6' : '-right-2 sm:-right-6'} bg-white rounded-lg sm:rounded-xl shadow-xl p-3 sm:p-4 flex items-center gap-2 sm:gap-3`}>
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0">
                 <Users size={20} className="text-gold sm:w-6 sm:h-6" />
               </div>
@@ -48,7 +48,7 @@ export default function About() {
           </div>
 
           {/* Text Side */}
-          <div className={`${visible ? 'animate-fade-in-left' : 'opacity-0'}`}>
+          <div className={`${visible ? (isRTL ? 'animate-fade-in-left' : 'animate-fade-in-right') : 'opacity-0'}`}>
             <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gold/10 text-gold text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               {t('about_tag')}
             </span>

@@ -141,6 +141,12 @@
     @apply bg-background text-foreground;
     overflow-x: hidden;
     width: 100%;
+    /* Smooth direction transition */
+    transition: opacity 0.15s ease;
+  }
+  /* Brief opacity flash during direction change for smoother visual transition */
+  html.dir-changing body {
+    opacity: 0.97;
   }
   img, svg, video {
     max-width: 100%;
@@ -457,7 +463,7 @@
   content: "";
   position: absolute;
   bottom: -4px;
-  right: 0;
+  inset-inline-start: 0;
   width: 0;
   height: 2px;
   background: #b8860b;
@@ -502,12 +508,35 @@ select:focus {
   animation: pulse-green 2s ease-in-out infinite;
 }
 
-/* RTL direction support for LTR toggle */
+/* Direction-aware mobile menu */
 [dir="ltr"] .mobile-menu {
   transform: translateX(-100%);
 }
 [dir="ltr"] .mobile-menu.open {
   transform: translateX(0);
+}
+
+/* Direction-aware animations */
+@keyframes fadeInStart {
+  from { opacity: 0; transform: translateX(var(--anim-direction, 30px)); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInEnd {
+  from { opacity: 0; transform: translateX(var(--anim-direction-neg, -30px)); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+[dir="rtl"] .animate-fade-in-start {
+  animation: fadeInRight 0.6s ease-out forwards;
+}
+[dir="ltr"] .animate-fade-in-start {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+[dir="rtl"] .animate-fade-in-end {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+[dir="ltr"] .animate-fade-in-end {
+  animation: fadeInRight 0.6s ease-out forwards;
 }
 
 /* Line clamp utility */
