@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متطلبات كاتب المحتوى - موقع إلكتروني</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap');
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  :root {
+    --primary: #1a365d;
+    --primary-light: #2a5298;
+    --accent: #c9a84c;
+    --accent-light: #f0e6c8;
+    --bg-dark: #0f1724;
+    --bg-light: #ffffff;
+    --bg-cream: #faf8f4;
+    --text-dark: #1a1a2e;
+    --text-muted: #6b7280;
+    --border: #e5e1d8;
+    --section-bg: #f7f5f0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 210mm;
+    font-family: 'Noto Sans Arabic', 'Arial', sans-serif;
+    direction: rtl;
+    color: var(--text-dark);
+    background: var(--bg-light);
+    line-height: 1.8;
+    font-size: 11pt;
+  }
+
+  /* Cover Page */
+  .cover {
+    width: 210mm;
+    min-height: 297mm;
+    background: linear-gradient(160deg, var(--bg-dark) 0%, #1a2744 40%, #0f1724 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,82,152,0.2) 0%, transparent 70%);
+  }
+
+  .cover-icon {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-icon svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--accent);
+  }
+
+  .cover h1 {
+    font-size: 32pt;
+    font-weight: 900;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .cover h2 {
+    font-size: 16pt;
+    font-weight: 400;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-line {
+    width: 80px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .cover-meta p {
+    color: rgba(255,255,255,0.6);
+    font-size: 10pt;
+    margin-bottom: 6px;
+  }
+
+  /* Content Pages */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 40px 50px;
+    background: var(--bg-light);
+    position: relative;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+  }
+
+  .page-header h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .page-header span {
+    font-size: 9pt;
+    color: var(--text-muted);
+  }
+
+  /* Section Styles */
+  .section {
+    margin-bottom: 28px;
+    page-break-inside: avoid;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .section-number {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13pt;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .section-title h4 {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .section-desc {
+    background: var(--section-bg);
+    border-right: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+    font-size: 10.5pt;
+    color: var(--text-dark);
+    line-height: 1.9;
+  }
+
+  /* Requirements Table */
+  .req-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 10.5pt;
+  }
+
+  .req-table thead th {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 10px 14px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 10pt;
+  }
+
+  .req-table thead th:first-child {
+    border-radius: 0 8px 0 0;
+    width: 35%;
+  }
+
+  .req-table thead th:nth-child(2) {
+    width: 20%;
+  }
+
+  .req-table thead th:nth-child(3) {
+    width: 45%;
+  }
+
+  .req-table thead th:last-child {
+    border-radius: 8px 0 0 0;
+  }
+
+  .req-table tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+
+  .req-table tbody tr:nth-child(even) {
+    background: var(--bg-cream);
+  }
+
+  .req-table .field-name {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .req-table .word-count {
+    display: inline-block;
+    background: var(--accent-light);
+    color: #7a6530;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 9pt;
+    font-weight: 600;
+  }
+
+  .req-table .notes {
+    color: var(--text-muted);
+    font-size: 9.5pt;
+  }
+
+  /* Tip Box */
+  .tip-box {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1px solid #f59e0b;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .tip-box .tip-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: #f59e0b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12pt;
+    font-weight: 800;
+  }
+
+  .tip-box p {
+    font-size: 10pt;
+    color: #92400e;
+    line-height: 1.7;
+  }
+
+  /* SEO Box */
+  .seo-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #3b82f6;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 14px;
+  }
+
+  .seo-box h5 {
+    font-size: 11pt;
+    color: #1e40af;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .seo-box p, .seo-box li {
+    font-size: 10pt;
+    color: #1e3a5f;
+    line-height: 1.7;
+  }
+
+  .seo-box ul {
+    padding-right: 18px;
+    margin-top: 6px;
+  }
+
+  .seo-box li {
+    margin-bottom: 4px;
+  }
+
+  /* Summary Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .stat-card {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+
+  .stat-card .stat-num {
+    font-size: 22pt;
+    font-weight: 900;
+    color: var(--primary);
+    display: block;
+  }
+
+  .stat-card .stat-label {
+    font-size: 9pt;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    padding: 8px 14px 8px 8px;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 10.5pt;
+    line-height: 1.7;
+  }
+
+  .checklist li:last-child {
+    border-bottom: none;
+  }
+
+  .check-mark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    display: inline-block;
+  }
+
+  /* Footer */
+  .page-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    right: 50px;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--text-muted);
+  }
+
+  /* Page break */
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Highlight text */
+  .highlight {
+    background: var(--accent-light);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* Bold labels */
+  .label {
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  @media screen {
+    html, body {
+      width: auto;
+    }
+    .page {
+      max-width: 210mm;
+      margin: 20px auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .cover {
+      max-width: 210mm;
+      margin: 20px auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="cover-icon">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+  </div>
+  <h1>متطلبات كاتب المحتوى</h1>
+  <h2>المحتوى النصي المطلوب للموقع الإلكتروني</h2>
+  <div class="cover-line"></div>
+  <div class="cover-meta">
+    <p>وثيقة مرجعية لكاتب المحتوى المتخصص في تحسين محركات البحث</p>
+    <p>المحتوى مطلوب باللغتين: العربية والإنجليزية</p>
+    <p>2026</p>
+  </div>
+</div>
+
+<!-- PAGE 2: Overview + Hero + About -->
+<div class="page">
+  <div class="page-header">
+    <h3>متطلبات كاتب المحتوى - الموقع الإلكتروني</h3>
+    <span>صفحة 2 من 6</span>
+  </div>
+
+  <!-- Overview Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-num">8</span>
+      <span class="stat-label">أقسام تحتاج محتوى</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">2</span>
+      <span class="stat-label">لغة (عربي + إنجليزي)</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">~2000</span>
+      <span class="stat-label">كلمة إجمالية مطلوبة</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">SEO</span>
+      <span class="stat-label">تحسين محركات البحث</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Hero -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">1</div>
+      <h4>قسم الهيرو (الشاشة الرئيسية)</h4>
+    </div>
+    <div class="section-desc">
+      هذا هو أول ما يراه الزائر عند دخول الموقع. يجب أن يكون النص جذّاباً وقصيراً ومباشراً، مع التركيز على إيصال رسالة الشركة بسرعة. النصوص هنا هي الانطباع الأول، لذا يجب أن تكون مدروسة بعناية فائقة وتخاطب العميل المستهدف مباشرة.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">العنوان الرئيسي (Headline)</td>
+          <td><span class="word-count">3-6 كلمات</span></td>
+          <td class="notes">شعار جذّاب يعكس هوية الشركة. يجب أن يحتوي على كلمة مفتاحية رئيسية. مثال: "نصنع حضورك الرقمي" أو "حلول إبداعية متكاملة". تجنّب العبارات العامة مثل "مرحباً بكم".</td>
+        </tr>
+        <tr>
+          <td class="field-name">العنوان الفرعي (Subheadline)</td>
+          <td><span class="word-count">8-15 كلمة</span></td>
+          <td class="notes">جملة وصفية توضّح ما تقدّمه الشركة وتقنع الزائر بالبقاء. يجب أن تذكر الفائدة الأساسية للعميل.</td>
+        </tr>
+        <tr>
+          <td class="field-name">نص زر الإجراء (CTA)</td>
+          <td><span class="word-count">2-4 كلمات</span></td>
+          <td class="notes">نص الزر الرئيسي. مثال: "اكتشف خدماتنا" أو "ابدأ مشروعك الآن". يجب أن يكون واضحاً ومباشراً ويحفّز على النقر.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="seo-box">
+      <h5>&#9733; توجيهات SEO</h5>
+      <p>العنوان الرئيسي يجب أن يحتوي على الكلمة المفتاحية الأساسية للشركة (مثل: "تسويق رقمي"، "تصميم مواقع"، "إدارة سوشيال ميديا"). الكلمة المفتاحية يجب أن تظهر بشكل طبيعي وليس متكلّفاً.</p>
+    </div>
+  </div>
+
+  <!-- Section 2: About -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">2</div>
+      <h4>قسم من نحن (About Us)</h4>
+    </div>
+    <div class="section-desc">
+      هذا القسم يبني الثقة مع الزائر. يجب أن يروي قصة الشركة بشكل احترافي ويوضّح سبب تميّزها عن المنافسين. النص هنا يجب أن يكون دافئاً ومهنياً في الوقت ذاته، مع التركيز على القيمة التي تقدّمها الشركة للعملاء وليس فقط على إنجازاتها.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">فقرة مختصرة</td>
+          <td><span class="word-count">30-50 كلمة</span></td>
+          <td class="notes">ملخص موجز عن الشركة يظهر بشكل بارز. يجب أن يغطّي: من نحن + ماذا نفعل + لمن نعمل. استخدم كلمات مفتاحية بشكل طبيعي.</td>
+        </tr>
+        <tr>
+          <td class="field-name">فقرة مفصّلة</td>
+          <td><span class="word-count">150-200 كلمة</span></td>
+          <td class="notes">تاريخ الشركة، الرؤية، الرسالة، القيم الأساسية، مجالات التخصص. يجب أن يبدأ بجملة قوية تجذب القارئ. استخدم لغة تتحدث عن فائدة العميل.</td>
+        </tr>
+        <tr>
+          <td class="field-name">شعار / قولة ملهمة</td>
+          <td><span class="word-count">5-10 كلمات</span></td>
+          <td class="notes">جملة قصيرة ملهمة تعكس فلسفة الشركة. مثال: "إبداع بلا حدود، نتائج بلا تأخير".</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>متطلبات كاتب المحتوى - الموقع الإلكتروني</span>
+    <span>وثيقة سرية</span>
+  </div>
+</div>
+
+<!-- PAGE 3: Services + Why Us -->
+<div class="page page-break">
+  <div class="page-header">
+    <h3>متطلبات كاتب المحتوى - الموقع الإلكتروني</h3>
+    <span>صفحة 3 من 6</span>
+  </div>
+
+  <!-- Section 3: Services -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">3</div>
+      <h4>قسم الخدمات (Services)</h4>
+    </div>
+    <div class="section-desc">
+      كل خدمة تحتاج اسماً جذّاباً ووصفاً مقنعاً يوضّح الفائدة للعميل. ركّز على النتائج وليس فقط على الميزات. كل وصف خدمة يجب أن يجيب على سؤال: "ما الفائدة التي سأحصل عليها كعميل؟". يتم ربط كل خدمة برابط واتساب مباشر للاستفسار.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">اسم الخدمة</td>
+          <td><span class="word-count">2-4 كلمات</span></td>
+          <td class="notes">اسم واضح ومباشر. مثال: "التصميم الجرافيكي"، "إدارة السوشيال ميديا"، "تطوير المواقع". تجنّب الأسماء الغامضة أو المبالغ فيها.</td>
+        </tr>
+        <tr>
+          <td class="field-name">وصف قصير</td>
+          <td><span class="word-count">20-30 كلمة</span></td>
+          <td class="notes">وصف مختصر يظهر في بطاقة الخدمة. يجب أن يوضّح الفائدة الأساسية بجملتين. استخدم فعلاً يخاطب العميل مباشرة.</td>
+        </tr>
+        <tr>
+          <td class="field-name">وصف تفصيلي</td>
+          <td><span class="word-count">80-120 كلمة</span></td>
+          <td class="notes">وصف شامل يتضمن: ما تتضمنه الخدمة، كيف تتم عملية العمل، النتائج المتوقعة. يجب أن يحتوي على 2-3 كلمات مفتاحية مرتبطة بالخدمة.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <div class="tip-icon">!</div>
+      <p><strong>ملاحظة مهمة:</strong> يُرجى تقديم قائمة بالخدمات الفعلية التي تقدّمها الشركة (عادةً 4-6 خدمات) مع تحديد أي خدمات إضافية غير المذكورة أعلاه.</p>
+    </div>
+    <div class="seo-box">
+      <h5>&#9733; توجيهات SEO للخدمات</h5>
+      <ul>
+        <li>كل خدمة يجب أن تستهدف كلمة مفتاحية مختلفة (مثل: "تصميم جرافيك احترافي"، "إدارة حسابات سوشيال ميديا")</li>
+        <li>استخدم مرادفات طبيعية للكلمات المفتاحية داخل الوصف التفصيلي</li>
+        <li>اسم الخدمة يجب أن يحتوي على الكلمة المفتاحية الرئيسية</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 4: Why Us -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">4</div>
+      <h4>قسم ليش نحن؟ (What Distinguishes Us)</h4>
+    </div>
+    <div class="section-desc">
+      هذا القسم يقنع الزائر باختيار الشركة على المنافسين. كل نقطة يجب أن تعطي سبباً حقيقياً ومحدداً. تجنّب العبارات العامة مثل "نحن الأفضل" واستخدم أدلة محددة وأرقاماً إن أمكن. ركّز على ما يميّز الشركة فعلاً وليس على ما هو شائع في السوق.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">عنوان النقطة</td>
+          <td><span class="word-count">2-3 كلمات</span></td>
+          <td class="notes">عنوان موجز وقوي. مثال: "جودة لا تُضاهى"، "التزام بالمواعيد"، "فريق متخصص". تجنّب العناوين الطويلة.</td>
+        </tr>
+        <tr>
+          <td class="field-name">وصف النقطة</td>
+          <td><span class="word-count">25-40 كلمة</span></td>
+          <td class="notes">شرح مختصر ومقنع. يجب أن يدعم العنوان بدليل أو مثال محدد. استخدم أرقاماً إن أمكن (مثل: "أكثر من 150 مشروعاً ناجحاً").</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <div class="tip-icon">!</div>
+      <p><strong>العدد المطلوب:</strong> 4-6 نقاط تميّز. يُفضّل أن تشمل: جودة العمل، الالتزام، الدعم، الخبرة، الابتكار، أو أي ميزة تنافسية حقيقية.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>متطلبات كاتب المحتوى - الموقع الإلكتروني</span>
+    <span>وثيقة سرية</span>
+  </div>
+</div>
+
+<!-- PAGE 4: Stats + Portfolio -->
+<div class="page page-break">
+  <div class="page-header">
+    <h3>متطلبات كاتب المحتوى - الموقع الإلكتروني</h3>
+    <span>صفحة 4 من 6</span>
+  </div>
+
+  <!-- Section 5: Stats -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">5</div>
+      <h4>قسم المشاريع بالأرقام (Stats)</h4>
+    </div>
+    <div class="section-desc">
+      أرقام حقيقية تعكس حجم إنجازات الشركة وتبني المصداقية. الأرقام تُعرض مع عدّاد متحرك (animation) لذا يجب أن تكون أرقاماً حقيقية ودقيقة. كل رقم يجب أن يكون مثيراً للاهتمام ويعكس إنجازاً حقيقياً. تجنّب الأرقام التقريبية أو المبالغ فيها.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">الرقم + العنوان</td>
+          <td><span class="word-count">4 إدخالات</span></td>
+          <td class="notes">كل إدخال يتضمن: رقم محدد + عنوان وصفي. مثال: "+150 مشروع منجز"، "+80 عميل راضٍ"، "+5 سنوات خبرة"، "+10 جوائز محلية". الأرقام يجب أن تكون حقيقية وقابلة للتحقق.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 6: Portfolio -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">6</div>
+      <h4>قسم معرض الأعمال (Portfolio)</h4>
+    </div>
+    <div class="section-desc">
+      يعرض أعمال الشركة السابقة لإثبات القدرات وجذب العملاء المحتملين. كل مشروع يجب أن يروي قصة نجاح موجزة. ركّز على النتائج المحققة وليس فقط على وصف العمل المنفّذ. هذا القسم هو الأقوى في إقناع العميل المحتمل بالتعامل مع الشركة.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">اسم المشروع</td>
+          <td><span class="word-count">2-5 كلمات</span></td>
+          <td class="notes">اسم واضح يدل على طبيعة المشروع وإن أمكن اسم العميل (إذا سمح بذلك). مثال: "حملة تسويقية لشركة الأفق".</td>
+        </tr>
+        <tr>
+          <td class="field-name">نوع/تصنيف المشروع</td>
+          <td><span class="word-count">1-2 كلمة</span></td>
+          <td class="notes">التصنيف الرئيسي. مثال: "تصميم جرافيك"، "تسويق رقمي"، "إنتاج فيديو"، "بناء هوية بصرية".</td>
+        </tr>
+        <tr>
+          <td class="field-name">وصف المشروع</td>
+          <td><span class="word-count">25-40 كلمة</span></td>
+          <td class="notes">ملخص يوضّح: ماذا تم تنفيذه + التحدي + النتيجة. ركّز على القيمة المحققة للعميل وليس على التفاصيل التقنية.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <div class="tip-icon">!</div>
+      <p><strong>العدد المطلوب:</strong> 6-8 مشاريع كحد أدنى. يُفضّل تنويع التصنيفات لعرض مجالات التخصص المختلفة.</p>
+    </div>
+  </div>
+
+  <!-- Section 7: Contact -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">7</div>
+      <h4>قسم تواصل معنا (Contact)</h4>
+    </div>
+    <div class="section-desc">
+      القسم الأخير في الصفحة ويهدف إلى تحويل الزائر إلى عميل فعلي عبر نموذج تواصل سهل ومباشر. النصوص هنا يجب أن تكون مشجّعة ومطمئنة وتخاطب الزائر بأن الشركة جاهزة لمساعدته.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">عنوان القسم</td>
+          <td><span class="word-count">2-4 كلمات</span></td>
+          <td class="notes">مثال: "تواصل معنا" أو "لنبني مشروعك معاً". يجب أن يكون ترحيبياً ومباشراً.</td>
+        </tr>
+        <tr>
+          <td class="field-name">نص تشجيعي</td>
+          <td><span class="word-count">20-30 كلمة</span></td>
+          <td class="notes">جملة تحفّز الزائر على إرسال رسالة. مثال: "نحن هنا لمساعدتك في تحقيق رؤيتك الرقمية. أخبرنا عن مشروعك وسنتواصل معك خلال 24 ساعة."</td>
+        </tr>
+        <tr>
+          <td class="field-name">رسالة نجاح الإرسال</td>
+          <td><span class="word-count">10-15 كلمة</span></td>
+          <td class="notes">الرسالة التي تظهر بعد إرسال النموذج بنجاح. مثال: "شكراً لتواصلك! سنرد عليك خلال 24 ساعة عمل."</td>
+        </tr>
+        <tr>
+          <td class="field-name">رسالة خطأ</td>
+          <td><span class="word-count">10-15 كلمة</span></td>
+          <td class="notes">الرسالة عند فشل الإرسال. مثال: "عذراً، حدث خطأ ما. يُرجى المحاولة مرة أخرى أو التواصل عبر الواتساب."</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>متطلبات كاتب المحتوى - الموقع الإلكتروني</span>
+    <span>وثيقة سرية</span>
+  </div>
+</div>
+
+<!-- PAGE 5: SEO + Footer -->
+<div class="page page-break">
+  <div class="page-header">
+    <h3>متطلبات كاتب المحتوى - الموقع الإلكتروني</h3>
+    <span>صفحة 5 من 6</span>
+  </div>
+
+  <!-- Section 8: SEO Meta -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">8</div>
+      <h4>محتوى تحسين محركات البحث (SEO Meta Tags)</h4>
+    </div>
+    <div class="section-desc">
+      هذه النصوص لا تظهر على الموقع مباشرة لكنها أساسية لظهور الموقع في نتائج بحث Google. كل صفحة في الموقع تحتاج عنواناً ووصفاً ميتاً مُحسّنين. هذه النصوص هي ما يراه المستخدم في نتائج البحث قبل أن ينقر على الموقع، لذا يجب أن تكون جذّابة وتحتوي على كلمات مفتاحية.
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">عنوان الصفحة (Meta Title)</td>
+          <td><span class="word-count">50-60 حرفاً</span></td>
+          <td class="notes">يظهر في تبويب المتصفح ونتائج البحث. يجب أن يحتوي على الكلمة المفتاحية الرئيسية واسم الشركة. مثال: "شركة تسويق رقمي | [اسم الشركة]".</td>
+        </tr>
+        <tr>
+          <td class="field-name">وصف الصفحة (Meta Description)</td>
+          <td><span class="word-count">150-160 حرفاً</span></td>
+          <td class="notes">يظهر تحت العنوان في نتائج البحث. يجب أن يكون جذّاباً ويحتوي على الكلمة المفتاحية ويدعو للنقر. مثال: "نقدّم حلول تسويق رقمي متكاملة تشمل إدارة السوشيال ميديا وتصميم المواقع والإنتاج المرئي. أكثر من 150 مشروعاً ناجحاً."</td>
+        </tr>
+        <tr>
+          <td class="field-name">الكلمات المفتاحية (Keywords)</td>
+          <td><span class="word-count">5-8 كلمات</span></td>
+          <td class="notes">قائمة بالكلمات المفتاحية المستهدفة لكل صفحة. يجب أن تشمل: كلمات رئيسية + كلمات طويلة الذيل (long-tail). مثال: "تسويق رقمي، تصميم مواقع، إدارة سوشيال ميديا، شركة تسويق في [المدينة]".</td>
+        </tr>
+        <tr>
+          <td class="field-name">نص Open Graph (للسوشيال ميديا)</td>
+          <td><span class="word-count">عنوان + وصف</span></td>
+          <td class="notes">النص الذي يظهر عند مشاركة الموقع على فيسبوك/تويتر/لينكدإن. يجب أن يكون مختلفاً قليلاً عن Meta Description ليناسب سياق السوشيال ميديا.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="seo-box">
+      <h5>&#9733; الكلمات المفتاحية المطلوبة لكل صفحة</h5>
+      <ul>
+        <li><strong>الصفحة الرئيسية:</strong> الكلمة المفتاحية الأساسية للشركة + اسم الشركة</li>
+        <li><strong>قسم الخدمات:</strong> كلمة مفتاحية مختلفة لكل خدمة</li>
+        <li><strong>قسم معرض الأعمال:</strong> "أعمال [اسم الشركة]" + "مشاريع [مجال التخصص]"</li>
+        <li><strong>قسم التواصل:</strong> "تواصل مع [اسم الشركة]" + "شركة [مجال] في [المدينة]"</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 9: Footer + Misc -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">9</div>
+      <h4>نصوص ثانوية (Footer وغيرها)</h4>
+    </div>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>الطول المطلوب</th>
+          <th>ملاحظات وتوجيهات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">نص الفوتر (حقوق النشر)</td>
+          <td><span class="word-count">10-20 كلمة</span></td>
+          <td class="notes">وصف مختصر + حقوق النشر. مثال: "جميع الحقوق محفوظة لشركة [الاسم] 2026. نصنع حضورك الرقمي بابتكار واحترافية."</td>
+        </tr>
+        <tr>
+          <td class="field-name">نص زر الواتساب العائم</td>
+          <td><span class="word-count">3-6 كلمات</span></td>
+          <td class="notes">نص الترحيب في نافذة الواتساب العائمة. مثال: "كيف نقدر نساعدك؟" أو "مرحباً! شلون نقدر نخدمك؟"</td>
+        </tr>
+        <tr>
+          <td class="field-name">نص صفحة 404</td>
+          <td><span class="word-count">15-20 كلمة</span></td>
+          <td class="notes">رسالة عند دخول صفحة غير موجودة. يجب أن تكون ودودة وتقدّم بديلاً. مثال: "يبدو أن هذه الصفحة غير موجودة. دعنا نعيدك إلى الصفحة الرئيسية."</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>متطلبات كاتب المحتوى - الموقع الإلكتروني</span>
+    <span>وثيقة سرية</span>
+  </div>
+</div>
+
+<!-- PAGE 6: Summary Checklist -->
+<div class="page page-break">
+  <div class="page-header">
+    <h3>متطلبات كاتب المحتوى - الموقع الإلكتروني</h3>
+    <span>صفحة 6 من 6</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <div class="section-number">&#10003;</div>
+      <h4>ملخّص شامل - قائمة التحقق النهائية</h4>
+    </div>
+    <div class="section-desc">
+      تأكّد من تسليم كل العناصر التالية باللغتين العربية والإنجليزية. كل عنصر يجب أن يكون في ملف منفصل أو في جدول واضح يسهّل نسخه إلى الموقع. يُفضّل تسليم المحتوى بملف Word أو Google Doc مع تحديد كل قسم بوضوح.
+    </div>
+  </div>
+
+  <ul class="checklist">
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>عنوان هيرو + فرعي + نص زر CTA</strong> - بالعربي والإنجليزي (3 حقول × 2 لغة = 6 نصوص)</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>فقرة "من نحن" مختصرة + مفصّلة + شعار</strong> - بالعربي والإنجليزي (3 حقول × 2 لغة = 6 نصوص)</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>أسماء + وصف الخدمات (قصير + تفصيلي)</strong> - لكل خدمة × عدد الخدمات × 2 لغة</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>نقاط التميّز (عنوان + وصف)</strong> - 4-6 نقاط × 2 حقول × 2 لغة</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>أرقام الإنجازات</strong> - 4 أرقام مع عناوينها (بالعربي والإنجليزي)</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>أسماء + أوصاف المشاريع</strong> - 6-8 مشاريع × 3 حقول × 2 لغة</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>نصوص قسم التواصل</strong> - عنوان + تشجيعي + رسائل النجاح والخطأ × 2 لغة</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>SEO Meta Tags</strong> - عنوان + وصف + كلمات مفتاحية + Open Graph لكل صفحة × 2 لغة</div>
+    </li>
+    <li>
+      <span class="check-mark"></span>
+      <div><strong>نصوص ثانوية</strong> - فوتر + واتساب + صفحة 404 × 2 لغة</div>
+    </li>
+  </ul>
+
+  <div class="tip-box">
+    <div class="tip-icon">!</div>
+    <p><strong>تنبيه مهم:</strong> كل المحتوى يجب أن يكون أصلياً وغير منسوخ من مواقع أخرى. المحتوى المنسوخ يضرّ بترتيب الموقع في محركات البحث بشكل كبير. كما يجب أن يكون المحتوى العربي ترجمة احترافية وليس ترجمة آلية حرفية - المعنى والأسلوب أهم من الكلمات الحرفية.</p>
+  </div>
+
+  <div class="stats-grid" style="margin-top: 20px;">
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--accent-light), #fff);">
+      <span class="stat-num" style="color: var(--accent);">~1000</span>
+      <span class="stat-label">كلمة عربية مطلوبة</span>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--accent-light), #fff);">
+      <span class="stat-num" style="color: var(--accent);">~1000</span>
+      <span class="stat-label">كلمة إنجليزية مطلوبة</span>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--accent-light), #fff);">
+      <span class="stat-num" style="color: var(--accent);">8</span>
+      <span class="stat-label">أقسام رئيسية</span>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--accent-light), #fff);">
+      <span class="stat-num" style="color: var(--accent);">SEO</span>
+      <span class="stat-label">محتوى ميتا مطلوب</span>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>متطلبات كاتب المحتوى - الموقع الإلكتروني</span>
+    <span>وثيقة سرية</span>
+  </div>
+</div>
+
+</body>
+</html>
