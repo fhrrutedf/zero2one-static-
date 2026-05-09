@@ -64,37 +64,37 @@ export default function Stats() {
   }, []);
 
   return (
-    <section id="stats" ref={sectionRef} className="py-20 lg:py-28 hero-gradient relative overflow-hidden">
+    <section id="stats" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 hero-gradient relative overflow-hidden">
       <div className="absolute inset-0 geometric-pattern opacity-20" />
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className={`text-center max-w-2xl mx-auto mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 text-gold-light text-sm font-semibold mb-4">
+        <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gold/10 border border-gold/20 text-gold-light text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('stats_tag')}
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">{t('stats_title')}</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">{t('stats_title')}</h2>
           <div className="section-divider" />
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
               <div
                 key={stat.labelKey}
-                className={`text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 ${
+                className={`text-center p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 ${
                   visible ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${idx * 150}ms` }}
               >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                  <Icon size={24} className="text-gold" />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-gold/20 flex items-center justify-center">
+                  <Icon size={18} className="text-gold sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-4xl lg:text-5xl font-bold text-white mb-2">
+                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">
                   <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                 </div>
-                <div className="text-white/60 text-sm font-medium">{t(stat.labelKey)}</div>
+                <div className="text-white/60 text-[10px] sm:text-sm font-medium">{t(stat.labelKey)}</div>
               </div>
             );
           })}

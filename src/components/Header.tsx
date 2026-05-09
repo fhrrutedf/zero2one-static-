@@ -39,12 +39,16 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -53,19 +57,15 @@ export default function Header() {
         isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <a
             href="#hero"
             onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 shrink-0"
           >
-            <span
-              className={`text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? 'text-foreground' : 'text-white'
-              }`}
-            >
+            <span className={`text-xl sm:text-2xl font-bold transition-colors duration-300 ${isScrolled ? 'text-foreground' : 'text-white'}`}>
               <span className="text-gold-gradient">شركتك</span>
             </span>
           </a>
@@ -79,12 +79,8 @@ export default function Header() {
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`nav-link text-sm font-medium transition-colors duration-300 ${
                   isScrolled
-                    ? activeSection === link.href.slice(1)
-                      ? 'text-gold'
-                      : 'text-foreground hover:text-gold'
-                    : activeSection === link.href.slice(1)
-                    ? 'text-gold-light'
-                    : 'text-white/80 hover:text-white'
+                    ? activeSection === link.href.slice(1) ? 'text-gold' : 'text-foreground hover:text-gold'
+                    : activeSection === link.href.slice(1) ? 'text-gold-light' : 'text-white/80 hover:text-white'
                 } ${activeSection === link.href.slice(1) ? 'active' : ''}`}
               >
                 {t(link.labelKey)}
@@ -93,43 +89,45 @@ export default function Header() {
           </nav>
 
           {/* CTA + Lang + Mobile Toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Language Toggle */}
             <button
               onClick={toggleLang}
-              className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border ${
+              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border min-w-[40px] justify-center ${
                 isScrolled
                   ? 'border-border text-foreground hover:bg-muted'
                   : 'border-white/20 text-white/80 hover:bg-white/10'
               }`}
               aria-label="Toggle Language"
             >
-              <Globe size={14} />
-              {lang === 'ar' ? 'EN' : 'عربي'}
+              <Globe size={12} className="sm:w-3.5 sm:h-3.5 shrink-0" />
+              <span>{lang === 'ar' ? 'EN' : 'عربي'}</span>
             </button>
 
+            {/* Desktop CTA */}
             <a
               href="https://wa.me/966500000000"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+              className={`hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 isScrolled
                   ? 'bg-gold text-white hover:bg-gold-dark'
                   : 'bg-gold/20 text-gold-light border border-gold/30 hover:bg-gold hover:text-white'
               }`}
             >
-              <Phone size={16} />
-              {t('cta_contact')}
+              <Phone size={14} />
+              <span>{t('cta_contact')}</span>
             </a>
 
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${
+              className={`lg:hidden p-2 rounded-lg transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center ${
                 isScrolled ? 'text-foreground hover:bg-muted' : 'text-white hover:bg-white/10'
               }`}
               aria-label="القائمة"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
@@ -137,19 +135,19 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`mobile-menu fixed top-0 right-0 w-72 h-full bg-dark shadow-2xl z-50 lg:hidden ${
+        className={`mobile-menu fixed top-0 right-0 w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden ${
           isMobileMenuOpen ? 'open' : ''
         }`}
       >
-        <div className="p-6">
-          <div className="flex items-center justify-between mb-8">
-            <span className="text-xl font-bold text-gold-gradient">شركتك</span>
+        <div className="p-5 sm:p-6 h-full overflow-y-auto">
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
+            <span className="text-lg sm:text-xl font-bold text-gold-gradient">شركتك</span>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-white/60 hover:text-white p-1"
+              className="text-white/60 hover:text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label="إغلاق"
             >
-              <X size={24} />
+              <X size={22} />
             </button>
           </div>
           <nav className="flex flex-col gap-1">
@@ -158,7 +156,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                className={`px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[48px] flex items-center ${
                   activeSection === link.href.slice(1)
                     ? 'bg-gold/10 text-gold'
                     : 'text-white/70 hover:bg-white/5 hover:text-white'
@@ -168,19 +166,19 @@ export default function Header() {
               </a>
             ))}
           </nav>
-          <div className="mt-8 pt-6 border-t border-white/10 space-y-3">
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 space-y-3">
             <a
               href="https://wa.me/966500000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-gold text-white font-semibold hover:bg-gold-dark transition-colors"
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-gold text-white font-semibold hover:bg-gold-dark transition-colors min-h-[48px]"
             >
               <Phone size={16} />
               {t('cta_contact')}
             </a>
             <button
               onClick={toggleLang}
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors"
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors min-h-[48px]"
             >
               <Globe size={16} />
               {lang === 'ar' ? 'English' : 'العربية'}

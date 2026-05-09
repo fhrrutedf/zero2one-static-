@@ -26,59 +26,59 @@ export default function Portfolio() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="portfolio" ref={sectionRef} className="py-20 lg:py-28 bg-light-bg">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="portfolio" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-light-bg">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center max-w-2xl mx-auto mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold text-sm font-semibold mb-4">
+        <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gold/10 text-gold text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('portfolio_tag')}
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{t('portfolio_title')}</h2>
-          <div className="section-divider mb-6" />
-          <p className="text-muted-foreground leading-relaxed">{t('portfolio_subtitle')}</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">{t('portfolio_title')}</h2>
+          <div className="section-divider mb-4 sm:mb-6" />
+          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{t('portfolio_subtitle')}</p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {projects.map((project, idx) => (
             <div
               key={project.titleKey}
-              className={`portfolio-card group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer ${
+              className={`portfolio-card group relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg cursor-pointer ${
                 visible ? 'animate-fade-in-up' : 'opacity-0'
               }`}
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               {/* Image Placeholder */}
               <div className={`portfolio-image aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <div className="text-center p-6">
-                  <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-white/20 flex items-center justify-center">
-                    <ExternalLink size={24} className="text-white" />
+                <div className="text-center p-4 sm:p-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-3 rounded-full bg-white/20 flex items-center justify-center">
+                    <ExternalLink size={20} className="text-white sm:w-6 sm:h-6" />
                   </div>
-                  <p className="text-white/80 text-sm font-medium">{t(project.catKey)}</p>
+                  <p className="text-white/80 text-xs sm:text-sm font-medium">{t(project.catKey)}</p>
                 </div>
               </div>
 
               {/* Overlay */}
-              <div className="portfolio-overlay absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-transparent flex flex-col justify-end p-6">
-                <span className="text-gold text-sm font-semibold mb-1">{t(project.catKey)}</span>
-                <h3 className="text-white text-lg font-bold mb-3">{t(project.titleKey)}</h3>
-                <span className="inline-flex items-center gap-1 text-gold-light text-sm font-medium">
+              <div className="portfolio-overlay absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-transparent flex flex-col justify-end p-4 sm:p-6">
+                <span className="text-gold text-xs sm:text-sm font-semibold mb-1">{t(project.catKey)}</span>
+                <h3 className="text-white text-base sm:text-lg font-bold mb-2 sm:mb-3">{t(project.titleKey)}</h3>
+                <span className="inline-flex items-center gap-1 text-gold-light text-xs sm:text-sm font-medium">
                   {t('portfolio_view')}
-                  <ExternalLink size={14} />
+                  <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
                 </span>
               </div>
 
               {/* Bottom Info (visible without hover) */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark/80 to-transparent group-hover:opacity-0 transition-opacity duration-300">
-                <span className="text-gold/80 text-xs font-medium">{t(project.catKey)}</span>
-                <h3 className="text-white text-sm font-bold">{t(project.titleKey)}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-dark/80 to-transparent group-hover:opacity-0 transition-opacity duration-300">
+                <span className="text-gold/80 text-[10px] sm:text-xs font-medium">{t(project.catKey)}</span>
+                <h3 className="text-white text-xs sm:text-sm font-bold">{t(project.titleKey)}</h3>
               </div>
             </div>
           ))}
