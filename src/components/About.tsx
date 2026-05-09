@@ -35,14 +35,14 @@ export default function About() {
                 </div>
               </div>
             </div>
-            {/* Floating stat card */}
-            <div className={`absolute -bottom-4 ${isRTL ? '-left-2 sm:-left-6' : '-right-2 sm:-right-6'} bg-white rounded-lg sm:rounded-xl shadow-xl p-3 sm:p-4 flex items-center gap-2 sm:gap-3`}>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0">
-                <Users size={20} className="text-gold sm:w-6 sm:h-6" />
+            {/* Floating stat card - hidden on mobile, shown on lg+ */}
+            <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-white rounded-xl shadow-xl p-4 items-center gap-3`}>
+              <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0">
+                <Users size={24} className="text-gold" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-bold text-foreground">+300</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_clients')}</div>
+                <div className="text-2xl font-bold text-foreground">+300</div>
+                <div className="text-xs text-muted-foreground">{t('about_stats_clients')}</div>
               </div>
             </div>
           </div>

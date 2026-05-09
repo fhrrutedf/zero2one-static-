@@ -475,15 +475,7 @@
   width: 100%;
 }
 
-/* Mobile menu */
-.mobile-menu {
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-}
-
-.mobile-menu.open {
-  transform: translateX(0);
-}
+/* Mobile menu - animation handled via inline styles in Header.tsx */
 
 /* Form input focus */
 input:focus,
@@ -508,13 +500,7 @@ select:focus {
   animation: pulse-green 2s ease-in-out infinite;
 }
 
-/* Direction-aware mobile menu */
-[dir="ltr"] .mobile-menu {
-  transform: translateX(-100%);
-}
-[dir="ltr"] .mobile-menu.open {
-  transform: translateX(0);
-}
+/* Direction-aware mobile menu - handled via inline styles in Header.tsx */
 
 /* Direction-aware animations */
 @keyframes fadeInStart {

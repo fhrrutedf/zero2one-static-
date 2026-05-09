@@ -53,7 +53,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
@@ -125,7 +125,7 @@ export default function Header() {
               className={`lg:hidden p-2 rounded-lg transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center ${
                 isScrolled ? 'text-foreground hover:bg-muted' : 'text-white hover:bg-white/10'
               }`}
-              aria-label="القائمة"
+              aria-label={lang === 'ar' ? 'القائمة' : 'Menu'}
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -133,11 +133,13 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - using inline styles for direction-aware animation */}
       <div
-        className={`mobile-menu fixed top-0 ${isRTL ? 'right-0' : 'left-0'} w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden ${
-          isMobileMenuOpen ? 'open' : ''
-        }`}
+        className="fixed top-0 w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden transition-transform duration-300 ease-in-out"
+        style={{
+          [isRTL ? 'right' : 'left']: 0,
+          transform: isMobileMenuOpen ? 'translateX(0)' : (isRTL ? 'translateX(100%)' : 'translateX(-100%)'),
+        }}
       >
         <div className="p-5 sm:p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
@@ -145,7 +147,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-white/60 hover:text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="إغلاق"
+              aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}
             >
               <X size={22} />
             </button>
