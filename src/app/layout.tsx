@@ -9,36 +9,34 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "من الصفر إلى الواحد | Zero 2 One - وكالة تسويق رقمي",
+  title: "شركتك | وكالة تسويق رقمي رائدة",
   description:
-    "وكالة تسويق رقمي رائدة في السعودية. نقدم خدمات تحسين محركات البحث، تصميم المواقع، إدارة الحملات الإعلانية، بناء الهوية التجارية، وتسويق المحتوى.",
+    "وكالة تسويق رقمي رائدة في المملكة العربية السعودية. نقدم خدمات إدارة وسائل التواصل، التسويق الرقمي، التصوير والإنتاج المرئي، تحسين محركات البحث، تصميم المواقع، وإدارة الحملات الإعلانية.",
   keywords: [
     "تسويق رقمي",
     "SEO",
     "تصميم مواقع",
     "حملات إعلانية",
-    "هوية تجارية",
-    "تسويق محتوى",
+    "إدارة تواصل اجتماعي",
+    "تصوير احترافي",
     "السعودية",
     "الرياض",
-    "من الصفر إلى الواحد",
-    "Zero 2 One",
   ],
-  authors: [{ name: "من الصفر إلى الواحد" }],
+  authors: [{ name: "شركتك" }],
   icons: {
-    icon: "/logo.svg",
+    icon: "/favicon.ico",
   },
   openGraph: {
-    title: "من الصفر إلى الواحد | Zero 2 One",
-    description: "وكالة تسويق رقمي رائدة في السعودية",
+    title: "شركتك | وكالة تسويق رقمي رائدة",
+    description: "نحوّل رؤيتك إلى واقع رقمي مبهر",
     type: "website",
     locale: "ar_SA",
-    siteName: "من الصفر إلى الواحد",
+    siteName: "شركتك",
   },
   twitter: {
     card: "summary_large_image",
-    title: "من الصفر إلى الواحد | Zero 2 One",
-    description: "وكالة تسويق رقمي رائدة في السعودية",
+    title: "شركتك | وكالة تسويق رقمي رائدة",
+    description: "نحوّل رؤيتك إلى واقع رقمي مبهر",
   },
 };
 
@@ -50,90 +48,67 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX');
+            `,
+          }}
+        />
+        {/* Meta Pixel - Replace with your Pixel ID */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', 'YOUR_PIXEL_ID');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+        {/* Schema.org Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "من الصفر إلى الواحد",
-              alternateName: "Zero 2 One",
-              description:
-                "وكالة تسويق رقمي رائدة في السعودية",
-              url: "https://zero2one.sa",
-              telephone: "+966530307054",
-              email: "Info@zero2one.sa",
+              name: "شركتك",
+              description: "وكالة تسويق رقمي رائدة في المملكة العربية السعودية",
+              url: "https://shirkatak.com",
+              telephone: "+966500000000",
+              email: "info@shirkatak.com",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "الرياض",
                 addressCountry: "SA",
-                streetAddress: "الرياض",
               },
               areaServed: {
                 "@type": "Country",
                 name: "المملكة العربية السعودية",
               },
               serviceType: [
+                "إدارة وسائل التواصل الاجتماعي",
+                "التسويق الرقمي",
+                "التصوير والإنتاج المرئي",
                 "تحسين محركات البحث",
                 "تصميم وتطوير المواقع",
                 "إدارة الحملات الإعلانية",
-                "بناء الهوية التجارية",
-                "تسويق المحتوى",
               ],
-              sameAs: [
-                "https://twitter.com/zero2one_sa",
-                "https://instagram.com/zero2one_sa",
-                "https://linkedin.com/company/zero2one_sa",
-              ],
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "من الصفر إلى الواحد",
-              url: "https://zero2one.sa",
-              inLanguage: "ar",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://zero2one.sa/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              name: "من الصفر إلى الواحد - وكالة تسويق رقمي",
-              image: "https://zero2one.sa/logo.svg",
-              telephone: "+966530307054",
-              email: "Info@zero2one.sa",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "الرياض",
-                addressRegion: "الرياض",
-                addressCountry: "SA",
-              },
-              priceRange: "$$",
-              openingHoursSpecification: {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Sunday",
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                ],
-                opens: "09:00",
-                closes: "18:00",
-              },
             }),
           }}
         />

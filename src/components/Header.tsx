@@ -1,28 +1,29 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Globe } from 'lucide-react';
+import { useLanguage } from './LanguageProvider';
+import type { TranslationKey } from '@/lib/i18n';
 
-const navLinks = [
-  { href: '#hero', label: 'الرئيسية' },
-  { href: '#about', label: 'من نحن' },
-  { href: '#services', label: 'خدماتنا' },
-  { href: '#portfolio', label: 'أعمالنا' },
-  { href: '#pricing', label: 'الباقات' },
-  { href: '#testimonials', label: 'آراء العملاء' },
-  { href: '#contact', label: 'تواصل معنا' },
+const navKeys: { href: string; labelKey: TranslationKey }[] = [
+  { href: '#hero', labelKey: 'nav_home' },
+  { href: '#about', labelKey: 'nav_about' },
+  { href: '#services', labelKey: 'nav_services' },
+  { href: '#portfolio', labelKey: 'nav_portfolio' },
+  { href: '#blog', labelKey: 'nav_blog' },
+  { href: '#contact', labelKey: 'nav_contact' },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const { lang, toggleLang, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      const sections = navLinks.map((link) => link.href.slice(1));
+      const sections = navKeys.map((link) => link.href.slice(1));
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
         if (section) {
@@ -34,7 +35,6 @@ export default function Header() {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -50,9 +50,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md'
-          : 'bg-transparent'
+        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -60,58 +58,60 @@ export default function Header() {
           {/* Logo */}
           <a
             href="#hero"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('#hero');
-            }}
+            onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
             className="flex items-center gap-2"
           >
-            <div className="flex items-center">
-              <span
-                className={`text-2xl font-bold transition-colors duration-300 ${
-                  isScrolled ? 'text-dark' : 'text-white'
-                }`}
-              >
-                <span className="text-gold-gradient">Zero</span>
-                <span className="mx-1 text-muted-foreground">2</span>
-                <span className="text-gold-gradient">One</span>
-              </span>
-            </div>
+            <span
+              className={`text-2xl font-bold transition-colors duration-300 ${
+                isScrolled ? 'text-foreground' : 'text-white'
+              }`}
+            >
+              <span className="text-gold-gradient">شركتك</span>
+            </span>
           </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {navKeys.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
+                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`nav-link text-sm font-medium transition-colors duration-300 ${
                   isScrolled
                     ? activeSection === link.href.slice(1)
                       ? 'text-gold'
-                      : 'text-dark hover:text-gold'
+                      : 'text-foreground hover:text-gold'
                     : activeSection === link.href.slice(1)
                     ? 'text-gold-light'
                     : 'text-white/80 hover:text-white'
                 } ${activeSection === link.href.slice(1) ? 'active' : ''}`}
               >
-                {link.label}
+                {t(link.labelKey)}
               </a>
             ))}
           </nav>
 
-          {/* CTA Button + Mobile Menu Toggle */}
-          <div className="flex items-center gap-4">
+          {/* CTA + Lang + Mobile Toggle */}
+          <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLang}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border ${
+                isScrolled
+                  ? 'border-border text-foreground hover:bg-muted'
+                  : 'border-white/20 text-white/80 hover:bg-white/10'
+              }`}
+              aria-label="Toggle Language"
+            >
+              <Globe size={14} />
+              {lang === 'ar' ? 'EN' : 'عربي'}
+            </button>
+
             <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('#contact');
-              }}
+              href="https://wa.me/966500000000"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                 isScrolled
                   ? 'bg-gold text-white hover:bg-gold-dark'
@@ -119,15 +119,13 @@ export default function Header() {
               }`}
             >
               <Phone size={16} />
-              لنتحدث
+              {t('cta_contact')}
             </a>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${
-                isScrolled
-                  ? 'text-dark hover:bg-muted'
-                  : 'text-white hover:bg-white/10'
+                isScrolled ? 'text-foreground hover:bg-muted' : 'text-white hover:bg-white/10'
               }`}
               aria-label="القائمة"
             >
@@ -145,62 +143,55 @@ export default function Header() {
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-8">
-            <span className="text-xl font-bold text-white">
-              <span className="text-gold-gradient">Zero</span>
-              <span className="text-muted-foreground mx-1">2</span>
-              <span className="text-gold-gradient">One</span>
-            </span>
+            <span className="text-xl font-bold text-gold-gradient">شركتك</span>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-white/60 hover:text-white p-1"
-              aria-label="إغلاق القائمة"
+              aria-label="إغلاق"
             >
               <X size={24} />
             </button>
           </div>
-
           <nav className="flex flex-col gap-1">
-            {navLinks.map((link) => (
+            {navKeys.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
+                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                   activeSection === link.href.slice(1)
                     ? 'bg-gold/10 text-gold'
                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                 }`}
               >
-                {link.label}
+                {t(link.labelKey)}
               </a>
             ))}
           </nav>
-
-          <div className="mt-8 pt-6 border-t border-white/10">
+          <div className="mt-8 pt-6 border-t border-white/10 space-y-3">
             <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('#contact');
-              }}
+              href="https://wa.me/966500000000"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-gold text-white font-semibold hover:bg-gold-dark transition-colors"
             >
               <Phone size={16} />
-              لنتحدث
+              {t('cta_contact')}
             </a>
+            <button
+              onClick={toggleLang}
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors"
+            >
+              <Globe size={16} />
+              {lang === 'ar' ? 'English' : 'العربية'}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Overlay */}
       {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
+        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setIsMobileMenuOpen(false)} />
       )}
     </header>
   );

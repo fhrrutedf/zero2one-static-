@@ -1,117 +1,89 @@
 'use client';
 
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Youtube,
-  ArrowUp,
-} from 'lucide-react';
+import { useLanguage } from './LanguageProvider';
+import { MapPin, Phone, Mail, Instagram, Twitter, Linkedin, Facebook } from 'lucide-react';
+import type { TranslationKey } from '@/lib/i18n';
 
-const quickLinks = [
-  { href: '#hero', label: 'الرئيسية' },
-  { href: '#about', label: 'من نحن' },
-  { href: '#services', label: 'خدماتنا' },
-  { href: '#portfolio', label: 'أعمالنا' },
-  { href: '#pricing', label: 'الباقات' },
-  { href: '#contact', label: 'تواصل معنا' },
+const quickLinks: { href: string; labelKey: TranslationKey }[] = [
+  { href: '#hero', labelKey: 'nav_home' },
+  { href: '#about', labelKey: 'nav_about' },
+  { href: '#services', labelKey: 'nav_services' },
+  { href: '#portfolio', labelKey: 'nav_portfolio' },
+  { href: '#blog', labelKey: 'nav_blog' },
+  { href: '#contact', labelKey: 'nav_contact' },
 ];
 
-const serviceLinks = [
-  'تحسين محركات البحث',
-  'تصميم وتطوير المواقع',
-  'إدارة الحملات الإعلانية',
-  'بناء الهوية التجارية',
-  'تسويق المحتوى',
-];
-
-const socialLinks = [
-  { icon: Twitter, label: 'تويتر', href: '#' },
-  { icon: Instagram, label: 'انستقرام', href: '#' },
-  { icon: Linkedin, label: 'لينكدإن', href: '#' },
-  { icon: Youtube, label: 'يوتيوب', href: '#' },
+const serviceLinks: { href: string; labelKey: TranslationKey }[] = [
+  { href: '#services', labelKey: 'service_1_title' },
+  { href: '#services', labelKey: 'service_2_title' },
+  { href: '#services', labelKey: 'service_4_title' },
+  { href: '#services', labelKey: 'service_5_title' },
+  { href: '#services', labelKey: 'service_6_title' },
 ];
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const { t } = useLanguage();
+  const year = new Date().getFullYear();
+
+  const handleNavClick = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <footer className="bg-dark text-white relative">
-      {/* Top decorative line */}
-      <div className="h-1 bg-gradient-to-l from-gold via-violet to-gold" />
-
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Main Footer Content */}
-        <div className="py-12 lg:py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-dark text-white">
+      <div className="container mx-auto px-4 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Company Info */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="mb-6">
-              <span className="text-2xl font-bold">
-                <span className="text-gold-gradient">Zero</span>
-                <span className="text-white/40 mx-1">2</span>
-                <span className="text-gold-gradient">One</span>
-              </span>
-              <p className="text-xs text-white/40 mt-1">من الصفر إلى الواحد</p>
-            </div>
-            <p className="text-sm text-white/60 leading-relaxed mb-6">
-              وكالة تسويق رقمي رائدة في المملكة العربية السعودية. نساعدك على بناء
-              حضورك الرقمي وتحقيق أهدافك التسويقية بأحدث التقنيات والاستراتيجيات.
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 text-white/50 hover:bg-gold hover:text-white transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon size={16} />
-                </a>
-              ))}
+          <div className="lg:col-span-1">
+            <h3 className="text-2xl font-bold mb-4 text-gold-gradient">شركتك</h3>
+            <p className="text-white/60 leading-relaxed text-sm mb-6">{t('footer_desc')}</p>
+            <div className="flex items-center gap-3">
+              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-gold hover:text-white transition-all duration-300">
+                <Instagram size={16} />
+              </a>
+              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-gold hover:text-white transition-all duration-300">
+                <Twitter size={16} />
+              </a>
+              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-gold hover:text-white transition-all duration-300">
+                <Facebook size={16} />
+              </a>
+              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-gold hover:text-white transition-all duration-300">
+                <Linkedin size={16} />
+              </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-white">روابط سريعة</h4>
+            <h4 className="text-lg font-semibold mb-4 text-gold">{t('footer_links')}</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
+              {quickLinks.map((link) => (
+                <li key={link.labelKey}>
                   <a
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="text-sm text-white/50 hover:text-gold transition-colors duration-300"
+                    onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                    className="text-white/60 hover:text-gold transition-colors duration-300 text-sm"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services Links */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-white">خدماتنا</h4>
+            <h4 className="text-lg font-semibold mb-4 text-gold">{t('footer_services')}</h4>
             <ul className="space-y-3">
-              {serviceLinks.map((service, index) => (
-                <li key={index}>
+              {serviceLinks.map((link) => (
+                <li key={link.labelKey}>
                   <a
-                    href="#services"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="text-sm text-white/50 hover:text-gold transition-colors duration-300"
+                    href={link.href}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                    className="text-white/60 hover:text-gold transition-colors duration-300 text-sm"
                   >
-                    {service}
+                    {t(link.labelKey)}
                   </a>
                 </li>
               ))}
@@ -120,48 +92,38 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-white">تواصل معنا</h4>
+            <h4 className="text-lg font-semibold mb-4 text-gold">{t('footer_contact')}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="text-gold mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-white/50">
-                  الرياض، المملكة العربية السعودية
-                </span>
+                <MapPin size={18} className="text-gold mt-0.5 shrink-0" />
+                <span className="text-white/60 text-sm">{t('contact_address')}</span>
               </li>
               <li className="flex items-start gap-3">
-                <Phone size={18} className="text-gold mt-0.5 flex-shrink-0" />
-                <a
-                  href="tel:+966530307054"
-                  className="text-sm text-white/50 hover:text-gold transition-colors"
-                >
-                  +966 53 030 7054
+                <Phone size={18} className="text-gold mt-0.5 shrink-0" />
+                <a href="tel:+966500000000" className="text-white/60 hover:text-gold transition-colors text-sm">
+                  {t('contact_phone_num')}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail size={18} className="text-gold mt-0.5 flex-shrink-0" />
-                <a
-                  href="mailto:Info@zero2one.sa"
-                  className="text-sm text-white/50 hover:text-gold transition-colors"
-                >
-                  Info@zero2one.sa
+                <Mail size={18} className="text-gold mt-0.5 shrink-0" />
+                <a href="mailto:info@shirkatak.com" className="text-white/60 hover:text-gold transition-colors text-sm">
+                  {t('contact_email_addr')}
                 </a>
               </li>
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/40 text-center sm:text-right">
-            © {new Date().getFullYear()} من الصفر إلى الواحد. جميع الحقوق محفوظة.
+      {/* Copyright */}
+      <div className="border-t border-white/10">
+        <div className="container mx-auto px-4 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-white/40 text-xs">
+            &copy; {year} شركتك. {t('footer_rights')}
           </p>
-          <button
-            onClick={scrollToTop}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gold/10 text-gold hover:bg-gold hover:text-white transition-all duration-300"
-            aria-label="العودة للأعلى"
-          >
-            <ArrowUp size={18} />
-          </button>
+          <p className="text-white/40 text-xs">
+            تصميم وتطوير وكالة تسويق رقمي
+          </p>
         </div>
       </div>
     </footer>
