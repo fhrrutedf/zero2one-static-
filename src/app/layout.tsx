@@ -9,35 +9,85 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "ZERO 2 ONE | وكالة تسويق رقمي وتحول رقمي في السعودية",
+  title: {
+    default: "ZERO 2 ONE | وكالة تسويق رقمي وتحول رقمي في السعودية",
+    template: "%s | ZERO 2 ONE",
+  },
   description:
-    "ZERO 2 ONE - وكالة سعودية متخصصة في التسويق الرقمي، تطوير المواقع، تحسين محركات البحث، إدارة الحملات الإعلانية، وبناء الهوية التجارية. من الصفر إلى الواحد.",
+    "ZERO 2 ONE - وكالة سعودية متخصصة في التسويق الرقمي، تطوير المواقع، تحسين محركات البحث SEO، إدارة الحملات الإعلانية، بناء الهوية التجارية، وإدارة السوشيال ميديا. نأخذ مشروعك من الصفر إلى الواحد.",
   keywords: [
     "تسويق رقمي",
     "SEO",
+    "تحسين محركات البحث",
     "تصميم مواقع",
+    "تطوير مواقع",
     "حملات إعلانية",
     "إدارة سوشيال ميديا",
     "هوية تجارية",
     "ZERO 2 ONE",
     "السعودية",
     "تطوير متاجر",
+    "تسويق الكتروني",
+    "وكالة تسويق",
+    "digital marketing",
+    "web development",
+    "branding agency",
+    "Riyadh",
+    "Saudi Arabia",
   ],
   authors: [{ name: "ZERO 2 ONE" }],
+  creator: "ZERO 2 ONE",
+  publisher: "ZERO 2 ONE",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/logo.png", sizes: "32x32" },
+    ],
+    apple: "/logo.png",
+  },
+  metadataBase: new URL("https://zero2one.sa"),
+  alternates: {
+    canonical: "https://zero2one.sa",
+    languages: {
+      "ar-SA": "https://zero2one.sa",
+      "en-US": "https://zero2one.sa/?lang=en",
+    },
   },
   openGraph: {
-    title: "ZERO 2 ONE | وكالة تسويق رقمي رائدة",
-    description: "من البدايات، إلى أعظم النهايات.. نشاركك الرحلة بكل شغف، احترافية، وإبداع",
+    title: "ZERO 2 ONE | وكالة تسويق رقمي رائدة في السعودية",
+    description: "من البدايات، إلى أعظم النهايات.. وكالة سعودية متخصصة في التسويق الرقمي، تطوير المواقع، SEO، الحملات الإعلانية، والهوية التجارية. من الصفر إلى الواحد.",
     type: "website",
     locale: "ar_SA",
+    alternateLocale: "en_US",
+    url: "https://zero2one.sa",
     siteName: "ZERO 2 ONE",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ZERO 2 ONE - وكالة تسويق رقمي",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZERO 2 ONE | وكالة تسويق رقمي رائدة",
-    description: "من البدايات، إلى أعظم النهايات.. نشاركك الرحلة بكل شغف، احترافية، وإبداع",
+    title: "ZERO 2 ONE | وكالة تسويق رقمي رائدة في السعودية",
+    description: "من البدايات، إلى أعظم النهايات.. وكالة سعودية متخصصة في التسويق الرقمي والهوية التجارية. من الصفر إلى الواحد.",
+    images: ["/og-image.png"],
+  },
+  verification: {
+    google: "google-site-verification-code-here",
   },
 };
 
@@ -75,7 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-TVKP5KSX');`,
           }}
         />
-        {/* Schema.org Structured Data */}
+        {/* Schema.org Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -83,12 +133,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "ZERO 2 ONE",
-              description: "وكالة تسويق رقمي وبرمجة وهوية تجارية في السعودية",
+              description: "وكالة تسويق رقمي وبرمجة وهوية تجارية في السعودية - من الصفر إلى الواحد",
               url: "https://zero2one.sa",
+              logo: "https://zero2one.sa/logo.png",
               email: "zero2one012025@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "SA",
+                addressLocality: "الرياض",
               },
               areaServed: {
                 "@type": "Country",
@@ -106,6 +158,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 "إدارة السوشيال ميديا",
                 "تطوير المتاجر الإلكترونية",
               ],
+              foundingDate: "2025",
+              priceRange: "$$",
+            }),
+          }}
+        />
+        {/* Schema.org LocalBusiness */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "@id": "https://zero2one.sa/#business",
+              name: "ZERO 2 ONE",
+              description: "وكالة تسويق رقمي وتحول رقمي في الرياض، السعودية",
+              url: "https://zero2one.sa",
+              telephone: "+966000000000",
+              email: "zero2one012025@gmail.com",
+              image: "https://zero2one.sa/logo.png",
+              priceRange: "$$",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "الرياض",
+                addressRegion: "الرياض",
+                addressCountry: "SA",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 24.7252,
+                longitude: 46.5427,
+              },
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+                  opens: "09:00",
+                  closes: "18:00",
+                },
+              ],
+              sameAs: [
+                "https://www.instagram.com/zero2onedm/",
+              ],
+            }),
+          }}
+        />
+        {/* Schema.org WebSite for Sitelinks Search */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "ZERO 2 ONE",
+              url: "https://zero2one.sa",
+              inLanguage: ["ar-SA", "en-US"],
+              potentialAction: {
+                "@type": "ContactAction",
+                target: "https://zero2one.sa/#contact",
+                name: "تواصل معنا",
+              },
             }),
           }}
         />
