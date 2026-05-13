@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
 import { Award, Users, Clock } from 'lucide-react';
+import Image from 'next/image';
 
 export default function About() {
   const { t, isRTL } = useLanguage();
@@ -25,23 +26,19 @@ export default function About() {
           {/* Image Side */}
           <div className={`relative ${visible ? (isRTL ? 'animate-fade-in-right' : 'animate-fade-in-left') : 'opacity-0'}`}>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-[4/3] bg-gradient-to-br from-gold/20 via-violet/10 to-gold/5 flex items-center justify-center">
+              <div className="aspect-[4/3] bg-gradient-to-br from-brand/20 via-brand-light/10 to-brand/5 flex items-center justify-center">
                 <div className="text-center p-6 sm:p-8">
-                  <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-3 sm:mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Award size={32} className="text-gold sm:w-12 sm:h-12" />
-                  </div>
-                  <p className="text-gold font-bold text-lg sm:text-xl">شركتك</p>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-1">وكالة تسويق رقمي</p>
+                  <Image src="/logo-white.png" alt="ZERO 2 ONE" width={160} height={54} className="h-12 sm:h-16 w-auto mx-auto mb-3 sm:mb-4" />
+                  <p className="text-white/70 text-xs sm:text-sm mt-1">من الصفر إلى الواحد</p>
                 </div>
               </div>
             </div>
-            {/* Floating stat card - hidden on mobile, shown on lg+ */}
             <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-white rounded-xl shadow-xl p-4 items-center gap-3`}>
-              <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0">
-                <Users size={24} className="text-gold" />
+              <div className="w-12 h-12 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
+                <Users size={24} className="text-brand" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">+300</div>
+                <div className="text-2xl font-bold text-foreground">+80</div>
                 <div className="text-xs text-muted-foreground">{t('about_stats_clients')}</div>
               </div>
             </div>
@@ -49,7 +46,7 @@ export default function About() {
 
           {/* Text Side */}
           <div className={`${visible ? (isRTL ? 'animate-fade-in-left' : 'animate-fade-in-right') : 'opacity-0'}`}>
-            <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gold/10 text-gold text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+            <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 text-brand text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               {t('about_tag')}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
@@ -60,36 +57,31 @@ export default function About() {
             <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">{t('about_p2')}</p>
             <p className="text-muted-foreground leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{t('about_p3')}</p>
 
-            {/* Mini Stats Row */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Award size={16} className="text-gold sm:w-5 sm:h-5" />
+                  <Award size={16} className="text-brand sm:w-5 sm:h-5" />
                 </div>
-                <div className="text-lg sm:text-2xl font-bold text-foreground">+500</div>
+                <div className="text-lg sm:text-2xl font-bold text-foreground">+150</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_projects')}</div>
               </div>
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Users size={16} className="text-gold sm:w-5 sm:h-5" />
+                  <Users size={16} className="text-brand sm:w-5 sm:h-5" />
                 </div>
-                <div className="text-lg sm:text-2xl font-bold text-foreground">+300</div>
+                <div className="text-lg sm:text-2xl font-bold text-foreground">+80</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_clients')}</div>
               </div>
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Clock size={16} className="text-gold sm:w-5 sm:h-5" />
+                  <Clock size={16} className="text-brand sm:w-5 sm:h-5" />
                 </div>
-                <div className="text-lg sm:text-2xl font-bold text-foreground">+10</div>
+                <div className="text-lg sm:text-2xl font-bold text-foreground">+5</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_experience')}</div>
               </div>
             </div>
 
-            <a
-              href="#services"
-              onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }); }}
-              className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gold text-white font-semibold text-sm sm:text-base hover:bg-gold-dark transition-all duration-300"
-            >
+            <a href="#services" onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }); }} className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-brand text-white font-semibold text-sm sm:text-base hover:bg-brand-dark transition-all duration-300">
               {t('about_btn')}
             </a>
           </div>

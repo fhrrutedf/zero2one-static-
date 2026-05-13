@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Globe } from 'lucide-react';
+import Image from 'next/image';
 import { useLanguage } from './LanguageProvider';
 import type { TranslationKey } from '@/lib/i18n';
 
@@ -10,7 +11,7 @@ const navKeys: { href: string; labelKey: TranslationKey }[] = [
   { href: '#about', labelKey: 'nav_about' },
   { href: '#services', labelKey: 'nav_services' },
   { href: '#portfolio', labelKey: 'nav_portfolio' },
-  { href: '#blog', labelKey: 'nav_blog' },
+  { href: '#whyus', labelKey: 'nav_whyus' },
   { href: '#contact', labelKey: 'nav_contact' },
 ];
 
@@ -39,7 +40,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -65,9 +65,14 @@ export default function Header() {
             onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
             className="flex items-center gap-2 shrink-0"
           >
-            <span className={`text-xl sm:text-2xl font-bold transition-colors duration-300 ${isScrolled ? 'text-foreground' : 'text-white'}`}>
-              <span className="text-gold-gradient">شركتك</span>
-            </span>
+            <Image
+              src={isScrolled ? "/logo.png" : "/logo-white.png"}
+              alt="ZERO 2 ONE"
+              width={120}
+              height={40}
+              className="h-8 sm:h-10 w-auto"
+              priority
+            />
           </a>
 
           {/* Desktop Navigation */}
@@ -79,8 +84,8 @@ export default function Header() {
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`nav-link text-sm font-medium transition-colors duration-300 ${
                   isScrolled
-                    ? activeSection === link.href.slice(1) ? 'text-gold' : 'text-foreground hover:text-gold'
-                    : activeSection === link.href.slice(1) ? 'text-gold-light' : 'text-white/80 hover:text-white'
+                    ? activeSection === link.href.slice(1) ? 'text-brand' : 'text-foreground hover:text-brand'
+                    : activeSection === link.href.slice(1) ? 'text-brand-light' : 'text-white/80 hover:text-white'
                 } ${activeSection === link.href.slice(1) ? 'active' : ''}`}
               >
                 {t(link.labelKey)}
@@ -111,8 +116,8 @@ export default function Header() {
               rel="noopener noreferrer"
               className={`hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 isScrolled
-                  ? 'bg-gold text-white hover:bg-gold-dark'
-                  : 'bg-gold/20 text-gold-light border border-gold/30 hover:bg-gold hover:text-white'
+                  ? 'bg-brand text-white hover:bg-brand-dark'
+                  : 'bg-brand/20 text-brand-light border border-brand/30 hover:bg-brand hover:text-white'
               }`}
             >
               <Phone size={14} />
@@ -133,7 +138,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu - using inline styles for direction-aware animation */}
+      {/* Mobile Menu */}
       <div
         className="fixed top-0 w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden transition-transform duration-300 ease-in-out"
         style={{
@@ -143,7 +148,7 @@ export default function Header() {
       >
         <div className="p-5 sm:p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
-            <span className="text-lg sm:text-xl font-bold text-gold-gradient">شركتك</span>
+            <Image src="/logo-white.png" alt="ZERO 2 ONE" width={100} height={32} className="h-8 w-auto" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-white/60 hover:text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -160,7 +165,7 @@ export default function Header() {
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[48px] flex items-center ${
                   activeSection === link.href.slice(1)
-                    ? 'bg-gold/10 text-gold'
+                    ? 'bg-brand/10 text-brand'
                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                 }`}
               >
@@ -173,7 +178,7 @@ export default function Header() {
               href="https://wa.me/966500000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-gold text-white font-semibold hover:bg-gold-dark transition-colors min-h-[48px]"
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-brand text-white font-semibold hover:bg-brand-dark transition-colors min-h-[48px]"
             >
               <Phone size={16} />
               {t('cta_contact')}

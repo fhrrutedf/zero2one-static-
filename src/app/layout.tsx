@@ -9,34 +9,35 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "شركتك | وكالة تسويق رقمي رائدة",
+  title: "ZERO 2 ONE | وكالة تسويق رقمي وتحول رقمي في السعودية",
   description:
-    "وكالة تسويق رقمي رائدة في المملكة العربية السعودية. نقدم خدمات إدارة وسائل التواصل، التسويق الرقمي، التصوير والإنتاج المرئي، تحسين محركات البحث، تصميم المواقع، وإدارة الحملات الإعلانية.",
+    "ZERO 2 ONE - وكالة سعودية متخصصة في التسويق الرقمي، تطوير المواقع، تحسين محركات البحث، إدارة الحملات الإعلانية، وبناء الهوية التجارية. من الصفر إلى الواحد.",
   keywords: [
     "تسويق رقمي",
     "SEO",
     "تصميم مواقع",
     "حملات إعلانية",
-    "إدارة تواصل اجتماعي",
-    "تصوير احترافي",
+    "إدارة سوشيال ميديا",
+    "هوية تجارية",
+    "ZERO 2 ONE",
     "السعودية",
-    "الرياض",
+    "تطوير متاجر",
   ],
-  authors: [{ name: "شركتك" }],
+  authors: [{ name: "ZERO 2 ONE" }],
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.png",
   },
   openGraph: {
-    title: "شركتك | وكالة تسويق رقمي رائدة",
-    description: "نحوّل رؤيتك إلى واقع رقمي مبهر",
+    title: "ZERO 2 ONE | وكالة تسويق رقمي رائدة",
+    description: "من البدايات، إلى أعظم النهايات.. نشاركك الرحلة بكل شغف، احترافية، وإبداع",
     type: "website",
     locale: "ar_SA",
-    siteName: "شركتك",
+    siteName: "ZERO 2 ONE",
   },
   twitter: {
     card: "summary_large_image",
-    title: "شركتك | وكالة تسويق رقمي رائدة",
-    description: "نحوّل رؤيتك إلى واقع رقمي مبهر",
+    title: "ZERO 2 ONE | وكالة تسويق رقمي رائدة",
+    description: "من البدايات، إلى أعظم النهايات.. نشاركك الرحلة بكل شغف، احترافية، وإبداع",
   },
 };
 
@@ -64,36 +65,14 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-        />
+        {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX');
-            `,
-          }}
-        />
-        {/* Meta Pixel - Replace with your Pixel ID */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', 'YOUR_PIXEL_ID');
-              fbq('track', 'PageView');
-            `,
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TVKP5KSX');`,
           }}
         />
         {/* Schema.org Structured Data */}
@@ -103,33 +82,44 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "شركتك",
-              description: "وكالة تسويق رقمي رائدة في المملكة العربية السعودية",
-              url: "https://shirkatak.com",
-              telephone: "+966500000000",
-              email: "info@shirkatak.com",
+              name: "ZERO 2 ONE",
+              description: "وكالة تسويق رقمي وبرمجة وهوية تجارية في السعودية",
+              url: "https://zero2one.sa",
+              email: "zero2one012025@gmail.com",
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "الرياض",
                 addressCountry: "SA",
               },
               areaServed: {
                 "@type": "Country",
                 name: "المملكة العربية السعودية",
               },
+              sameAs: [
+                "https://www.instagram.com/zero2onedm/",
+              ],
               serviceType: [
-                "إدارة وسائل التواصل الاجتماعي",
                 "التسويق الرقمي",
-                "التصوير والإنتاج المرئي",
-                "تحسين محركات البحث",
                 "تصميم وتطوير المواقع",
+                "تحسين محركات البحث",
                 "إدارة الحملات الإعلانية",
+                "بناء الهوية التجارية",
+                "إدارة السوشيال ميديا",
+                "تطوير المتاجر الإلكترونية",
               ],
             }),
           }}
         />
       </head>
       <body className={`${cairo.variable} font-cairo antialiased`}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TVKP5KSX"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         {children}
       </body>
     </html>

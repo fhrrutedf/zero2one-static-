@@ -8,7 +8,6 @@ import Services from '@/components/Services';
 import Portfolio from '@/components/Portfolio';
 import WhyUs from '@/components/WhyUs';
 import Stats from '@/components/Stats';
-import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -25,7 +24,6 @@ export default function Home() {
           <Portfolio />
           <WhyUs />
           <Stats />
-          <Blog />
           <Contact />
         </main>
         <Footer />
