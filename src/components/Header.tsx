@@ -111,7 +111,7 @@ export default function Header() {
 
             {/* Desktop CTA */}
             <a
-              href="https://wa.me/966500000000"
+              href="https://wa.me/966530307054"
               target="_blank"
               rel="noopener noreferrer"
               className={`hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
@@ -175,7 +175,7 @@ export default function Header() {
           </nav>
           <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 space-y-3">
             <a
-              href="https://wa.me/966500000000"
+              href="https://wa.me/966530307054"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-brand text-white font-semibold hover:bg-brand-dark transition-colors min-h-[48px]"

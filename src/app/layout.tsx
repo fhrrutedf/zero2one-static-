@@ -148,6 +148,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               },
               sameAs: [
                 "https://www.instagram.com/zero2onedm/",
+                "https://x.com/Zero2OneDM",
+                "https://www.tiktok.com/@zero2one2030",
               ],
               serviceType: [
                 "التسويق الرقمي",
@@ -174,7 +176,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               name: "ZERO 2 ONE",
               description: "وكالة تسويق رقمي وتحول رقمي في الرياض، السعودية",
               url: "https://zero2one.sa",
-              telephone: "+966000000000",
+              telephone: "+966530307054",
               email: "zero2one012025@gmail.com",
               image: "https://zero2one.sa/logo.png",
               priceRange: "$$",
@@ -199,6 +201,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               ],
               sameAs: [
                 "https://www.instagram.com/zero2onedm/",
+                "https://x.com/Zero2OneDM",
+                "https://www.tiktok.com/@zero2one2030",
               ],
             }),
           }}
