@@ -2,23 +2,21 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { MapPin, Phone, Mail, Clock, Send, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-
-// EmailJS Configuration
-// Replace these with your actual EmailJS credentials
-const EMAILJS_SERVICE_ID = 'service_zero2one';
-const EMAILJS_TEMPLATE_ID = 'template_contact';
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+import { MapPin, Mail, Clock, Send, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export default function Contact() {
   const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
   const [visible, setVisible] = useState(false);
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [formData, setFormData] = useState({
+    from_name: '',
+    from_email: '',
+    from_phone: '',
+    message: '',
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,24 +27,33 @@ export default function Contact() {
     return () => observer.disconnect();
   }, []);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formRef.current) return;
-
     setStatus('sending');
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY
-      );
-      setStatus('success');
-      formRef.current.reset();
-      setTimeout(() => setStatus('idle'), 5000);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setStatus('success');
+        setFormData({ from_name: '', from_email: '', from_phone: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
     } catch (error) {
-      console.error('EmailJS error:', error);
+      console.error('Form submission error:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -67,12 +74,14 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Form */}
           <div className={`${visible ? (isRTL ? 'animate-fade-in-right' : 'animate-fade-in-left') : 'opacity-0'}`}>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_name')}</label>
                 <input
                   type="text"
                   name="from_name"
+                  value={formData.from_name}
+                  onChange={handleChange}
                   placeholder={t('contact_name_ph')}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300"
                   required
@@ -85,6 +94,8 @@ export default function Contact() {
                   <input
                     type="email"
                     name="from_email"
+                    value={formData.from_email}
+                    onChange={handleChange}
                     placeholder={t('contact_email_ph')}
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300"
                     required
@@ -96,6 +107,8 @@ export default function Contact() {
                   <input
                     type="tel"
                     name="from_phone"
+                    value={formData.from_phone}
+                    onChange={handleChange}
                     placeholder={t('contact_phone_ph')}
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300"
                     disabled={status === 'sending'}
@@ -106,6 +119,8 @@ export default function Contact() {
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_message')}</label>
                 <textarea
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder={t('contact_message_ph')}
                   rows={4}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300 resize-none"
@@ -138,16 +153,16 @@ export default function Contact() {
                  t('contact_submit')}
               </button>
 
-              {/* Status Messages (mobile) */}
+              {/* Status Messages */}
               {status === 'success' && (
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm animate-fade-in-up">
-                  <CheckCircle size={16} />
+                  <CheckCircle size={16} className="shrink-0" />
                   {t('contact_success')}
                 </div>
               )}
               {status === 'error' && (
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm animate-fade-in-up">
-                  <AlertCircle size={16} />
+                  <AlertCircle size={16} className="shrink-0" />
                   {t('contact_error')}
                 </div>
               )}
