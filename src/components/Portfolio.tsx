@@ -3,17 +3,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
 import { ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 import type { TranslationKey } from '@/lib/i18n';
 
 const projects: {
   titleKey: TranslationKey;
   catKey: TranslationKey;
-  gradient: string;
+  image: string;
 }[] = [
-  { titleKey: 'portfolio_1_title', catKey: 'portfolio_1_cat', gradient: 'from-brand/30 to-brand-light/20' },
-  { titleKey: 'portfolio_2_title', catKey: 'portfolio_2_cat', gradient: 'from-brand-light/30 to-brand/20' },
-  { titleKey: 'portfolio_3_title', catKey: 'portfolio_3_cat', gradient: 'from-brand/20 to-brand-light/30' },
-  { titleKey: 'portfolio_4_title', catKey: 'portfolio_4_cat', gradient: 'from-brand-light/20 to-brand/30' },
+  { titleKey: 'portfolio_1_title', catKey: 'portfolio_1_cat', image: '/images/projects/doctor/poster-1.png' },
+  { titleKey: 'portfolio_2_title', catKey: 'portfolio_2_cat', image: '/images/projects/Logistics-Delivery-App/3.png' },
+  { titleKey: 'portfolio_3_title', catKey: 'portfolio_3_cat', image: '/images/projects/branding-coffee/poster.png' },
+  { titleKey: 'portfolio_4_title', catKey: 'portfolio_4_cat', image: '/images/projects/osool/d-three.png' },
 ];
 
 export default function Portfolio() {
@@ -45,13 +46,14 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {projects.map((project, idx) => (
             <div key={project.titleKey} className={`portfolio-card group relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg cursor-pointer ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 100}ms` }}>
-              <div className={`portfolio-image aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <div className="text-center p-4 sm:p-6">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-3 rounded-full bg-white/20 flex items-center justify-center">
-                    <ExternalLink size={20} className="text-white sm:w-6 sm:h-6" />
-                  </div>
-                  <p className="text-white/80 text-xs sm:text-sm font-medium">{t(project.catKey)}</p>
-                </div>
+              <div className="portfolio-image aspect-[4/3] relative bg-dark">
+                <Image
+                  src={project.image}
+                  alt={t(project.titleKey)}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
               </div>
               <div className="portfolio-overlay absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-transparent flex flex-col justify-end p-4 sm:p-6">
                 <span className="text-brand text-xs sm:text-sm font-semibold mb-1">{t(project.catKey)}</span>

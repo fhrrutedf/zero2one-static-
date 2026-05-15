@@ -26,11 +26,14 @@ export default function About() {
           {/* Image Side */}
           <div className={`relative ${visible ? (isRTL ? 'animate-fade-in-right' : 'animate-fade-in-left') : 'opacity-0'}`}>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-[4/3] bg-gradient-to-br from-brand/20 via-brand-light/10 to-brand/5 flex items-center justify-center">
-                <div className="text-center p-6 sm:p-8">
-                  <Image src="/logo-white.png" alt="ZERO 2 ONE" width={160} height={54} className="h-12 sm:h-16 w-auto mx-auto mb-3 sm:mb-4" />
-                  <p className="text-white/70 text-xs sm:text-sm mt-1">من الصفر إلى الواحد</p>
-                </div>
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/thumb-one.png"
+                  alt="ZERO 2 ONE - بيئة العمل"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
             <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-white rounded-xl shadow-xl p-4 items-center gap-3`}>
