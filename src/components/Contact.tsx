@@ -60,7 +60,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-white">
+    <section id="contact" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-dark">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 text-brand text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
@@ -155,13 +155,13 @@ export default function Contact() {
 
               {/* Status Messages */}
               {status === 'success' && (
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm animate-fade-in-up">
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-green-900/30 border border-green-800 text-green-400 text-sm animate-fade-in-up">
                   <CheckCircle size={16} className="shrink-0" />
                   {t('contact_success')}
                 </div>
               )}
               {status === 'error' && (
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm animate-fade-in-up">
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-red-900/30 border border-red-800 text-red-400 text-sm animate-fade-in-up">
                   <AlertCircle size={16} className="shrink-0" />
                   {t('contact_error')}
                 </div>

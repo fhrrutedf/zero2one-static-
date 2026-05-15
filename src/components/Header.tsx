@@ -55,7 +55,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
+        isScrolled ? 'bg-black/95 backdrop-blur-md shadow-lg shadow-black/50' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-3 sm:px-4 lg:px-8">
@@ -67,7 +67,7 @@ export default function Header() {
             className="flex items-center gap-2 shrink-0"
           >
             <Image
-              src={isScrolled ? "/logo.png" : "/logo-white.png"}
+              src={"/logo-white.png"}
               alt="ZERO 2 ONE"
               width={120}
               height={40}
@@ -84,9 +84,7 @@ export default function Header() {
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`nav-link text-sm font-medium transition-colors duration-300 ${
-                  isScrolled
-                    ? activeSection === link.href.slice(1) ? 'text-brand' : 'text-foreground hover:text-brand'
-                    : activeSection === link.href.slice(1) ? 'text-brand-light' : 'text-white/80 hover:text-white'
+                  activeSection === link.href.slice(1) ? 'text-brand' : 'text-white/80 hover:text-white'
                 } ${activeSection === link.href.slice(1) ? 'active' : ''}`}
               >
                 {t(link.labelKey)}
@@ -100,9 +98,7 @@ export default function Header() {
             <button
               onClick={toggleLang}
               className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border min-w-[40px] justify-center ${
-                isScrolled
-                  ? 'border-border text-foreground hover:bg-muted'
-                  : 'border-white/20 text-white/80 hover:bg-white/10'
+                'border-white/20 text-white/80 hover:bg-white/10'
               }`}
               aria-label="Toggle Language"
             >
@@ -116,9 +112,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               className={`hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                isScrolled
-                  ? 'bg-brand text-white hover:bg-brand-dark'
-                  : 'bg-brand/20 text-brand-light border border-brand/30 hover:bg-brand hover:text-white'
+                'bg-brand text-white hover:bg-brand-dark'
               }`}
             >
               <Phone size={14} />
@@ -129,7 +123,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                isScrolled ? 'text-foreground hover:bg-muted' : 'text-white hover:bg-white/10'
+                'text-white hover:bg-white/10'
               }`}
               aria-label={lang === 'ar' ? 'القائمة' : 'Menu'}
             >
