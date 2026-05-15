@@ -2,13 +2,23 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { MapPin, Phone, Mail, Clock, Send, Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+// EmailJS Configuration
+// Replace these with your actual EmailJS credentials
+const EMAILJS_SERVICE_ID = 'service_zero2one';
+const EMAILJS_TEMPLATE_ID = 'template_contact';
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export default function Contact() {
   const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [visible, setVisible] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>('idle');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -19,10 +29,27 @@ export default function Contact() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    if (!formRef.current) return;
+
+    setStatus('sending');
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus('success');
+      formRef.current.reset();
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   return (
@@ -40,29 +67,90 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Form */}
           <div className={`${visible ? (isRTL ? 'animate-fade-in-right' : 'animate-fade-in-left') : 'opacity-0'}`}>
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_name')}</label>
-                <input type="text" placeholder={t('contact_name_ph')} className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300" required />
+                <input
+                  type="text"
+                  name="from_name"
+                  placeholder={t('contact_name_ph')}
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300"
+                  required
+                  disabled={status === 'sending'}
+                />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div>
                   <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_email')}</label>
-                  <input type="email" placeholder={t('contact_email_ph')} className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300" required />
+                  <input
+                    type="email"
+                    name="from_email"
+                    placeholder={t('contact_email_ph')}
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300"
+                    required
+                    disabled={status === 'sending'}
+                  />
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_phone')}</label>
-                  <input type="tel" placeholder={t('contact_phone_ph')} className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300" />
+                  <input
+                    type="tel"
+                    name="from_phone"
+                    placeholder={t('contact_phone_ph')}
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300"
+                    disabled={status === 'sending'}
+                  />
                 </div>
               </div>
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">{t('contact_message')}</label>
-                <textarea placeholder={t('contact_message_ph')} rows={4} className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300 resize-none" required />
+                <textarea
+                  name="message"
+                  placeholder={t('contact_message_ph')}
+                  rows={4}
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-light-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all duration-300 resize-none"
+                  required
+                  disabled={status === 'sending'}
+                />
               </div>
-              <button type="submit" className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-brand text-white font-semibold text-base sm:text-lg hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/25 hover:shadow-brand/40 min-h-[48px]">
-                <Send size={16} className="sm:w-[18px] sm:h-[18px]" />
-                {submitted ? '✓' : t('contact_submit')}
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className={`w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 min-h-[48px] ${
+                  status === 'success'
+                    ? 'bg-green-600 text-white shadow-lg shadow-green-600/25'
+                    : status === 'error'
+                    ? 'bg-red-600 text-white shadow-lg shadow-red-600/25'
+                    : status === 'sending'
+                    ? 'bg-brand/70 text-white cursor-wait'
+                    : 'bg-brand text-white hover:bg-brand-dark shadow-lg shadow-brand/25 hover:shadow-brand/40'
+                }`}
+              >
+                {status === 'sending' && <Loader2 size={18} className="animate-spin" />}
+                {status === 'success' && <CheckCircle size={18} />}
+                {status === 'error' && <AlertCircle size={18} />}
+                {status === 'idle' && <Send size={16} className="sm:w-[18px] sm:h-[18px]" />}
+                {status === 'sending' ? t('contact_sending') :
+                 status === 'success' ? t('contact_success') :
+                 status === 'error' ? t('contact_error') :
+                 t('contact_submit')}
               </button>
+
+              {/* Status Messages (mobile) */}
+              {status === 'success' && (
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm animate-fade-in-up">
+                  <CheckCircle size={16} />
+                  {t('contact_success')}
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm animate-fade-in-up">
+                  <AlertCircle size={16} />
+                  {t('contact_error')}
+                </div>
+              )}
             </form>
           </div>
 
