@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
+import { useTheme } from './ThemeProvider';
 import { Award, Users, Clock } from 'lucide-react';
 import Image from 'next/image';
 
 export default function About() {
   const { t, isRTL } = useLanguage();
+  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -36,12 +38,12 @@ export default function About() {
                 />
               </div>
             </div>
-            <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-card-bg rounded-xl shadow-xl shadow-black/40 border border-white/10 p-4 items-center gap-3`}>
+            <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-card-bg rounded-xl shadow-xl ${isDark ? 'shadow-black/40' : 'shadow-black/10'} border ${isDark ? 'border-white/10' : 'border-border'} p-4 items-center gap-3`}>
               <div className="w-12 h-12 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
                 <Users size={24} className="text-brand" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-white">+80</div>
+                <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-foreground'}`}>+80</div>
                 <div className="text-xs text-muted-foreground">{t('about_stats_clients')}</div>
               </div>
             </div>

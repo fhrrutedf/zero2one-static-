@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
+import { useTheme } from './ThemeProvider';
 import { MapPin, Mail, Clock, Send, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export default function Contact() {
   const { t, isRTL } = useLanguage();
+  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [status, setStatus] = useState<FormStatus>('idle');
@@ -155,13 +157,17 @@ export default function Contact() {
 
               {/* Status Messages */}
               {status === 'success' && (
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-green-900/30 border border-green-800 text-green-400 text-sm animate-fade-in-up">
+                <div className={`flex items-center gap-2 p-3 rounded-lg border text-sm animate-fade-in-up ${
+                  isDark ? 'bg-green-900/30 border-green-800 text-green-400' : 'bg-green-50 border-green-200 text-green-700'
+                }`}>
                   <CheckCircle size={16} className="shrink-0" />
                   {t('contact_success')}
                 </div>
               )}
               {status === 'error' && (
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-red-900/30 border border-red-800 text-red-400 text-sm animate-fade-in-up">
+                <div className={`flex items-center gap-2 p-3 rounded-lg border text-sm animate-fade-in-up ${
+                  isDark ? 'bg-red-900/30 border-red-800 text-red-400' : 'bg-red-50 border-red-200 text-red-700'
+                }`}>
                   <AlertCircle size={16} className="shrink-0" />
                   {t('contact_error')}
                 </div>
