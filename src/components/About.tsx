@@ -57,8 +57,7 @@ export default function About() {
             </h2>
             <div className="section-divider mb-6 sm:mb-8" />
             <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">{t('about_p1')}</p>
-            <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">{t('about_p2')}</p>
-            <p className="text-muted-foreground leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{t('about_p3')}</p>
+            <p className="text-muted-foreground leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{t('about_p2')}</p>
 
             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
