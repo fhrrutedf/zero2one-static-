@@ -1,6 +1,7 @@
 'use client';
 
 import { LanguageProvider } from '@/components/LanguageProvider';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -15,22 +16,24 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 
 export default function Home() {
   return (
-    <LanguageProvider>
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
-          <Hero />
-          <About />
-          <Services />
-          <Portfolio />
-          <Results />
-          <WhyUs />
-          <Stats />
-          <Contact />
-        </main>
-        <Footer />
-        <WhatsAppButton />
-      </div>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-1">
+            <Hero />
+            <About />
+            <Services />
+            <Portfolio />
+            <Results />
+            <WhyUs />
+            <Stats />
+            <Contact />
+          </main>
+          <Footer />
+          <WhatsAppButton />
+        </div>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

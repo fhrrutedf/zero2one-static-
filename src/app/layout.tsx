@@ -97,18 +97,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang="ar" dir="rtl" className="dark" suppressHydrationWarning>
       <head>
-        {/* Inline script to prevent RTL/LTR flash on language switch */}
+        {/* Inline script to prevent RTL/LTR flash and theme flash */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  var stored = localStorage.getItem('lang');
-                  if (stored === 'en') {
+                  var storedLang = localStorage.getItem('lang');
+                  if (storedLang === 'en') {
                     document.documentElement.lang = 'en';
                     document.documentElement.dir = 'ltr';
+                  }
+                  var storedTheme = localStorage.getItem('theme');
+                  if (storedTheme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.add('dark');
                   }
                 } catch(e) {}
               })();

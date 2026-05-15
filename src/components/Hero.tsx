@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { ArrowDown, Sparkles, Target, TrendingUp } from 'lucide-react';
 import { useLanguage } from './LanguageProvider';
+import { useTheme } from './ThemeProvider';
 
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -36,6 +37,7 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 
 export default function Hero() {
   const { t, lang } = useLanguage();
+  const { isDark } = useTheme();
   const isAr = lang === 'ar';
 
   return (
@@ -57,21 +59,23 @@ export default function Hero() {
 
           {isAr ? (
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up delay-200">
-              <span className="text-white">{t('hero_title_1')}</span>
+              <span className="text-foreground">{t('hero_title_1')}</span>
               <br />
-              <span className="text-white">{t('hero_title_2')} </span>
+              <span className="text-foreground">{t('hero_title_2')} </span>
               <span className="text-brand-gradient">{t('hero_title_highlight')}</span>
             </h1>
           ) : (
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 animate-fade-in-up delay-200">
-              <span className="text-white">{t('hero_title_1')}</span>
+              <span className="text-foreground">{t('hero_title_1')}</span>
               <br />
-              <span className="text-white">{t('hero_title_2')} </span>
+              <span className="text-foreground">{t('hero_title_2')} </span>
               <span className="text-brand-gradient">{t('hero_title_highlight')}</span>
             </h1>
           )}
 
-          <p className="text-base sm:text-lg lg:text-xl text-white/60 max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 animate-fade-in-up delay-400">
+          <p className={`text-base sm:text-lg lg:text-xl max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 animate-fade-in-up delay-400 ${
+            isDark ? 'text-white/60' : 'text-foreground/60'
+          }`}>
             {t('hero_subtitle')}
           </p>
 
@@ -79,7 +83,9 @@ export default function Hero() {
             <a href="#services" onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-brand text-white font-semibold text-base sm:text-lg hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/25 hover:shadow-brand/40 text-center">
               {t('hero_btn_services')}
             </a>
-            <a href="#portfolio" onClick={(e) => { e.preventDefault(); document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-white/20 text-white font-semibold text-base sm:text-lg hover:bg-white/10 transition-all duration-300 text-center">
+            <a href="#portfolio" onClick={(e) => { e.preventDefault(); document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' }); }} className={`w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border font-semibold text-base sm:text-lg transition-all duration-300 text-center ${
+              isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-foreground/20 text-foreground hover:bg-foreground/10'
+            }`}>
               {t('hero_btn_portfolio')}
             </a>
           </div>
@@ -87,25 +93,25 @@ export default function Hero() {
           <div className="grid grid-cols-3 gap-3 sm:gap-6 lg:gap-12 max-w-md sm:max-w-xl mx-auto animate-fade-in-up delay-700">
             <div className="text-center">
               <Target size={16} className="text-brand mx-auto mb-1.5 sm:mb-2 sm:w-5 sm:h-5" />
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"><CountUp target={150} suffix="+" /></div>
-              <div className="text-xs sm:text-sm text-white/50 mt-0.5 sm:mt-1">{t('about_stats_projects')}</div>
+              <div className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${isDark ? 'text-white' : 'text-foreground'}`}><CountUp target={150} suffix="+" /></div>
+              <div className={`text-xs sm:text-sm mt-0.5 sm:mt-1 ${isDark ? 'text-white/50' : 'text-foreground/50'}`}>{t('about_stats_projects')}</div>
             </div>
             <div className="text-center">
               <TrendingUp size={16} className="text-brand mx-auto mb-1.5 sm:mb-2 sm:w-5 sm:h-5" />
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"><CountUp target={80} suffix="+" /></div>
-              <div className="text-xs sm:text-sm text-white/50 mt-0.5 sm:mt-1">{t('about_stats_clients')}</div>
+              <div className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${isDark ? 'text-white' : 'text-foreground'}`}><CountUp target={80} suffix="+" /></div>
+              <div className={`text-xs sm:text-sm mt-0.5 sm:mt-1 ${isDark ? 'text-white/50' : 'text-foreground/50'}`}>{t('about_stats_clients')}</div>
             </div>
             <div className="text-center">
               <Sparkles size={16} className="text-brand mx-auto mb-1.5 sm:mb-2 sm:w-5 sm:h-5" />
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"><CountUp target={5} suffix="+" /></div>
-              <div className="text-xs sm:text-sm text-white/50 mt-0.5 sm:mt-1">{t('about_stats_experience')}</div>
+              <div className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${isDark ? 'text-white' : 'text-foreground'}`}><CountUp target={5} suffix="+" /></div>
+              <div className={`text-xs sm:text-sm mt-0.5 sm:mt-1 ${isDark ? 'text-white/50' : 'text-foreground/50'}`}>{t('about_stats_experience')}</div>
             </div>
           </div>
         </div>
       </div>
 
       <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 sm:gap-2 animate-fade-in-up delay-1000">
-        <span className="text-white/40 text-[10px] sm:text-xs">{t('hero_scroll')}</span>
+        <span className={`text-[10px] sm:text-xs ${isDark ? 'text-white/40' : 'text-foreground/40'}`}>{t('hero_scroll')}</span>
         <ArrowDown size={16} className="text-brand animate-bounce sm:w-5 sm:h-5" />
       </div>
     </section>

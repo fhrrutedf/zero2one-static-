@@ -52,41 +52,56 @@
   --color-card-bg: #1A1A1A;
 }
 
+/* ========================================
+   LIGHT MODE (default)
+   ======================================== */
 :root {
   --radius: 0.625rem;
-  --background: #000000;
-  --foreground: #FFFFFF;
-  --card: #1A1A1A;
-  --card-foreground: #FFFFFF;
-  --popover: #0E0E0E;
-  --popover-foreground: #FFFFFF;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --card: #F7F7F8;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
   --primary: #e92f08;
   --primary-foreground: #FFFFFF;
   --secondary: #e98523;
   --secondary-foreground: #FFFFFF;
-  --muted: #1A1A1A;
-  --muted-foreground: #757575;
+  --muted: #F0F0F1;
+  --muted-foreground: #6B6B76;
   --accent: #e92f08;
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #333333;
-  --input: #333333;
+  --border: #E4E4E7;
+  --input: #D4D4D8;
   --ring: #e92f08;
   --chart-1: #e92f08;
   --chart-2: #e98523;
   --chart-3: #6d0408;
   --chart-4: #a32106;
   --chart-5: #c44b08;
-  --sidebar: #000000;
-  --sidebar-foreground: #FFFFFF;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1A1A1A;
   --sidebar-primary: #e92f08;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #1A1A1A;
-  --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #333333;
+  --sidebar-accent: #F0F0F1;
+  --sidebar-accent-foreground: #1A1A1A;
+  --sidebar-border: #E4E4E7;
   --sidebar-ring: #e92f08;
+
+  /* Light-mode overrides for custom colors */
+  --color-brand: #e92f08;
+  --color-brand-light: #e98523;
+  --color-brand-dark: #6d0408;
+  --color-dark: #FFFFFF;
+  --color-dark-light: #F7F7F8;
+  --color-light-bg: #F7F7F8;
+  --color-card-bg: #FFFFFF;
 }
 
+/* ========================================
+   DARK MODE
+   ======================================== */
 .dark {
   --background: #000000;
   --foreground: #FFFFFF;
@@ -119,6 +134,15 @@
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: #333333;
   --sidebar-ring: #e92f08;
+
+  /* Dark-mode overrides for custom colors */
+  --color-brand: #e92f08;
+  --color-brand-light: #e98523;
+  --color-brand-dark: #6d0408;
+  --color-dark: #000000;
+  --color-dark-light: #0E0E0E;
+  --color-light-bg: #0E0E0E;
+  --color-card-bg: #1A1A1A;
 }
 
 @layer base {
@@ -138,7 +162,7 @@
     @apply bg-background text-foreground;
     overflow-x: hidden;
     width: 100%;
-    transition: opacity 0.15s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   html.dir-changing body {
     opacity: 0.97;
@@ -233,13 +257,13 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0E0E0E; }
+::-webkit-scrollbar-track { background: var(--background); }
 ::-webkit-scrollbar-thumb { background: #e92f08; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #6d0408; }
 
-/* Hero gradient background */
+/* Hero gradient background - theme-aware */
 .hero-gradient {
-  background: linear-gradient(135deg, #000000 0%, #0E0E0E 40%, #000000 100%);
+  background: linear-gradient(135deg, var(--background) 0%, var(--color-light-bg) 40%, var(--background) 100%);
 }
 
 /* Brand gradient text */
@@ -250,7 +274,7 @@
   background-clip: text;
 }
 
-/* Decorative pattern */
+/* Decorative pattern - theme-aware */
 .geometric-pattern {
   background-image:
     linear-gradient(30deg, rgba(233, 47, 8, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(233, 47, 8, 0.05) 87.5%, rgba(233, 47, 8, 0.05)),
@@ -327,9 +351,20 @@ input:focus, textarea:focus, select:focus {
 }
 .results-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(233, 47, 8, 0.15), 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 50px rgba(233, 47, 8, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Line clamp utility */
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ========================================
+   THEME TRANSITION OVERRIDES
+   Smooth transition when toggling theme
+   ======================================== */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}

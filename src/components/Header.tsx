@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Globe } from 'lucide-react';
+import { Menu, X, Phone, Globe, Sun, Moon } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from './LanguageProvider';
+import { useTheme } from './ThemeProvider';
 import type { TranslationKey } from '@/lib/i18n';
 
 const navKeys: { href: string; labelKey: TranslationKey }[] = [
@@ -21,6 +22,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const { lang, toggleLang, t, isRTL } = useLanguage();
+  const { theme, toggleTheme, isDark } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,11 +54,26 @@ export default function Header() {
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Theme-aware header background
+  const headerBg = isScrolled
+    ? isDark
+      ? 'bg-black/95 backdrop-blur-md shadow-lg shadow-black/50'
+      : 'bg-white/95 backdrop-blur-md shadow-lg shadow-black/5'
+    : 'bg-transparent';
+
+  // Theme-aware text colors
+  const navTextActive = 'text-brand';
+  const navTextDefault = isDark ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-foreground';
+  const mobileMenuBg = isDark ? 'bg-dark' : 'bg-white';
+  const mobileMenuText = isDark ? 'text-white' : 'text-foreground';
+  const mobileMenuMuted = isDark ? 'text-white/70 hover:bg-white/5 hover:text-white' : 'text-foreground/70 hover:bg-foreground/5 hover:text-foreground';
+  const borderMuted = isDark ? 'border-white/20' : 'border-foreground/20';
+  const hoverBg = isDark ? 'hover:bg-white/10' : 'hover:bg-foreground/10';
+  const overlayBg = isDark ? 'bg-black/50' : 'bg-black/30';
+
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/95 backdrop-blur-md shadow-lg shadow-black/50' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${headerBg}`}
     >
       <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
@@ -67,7 +84,7 @@ export default function Header() {
             className="flex items-center gap-2 shrink-0"
           >
             <Image
-              src={"/logo-white.png"}
+              src={isDark ? "/logo-white.png" : "/logo-black.png"}
               alt="ZERO 2 ONE"
               width={120}
               height={40}
@@ -84,7 +101,7 @@ export default function Header() {
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`nav-link text-sm font-medium transition-colors duration-300 ${
-                  activeSection === link.href.slice(1) ? 'text-brand' : 'text-white/80 hover:text-white'
+                  activeSection === link.href.slice(1) ? navTextActive : navTextDefault
                 } ${activeSection === link.href.slice(1) ? 'active' : ''}`}
               >
                 {t(link.labelKey)}
@@ -92,13 +109,26 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA + Lang + Mobile Toggle */}
+          {/* CTA + Theme + Lang + Mobile Toggle */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full transition-all duration-300 border ${borderMuted} ${hoverBg}`}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDark ? (
+                <Sun size={14} className="text-brand sm:w-4 sm:h-4" />
+              ) : (
+                <Moon size={14} className="text-brand sm:w-4 sm:h-4" />
+              )}
+            </button>
+
             {/* Language Toggle */}
             <button
               onClick={toggleLang}
-              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border min-w-[40px] justify-center ${
-                'border-white/20 text-white/80 hover:bg-white/10'
+              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border min-w-[40px] justify-center ${borderMuted} ${
+                isDark ? 'text-white/80 hover:bg-white/10' : 'text-foreground/80 hover:bg-foreground/10'
               }`}
               aria-label="Toggle Language"
             >
@@ -123,7 +153,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                'text-white hover:bg-white/10'
+                isDark ? 'text-white hover:bg-white/10' : 'text-foreground hover:bg-foreground/10'
               }`}
               aria-label={lang === 'ar' ? 'القائمة' : 'Menu'}
             >
@@ -135,7 +165,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className="fixed top-0 w-[280px] sm:w-72 h-full bg-dark shadow-2xl z-50 lg:hidden transition-transform duration-300 ease-in-out"
+        className={`fixed top-0 w-[280px] sm:w-72 h-full ${mobileMenuBg} shadow-2xl z-50 lg:hidden transition-transform duration-300 ease-in-out`}
         style={{
           [isRTL ? 'right' : 'left']: 0,
           transform: isMobileMenuOpen ? 'translateX(0)' : (isRTL ? 'translateX(100%)' : 'translateX(-100%)'),
@@ -143,10 +173,18 @@ export default function Header() {
       >
         <div className="p-5 sm:p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
-            <Image src="/logo-white.png" alt="ZERO 2 ONE" width={100} height={32} className="h-8 w-auto" />
+            <Image
+              src={isDark ? "/logo-white.png" : "/logo-black.png"}
+              alt="ZERO 2 ONE"
+              width={100}
+              height={32}
+              className="h-8 w-auto"
+            />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-white/60 hover:text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center ${
+                isDark ? 'text-white/60 hover:text-white' : 'text-foreground/60 hover:text-foreground'
+              }`}
               aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}
             >
               <X size={22} />
@@ -161,14 +199,14 @@ export default function Header() {
                 className={`px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[48px] flex items-center ${
                   activeSection === link.href.slice(1)
                     ? 'bg-brand/10 text-brand'
-                    : 'text-white/70 hover:bg-white/5 hover:text-white'
+                    : mobileMenuMuted
                 }`}
               >
                 {t(link.labelKey)}
               </a>
             ))}
           </nav>
-          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 space-y-3">
+          <div className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t ${isDark ? 'border-white/10' : 'border-foreground/10'} space-y-3`}>
             <a
               href="https://wa.me/966530307054"
               target="_blank"
@@ -178,9 +216,27 @@ export default function Header() {
               <Phone size={16} />
               {t('cta_contact')}
             </a>
+
+            {/* Theme Toggle in Mobile Menu */}
+            <button
+              onClick={toggleTheme}
+              className={`flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border font-semibold transition-colors min-h-[48px] ${
+                isDark
+                  ? 'border-white/20 text-white hover:bg-white/10'
+                  : 'border-foreground/20 text-foreground hover:bg-foreground/10'
+              }`}
+            >
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              {isDark ? (lang === 'ar' ? 'الوضع الفاتح' : 'Light Mode') : (lang === 'ar' ? 'الوضع الداكن' : 'Dark Mode')}
+            </button>
+
             <button
               onClick={toggleLang}
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors min-h-[48px]"
+              className={`flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border font-semibold transition-colors min-h-[48px] ${
+                isDark
+                  ? 'border-white/20 text-white hover:bg-white/10'
+                  : 'border-foreground/20 text-foreground hover:bg-foreground/10'
+              }`}
             >
               <Globe size={16} />
               {lang === 'ar' ? 'English' : 'العربية'}
@@ -191,7 +247,7 @@ export default function Header() {
 
       {/* Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setIsMobileMenuOpen(false)} />
+        <div className={`fixed inset-0 ${overlayBg} z-40 lg:hidden`} onClick={() => setIsMobileMenuOpen(false)} />
       )}
     </header>
   );

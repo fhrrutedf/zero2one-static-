@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useLanguage } from './LanguageProvider';
+import { useTheme } from './ThemeProvider';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import type { TranslationKey } from '@/lib/i18n';
@@ -109,6 +110,7 @@ const filterKeys: { key: ResultCategory; labelKey: TranslationKey }[] = [
 
 export default function Results() {
   const { t, isRTL } = useLanguage();
+  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState<ResultCategory>('all');
@@ -172,9 +174,9 @@ export default function Results() {
           <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('results_tag')}
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">{t('results_title')}</h2>
+          <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-foreground'}`}>{t('results_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className="text-white/60 leading-relaxed text-sm sm:text-base">{t('results_subtitle')}</p>
+          <p className={`leading-relaxed text-sm sm:text-base ${isDark ? 'text-white/60' : 'text-foreground/60'}`}>{t('results_subtitle')}</p>
         </div>
 
         {/* Filter Tabs */}
@@ -186,7 +188,9 @@ export default function Results() {
               className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                 activeFilter === f.key
                   ? 'bg-brand text-white shadow-lg shadow-brand/30'
-                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
+                  : isDark
+                    ? 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
+                    : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10 hover:text-foreground border border-foreground/10'
               }`}
             >
               {t(f.labelKey)}
@@ -222,7 +226,7 @@ export default function Results() {
                   }
                 />
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
                 {/* Zoom icon on hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -248,7 +252,7 @@ export default function Results() {
       {/* Lightbox Modal */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-dark/95 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
           onClick={closeLightbox}
         >
           {/* Close button */}

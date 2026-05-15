@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
+import { useTheme } from './ThemeProvider';
 import { Briefcase, Users, Clock, ThumbsUp } from 'lucide-react';
 
 interface StatItem {
@@ -51,6 +52,7 @@ function AnimatedCounter({ target, suffix }: { target: number; suffix: string })
 
 export default function Stats() {
   const { t } = useLanguage();
+  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -71,7 +73,7 @@ export default function Stats() {
           <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('stats_tag')}
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">{t('stats_title')}</h2>
+          <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-foreground'}`}>{t('stats_title')}</h2>
           <div className="section-divider" />
         </div>
 
@@ -79,14 +81,18 @@ export default function Stats() {
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={stat.labelKey} className={`text-center p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 150}ms` }}>
+              <div key={stat.labelKey} className={`text-center p-5 sm:p-8 rounded-xl sm:rounded-2xl backdrop-blur-sm border ${
+                isDark
+                  ? 'bg-white/5 border-white/10'
+                  : 'bg-white/70 border-foreground/10 shadow-sm'
+              } ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 150}ms` }}>
                 <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-brand/20 flex items-center justify-center">
                   <Icon size={18} className="text-brand sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">
+                <div className={`text-2xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-foreground'}`}>
                   <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                 </div>
-                <div className="text-white/60 text-[10px] sm:text-sm font-medium">{t(stat.labelKey)}</div>
+                <div className={`text-[10px] sm:text-sm font-medium ${isDark ? 'text-white/60' : 'text-foreground/60'}`}>{t(stat.labelKey)}</div>
               </div>
             );
           })}
