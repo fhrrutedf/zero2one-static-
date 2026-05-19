@@ -149,7 +149,6 @@ export default function Results() {
     setLightboxIndex((lightboxIndex - 1 + filteredResults.length) % filteredResults.length);
   }, [lightboxIndex, filteredResults.length]);
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
     if (lightboxIndex === null) return;
     const handler = (e: KeyboardEvent) => {
@@ -212,7 +211,7 @@ export default function Results() {
                   src={result.image}
                   alt={t(result.titleKey)}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes={
                     result.span === 'wide'
                       ? '(max-width: 640px) 100vw, 50vw'
@@ -221,23 +220,25 @@ export default function Results() {
                       : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
                   }
                 />
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
-                {/* Zoom icon on hover */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-[#bc8934]/80 flex items-center justify-center backdrop-blur-sm">
-                    <ZoomIn size={20} className="text-white" />
-                  </div>
-                </div>
-
-                {/* Bottom info */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5">
-                  <span className="inline-block px-2.5 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[10px] sm:text-xs font-medium mb-2">
+                {/* Hover overlay with animated text - slides up from bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col justify-end p-4 sm:p-5">
+                  {/* Category badge - slides in */}
+                  <span className="inline-block self-start px-3 py-1 rounded-full bg-[#bc8934]/30 text-[#d4a043] text-[10px] sm:text-xs font-semibold mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     {t(result.catKey)}
                   </span>
-                  <h3 className="text-white text-sm sm:text-base lg:text-lg font-bold mb-1">{t(result.titleKey)}</h3>
-                  <p className="text-white/60 text-[10px] sm:text-xs font-semibold">{t(result.clientKey)}</p>
+                  {/* Title - slides in with delay */}
+                  <h3 className="text-white text-sm sm:text-base lg:text-lg font-bold mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                    {t(result.titleKey)}
+                  </h3>
+                  {/* Client - slides in with more delay */}
+                  <p className="text-white/70 text-[10px] sm:text-xs font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">
+                    {t(result.clientKey)}
+                  </p>
+                  {/* Zoom icon */}
+                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#bc8934]/70 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-200">
+                    <ZoomIn size={16} className="text-white" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -251,7 +252,6 @@ export default function Results() {
           className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
           onClick={closeLightbox}
         >
-          {/* Close button */}
           <button
             className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10"
             onClick={closeLightbox}
@@ -259,7 +259,6 @@ export default function Results() {
             <X size={20} />
           </button>
 
-          {/* Previous button */}
           <button
             className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#bc8934] transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); goPrev(); }}
@@ -267,7 +266,6 @@ export default function Results() {
             {isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
           </button>
 
-          {/* Next button */}
           <button
             className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#bc8934] transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); goNext(); }}
@@ -275,7 +273,6 @@ export default function Results() {
             {isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
           </button>
 
-          {/* Image container */}
           <div
             className="relative max-w-5xl w-full max-h-[85vh] mx-auto"
             onClick={(e) => e.stopPropagation()}
@@ -290,13 +287,12 @@ export default function Results() {
                 quality={100}
               />
             </div>
-            {/* Image info */}
             <div className="mt-4 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-xs font-medium mb-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-xs font-semibold mb-2">
                 {t(filteredResults[lightboxIndex].catKey)}
               </span>
               <h3 className="text-white text-lg sm:text-xl font-bold">{t(filteredResults[lightboxIndex].titleKey)}</h3>
-              <p className="text-white/50 text-sm mt-1">{t(filteredResults[lightboxIndex].clientKey)}</p>
+              <p className="text-white/60 text-sm mt-1 font-semibold">{t(filteredResults[lightboxIndex].clientKey)}</p>
             </div>
           </div>
         </div>

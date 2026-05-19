@@ -60,7 +60,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-light-alt section-gold-accent-top">
+    <section id="contact" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-light section-gold-accent-top">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 text-[#bc8934] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
@@ -83,7 +83,7 @@ export default function Contact() {
                   value={formData.from_name}
                   onChange={handleChange}
                   placeholder={t('contact_name_ph')}
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-card-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-white text-foreground text-sm placeholder:text-foreground/40 focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300"
                   required
                   disabled={status === 'sending'}
                 />
@@ -97,7 +97,7 @@ export default function Contact() {
                     value={formData.from_email}
                     onChange={handleChange}
                     placeholder={t('contact_email_ph')}
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-card-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-white text-foreground text-sm placeholder:text-foreground/40 focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300"
                     required
                     disabled={status === 'sending'}
                   />
@@ -110,7 +110,7 @@ export default function Contact() {
                     value={formData.from_phone}
                     onChange={handleChange}
                     placeholder={t('contact_phone_ph')}
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-card-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-white text-foreground text-sm placeholder:text-foreground/40 focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300"
                     disabled={status === 'sending'}
                   />
                 </div>
@@ -123,7 +123,7 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder={t('contact_message_ph')}
                   rows={4}
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-card-bg text-foreground text-sm placeholder:text-muted-foreground focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300 resize-none"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-border bg-white text-foreground text-sm placeholder:text-foreground/40 focus:border-[#bc8934] focus:ring-2 focus:ring-[#bc8934]/15 transition-all duration-300 resize-none"
                   required
                   disabled={status === 'sending'}
                 />
@@ -133,7 +133,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className={`w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 min-h-[48px] ${
+                className={`w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all duration-300 min-h-[48px] ${
                   status === 'success'
                     ? 'bg-green-600 text-white shadow-lg shadow-green-600/25'
                     : status === 'error'
@@ -155,13 +155,13 @@ export default function Contact() {
 
               {/* Status Messages */}
               {status === 'success' && (
-                <div className="flex items-center gap-2 p-3 rounded-lg border text-sm animate-fade-in-up bg-green-50 border-green-200 text-green-700">
+                <div className="flex items-center gap-2 p-3 rounded-lg border text-sm animate-fade-in-up bg-green-50 border-green-200 text-green-700 font-semibold">
                   <CheckCircle size={16} className="shrink-0" />
                   {t('contact_success')}
                 </div>
               )}
               {status === 'error' && (
-                <div className="flex items-center gap-2 p-3 rounded-lg border text-sm animate-fade-in-up bg-red-50 border-red-200 text-red-700">
+                <div className="flex items-center gap-2 p-3 rounded-lg border text-sm animate-fade-in-up bg-red-50 border-red-200 text-red-700 font-semibold">
                   <AlertCircle size={16} className="shrink-0" />
                   {t('contact_error')}
                 </div>
@@ -176,48 +176,48 @@ export default function Contact() {
             </div>
 
             <div className="space-y-3 sm:space-y-4">
-              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
+              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white shadow-sm border border-border">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#bc8934]/10 flex items-center justify-center shrink-0">
                   <MapPin size={16} className="text-[#bc8934] sm:w-[18px] sm:h-[18px]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground text-xs sm:text-sm">{t('contact_address')}</h4>
+                  <h4 className="font-bold text-foreground text-xs sm:text-sm">{t('contact_address')}</h4>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
+              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white shadow-sm border border-border">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#bc8934]/10 flex items-center justify-center shrink-0">
                   <Mail size={16} className="text-[#bc8934] sm:w-[18px] sm:h-[18px]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground text-xs sm:text-sm">{t('contact_email_addr')}</h4>
-                  <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-foreground/70 text-[10px] sm:text-xs mt-0.5 hover:text-[#bc8934] transition-colors font-semibold">zero2one012025@gmail.com</a>
+                  <h4 className="font-bold text-foreground text-xs sm:text-sm">{t('contact_email_addr')}</h4>
+                  <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-foreground/60 text-[10px] sm:text-xs mt-0.5 hover:text-[#bc8934] transition-colors font-semibold">zero2one012025@gmail.com</a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
+              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white shadow-sm border border-border">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#bc8934]/10 flex items-center justify-center shrink-0">
                   <Clock size={16} className="text-[#bc8934] sm:w-[18px] sm:h-[18px]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground text-xs sm:text-sm">{t('contact_working')}</h4>
-                  <p className="text-foreground/70 text-[10px] sm:text-xs mt-0.5 font-semibold">{t('contact_working_days')}</p>
-                  <p className="text-foreground/70 text-[10px] sm:text-xs font-semibold">{t('contact_working_hours')}</p>
+                  <h4 className="font-bold text-foreground text-xs sm:text-sm">{t('contact_working')}</h4>
+                  <p className="text-foreground/60 text-[10px] sm:text-xs mt-0.5 font-semibold">{t('contact_working_days')}</p>
+                  <p className="text-foreground/60 text-[10px] sm:text-xs font-semibold">{t('contact_working_hours')}</p>
                 </div>
               </div>
             </div>
 
             {/* Social Links */}
             <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-border">
-              <h4 className="font-semibold text-foreground text-xs sm:text-sm mb-3">{t('contact_social')}</h4>
+              <h4 className="font-bold text-foreground text-xs sm:text-sm mb-3">{t('contact_social')}</h4>
               <div className="flex items-center gap-2 sm:gap-3">
-                <a href="https://www.instagram.com/zero2onedm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-card-bg text-muted-foreground hover:bg-[#bc8934] hover:text-white transition-all duration-300 min-w-[44px] min-h-[44px]">
+                <a href="https://www.instagram.com/zero2onedm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white border border-border text-foreground/60 hover:bg-[#bc8934] hover:text-white hover:border-[#bc8934] transition-all duration-300 min-w-[44px] min-h-[44px]">
                   <Instagram size={16} className="sm:w-[18px] sm:h-[18px]" />
                 </a>
-                <a href="https://x.com/Zero2OneDM" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-card-bg text-muted-foreground hover:bg-[#bc8934] hover:text-white transition-all duration-300 min-w-[44px] min-h-[44px]">
+                <a href="https://x.com/Zero2OneDM" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white border border-border text-foreground/60 hover:bg-[#bc8934] hover:text-white hover:border-[#bc8934] transition-all duration-300 min-w-[44px] min-h-[44px]">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="sm:w-[18px] sm:h-[18px]"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
-                <a href="https://www.tiktok.com/@zero2one2030" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-card-bg text-muted-foreground hover:bg-[#bc8934] hover:text-white transition-all duration-300 min-w-[44px] min-h-[44px]">
+                <a href="https://www.tiktok.com/@zero2one2030" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white border border-border text-foreground/60 hover:bg-[#bc8934] hover:text-white hover:border-[#bc8934] transition-all duration-300 min-w-[44px] min-h-[44px]">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="sm:w-[18px] sm:h-[18px]"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78 2.86 2.86 0 0 1 .9.15V9.01a6.27 6.27 0 0 0-.9-.07 6.34 6.34 0 0 0 0 12.68 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1-.15z"/></svg>
                 </a>
               </div>
