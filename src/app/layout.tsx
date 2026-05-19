@@ -147,6 +147,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 "@type": "PostalAddress",
                 addressCountry: "SA",
                 addressLocality: "الرياض",
+                addressRegion: "العليا",
+                streetAddress: "مجمع الكمبيوترات، الدور السابع",
               },
               areaServed: {
                 "@type": "Country",
@@ -189,13 +191,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "الرياض",
-                addressRegion: "الرياض",
+                addressRegion: "العليا",
                 addressCountry: "SA",
+                streetAddress: "مجمع الكمبيوترات، الدور السابع",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: 24.7252,
-                longitude: 46.5427,
+                latitude: 24.6877,
+                longitude: 46.6729,
               },
               openingHoursSpecification: [
                 {

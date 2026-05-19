@@ -172,7 +172,7 @@ export default function Contact() {
           {/* Contact Info + Map */}
           <div className={`${visible ? (isRTL ? 'animate-fade-in-left' : 'animate-fade-in-right') : 'opacity-0'}`}>
             <div className="rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-8 shadow-lg">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463877.0239189283!2d46.54271704999999!3d24.725195199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2z2KfZhNix2YrYp9i2!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa" width="100%" height="220" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Location Map" />
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6!2d46.6729!3d24.6877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f035a37629539%3A0x82c76c9df9cf7974!2z2KfZhNix2YrYp9i2IC0g2KfZhNiu2YXYp9it2YrYqSDYp9mE2LnYsdmK2Kc!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa" width="100%" height="220" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Location Map" />
             </div>
 
             <div className="space-y-3 sm:space-y-4">
