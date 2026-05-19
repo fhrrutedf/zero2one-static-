@@ -71,7 +71,7 @@ export default function Hero() {
             </h1>
           )}
 
-          <p className="text-base sm:text-lg lg:text-xl max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 animate-fade-in-up delay-400 text-white/80 font-medium">
+          <p className="text-base sm:text-lg lg:text-xl max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 animate-fade-in-up delay-400 text-white/90 font-semibold">
             {t('hero_subtitle')}
           </p>
 
@@ -88,17 +88,17 @@ export default function Hero() {
             <div className="text-center">
               <Target size={16} className="text-[#bc8934] mx-auto mb-1.5 sm:mb-2 sm:w-5 sm:h-5" />
               <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"><CountUp target={150} suffix="+" /></div>
-              <div className="text-xs sm:text-sm mt-0.5 sm:mt-1 text-white/70 font-medium">{t('about_stats_projects')}</div>
+              <div className="text-xs sm:text-sm mt-0.5 sm:mt-1 text-white/80 font-semibold">{t('about_stats_projects')}</div>
             </div>
             <div className="text-center">
               <TrendingUp size={16} className="text-[#bc8934] mx-auto mb-1.5 sm:mb-2 sm:w-5 sm:h-5" />
               <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"><CountUp target={80} suffix="+" /></div>
-              <div className="text-xs sm:text-sm mt-0.5 sm:mt-1 text-white/70 font-medium">{t('about_stats_clients')}</div>
+              <div className="text-xs sm:text-sm mt-0.5 sm:mt-1 text-white/80 font-semibold">{t('about_stats_clients')}</div>
             </div>
             <div className="text-center">
               <Sparkles size={16} className="text-[#bc8934] mx-auto mb-1.5 sm:mb-2 sm:w-5 sm:h-5" />
               <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"><CountUp target={5} suffix="+" /></div>
-              <div className="text-xs sm:text-sm mt-0.5 sm:mt-1 text-white/70 font-medium">{t('about_stats_experience')}</div>
+              <div className="text-xs sm:text-sm mt-0.5 sm:mt-1 text-white/80 font-semibold">{t('about_stats_experience')}</div>
             </div>
           </div>
         </div>

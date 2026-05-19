@@ -68,7 +68,7 @@ export default function Contact() {
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">{t('contact_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-medium">{t('contact_subtitle')}</p>
+          <p className="text-foreground/85 leading-relaxed text-sm sm:text-base font-semibold">{t('contact_subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
@@ -191,7 +191,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground text-xs sm:text-sm">{t('contact_email_addr')}</h4>
-                  <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-muted-foreground text-[10px] sm:text-xs mt-0.5 hover:text-[#bc8934] transition-colors">zero2one012025@gmail.com</a>
+                  <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-foreground/70 text-[10px] sm:text-xs mt-0.5 hover:text-[#bc8934] transition-colors font-semibold">zero2one012025@gmail.com</a>
                 </div>
               </div>
 
@@ -201,8 +201,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground text-xs sm:text-sm">{t('contact_working')}</h4>
-                  <p className="text-muted-foreground text-[10px] sm:text-xs mt-0.5">{t('contact_working_days')}</p>
-                  <p className="text-muted-foreground text-[10px] sm:text-xs">{t('contact_working_hours')}</p>
+                  <p className="text-foreground/70 text-[10px] sm:text-xs mt-0.5 font-semibold">{t('contact_working_days')}</p>
+                  <p className="text-foreground/70 text-[10px] sm:text-xs font-semibold">{t('contact_working_hours')}</p>
                 </div>
               </div>
             </div>

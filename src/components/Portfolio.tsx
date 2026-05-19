@@ -65,7 +65,7 @@ export default function Portfolio() {
 
           {/* Subtitle - fades in from bottom */}
           <p
-            className={`text-muted-foreground leading-relaxed text-sm sm:text-base font-medium transition-all duration-700 ${
+            className={`text-foreground/85 leading-relaxed text-sm sm:text-base font-semibold transition-all duration-700 ${
               visible ? 'animate-slide-from-bottom' : 'opacity-0 translate-y-10'
             }`}
             style={{ animationDelay: '450ms' }}

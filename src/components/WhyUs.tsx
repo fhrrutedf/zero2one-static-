@@ -38,7 +38,7 @@ export default function WhyUs() {
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">{t('whyus_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{t('whyus_subtitle')}</p>
+          <p className="text-white/85 leading-relaxed text-sm sm:text-base font-semibold">{t('whyus_subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -50,7 +50,7 @@ export default function WhyUs() {
                   <Icon size={26} className="text-[#bc8934] sm:w-8 sm:h-8" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">{t(feature.titleKey)}</h3>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-medium">{t(feature.descKey)}</p>
+                <p className="text-white/85 text-sm sm:text-base leading-relaxed font-semibold">{t(feature.descKey)}</p>
               </div>
             );
           })}

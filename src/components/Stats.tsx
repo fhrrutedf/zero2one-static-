@@ -86,7 +86,7 @@ export default function Stats() {
                 <div className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 text-foreground">
                   <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                 </div>
-                <div className="text-[10px] sm:text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</div>
+                <div className="text-[10px] sm:text-sm font-semibold text-foreground/85">{t(stat.labelKey)}</div>
               </div>
             );
           })}

@@ -174,7 +174,7 @@ export default function Results() {
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('results_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className="leading-relaxed text-sm sm:text-base text-white/80 font-medium">{t('results_subtitle')}</p>
+          <p className="leading-relaxed text-sm sm:text-base text-white/90 font-semibold">{t('results_subtitle')}</p>
         </div>
 
         {/* Filter Tabs */}
@@ -183,10 +183,10 @@ export default function Results() {
             <button
               key={f.key}
               onClick={() => setActiveFilter(f.key)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeFilter === f.key
                   ? 'bg-[#bc8934] text-white shadow-lg shadow-[#bc8934]/30'
-                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
+                  : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10'
               }`}
             >
               {t(f.labelKey)}
@@ -237,7 +237,7 @@ export default function Results() {
                     {t(result.catKey)}
                   </span>
                   <h3 className="text-white text-sm sm:text-base lg:text-lg font-bold mb-1">{t(result.titleKey)}</h3>
-                  <p className="text-white/50 text-[10px] sm:text-xs">{t(result.clientKey)}</p>
+                  <p className="text-white/60 text-[10px] sm:text-xs font-semibold">{t(result.clientKey)}</p>
                 </div>
               </div>
             </div>

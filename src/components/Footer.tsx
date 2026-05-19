@@ -51,7 +51,7 @@ export default function Footer() {
               height={44}
               className="h-10 w-auto mb-4"
             />
-            <p className="text-[#f5f3f0]/60 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-6">{t('footer_desc')}</p>
+            <p className="text-[#f5f3f0]/75 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-6 font-semibold">{t('footer_desc')}</p>
             <div className="flex items-center gap-2 sm:gap-3">
               <a href="https://www.instagram.com/zero2onedm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-[#bc8934] hover:text-white transition-all duration-300 min-w-[44px] min-h-[44px]">
                 <Instagram size={14} className="sm:w-4 sm:h-4" />
@@ -74,7 +74,7 @@ export default function Footer() {
                   <a
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                    className="text-[#f5f3f0]/60 hover:text-[#bc8934] transition-colors duration-300 text-xs sm:text-sm min-h-[44px] flex items-center"
+                    className="text-[#f5f3f0]/75 hover:text-[#bc8934] transition-colors duration-300 text-xs sm:text-sm font-semibold min-h-[44px] flex items-center"
                   >
                     {t(link.labelKey)}
                   </a>
@@ -92,7 +92,7 @@ export default function Footer() {
                   <a
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                    className="text-[#f5f3f0]/60 hover:text-[#bc8934] transition-colors duration-300 text-xs sm:text-sm min-h-[44px] flex items-center"
+                    className="text-[#f5f3f0]/75 hover:text-[#bc8934] transition-colors duration-300 text-xs sm:text-sm font-semibold min-h-[44px] flex items-center"
                   >
                     {t(link.labelKey)}
                   </a>
@@ -107,17 +107,17 @@ export default function Footer() {
             <ul className="space-y-3 sm:space-y-4">
               <li className="flex items-start gap-2 sm:gap-3">
                 <MapPin size={16} className="text-[#bc8934] mt-0.5 shrink-0 sm:w-[18px] sm:h-[18px]" />
-                <span className="text-[#f5f3f0]/60 text-xs sm:text-sm">{t('contact_address')}</span>
+                <span className="text-[#f5f3f0]/75 text-xs sm:text-sm font-semibold">{t('contact_address')}</span>
               </li>
               <li className="flex items-start gap-2 sm:gap-3">
                 <Phone size={16} className="text-[#bc8934] mt-0.5 shrink-0 sm:w-[18px] sm:h-[18px]" />
-                <a href="tel:+966530307054" dir="ltr" className="text-[#f5f3f0]/60 hover:text-[#bc8934] transition-colors text-xs sm:text-sm">
+                <a href="tel:+966530307054" dir="ltr" className="text-[#f5f3f0]/75 hover:text-[#bc8934] transition-colors text-xs sm:text-sm font-semibold">
                   +966 53 030 7054
                 </a>
               </li>
               <li className="flex items-start gap-2 sm:gap-3">
                 <Mail size={16} className="text-[#bc8934] mt-0.5 shrink-0 sm:w-[18px] sm:h-[18px]" />
-                <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-[#f5f3f0]/60 hover:text-[#bc8934] transition-colors text-xs sm:text-sm">
+                <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-[#f5f3f0]/75 hover:text-[#bc8934] transition-colors text-xs sm:text-sm font-semibold">
                   zero2one012025@gmail.com
                 </a>
               </li>
@@ -129,10 +129,10 @@ export default function Footer() {
       {/* Copyright */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2">
-          <p className="text-white/60 text-[10px] sm:text-xs font-medium">
+          <p className="text-white/75 text-[10px] sm:text-xs font-semibold">
             &copy; {year} ZERO 2 ONE. {t('footer_rights')}
           </p>
-          <p className="text-white/60 text-[10px] sm:text-xs font-medium">
+          <p className="text-white/75 text-[10px] sm:text-xs font-semibold">
             من الصفر إلى الواحد
           </p>
         </div>
