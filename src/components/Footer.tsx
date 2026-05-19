@@ -129,10 +129,10 @@ export default function Footer() {
       {/* Copyright */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2">
-          <p className="text-white/40 text-[10px] sm:text-xs">
+          <p className="text-white/60 text-[10px] sm:text-xs font-medium">
             &copy; {year} ZERO 2 ONE. {t('footer_rights')}
           </p>
-          <p className="text-white/40 text-[10px] sm:text-xs">
+          <p className="text-white/60 text-[10px] sm:text-xs font-medium">
             من الصفر إلى الواحد
           </p>
         </div>

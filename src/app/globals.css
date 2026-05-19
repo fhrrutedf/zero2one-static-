@@ -166,6 +166,9 @@
     overflow-x: hidden;
     width: 100%;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   html.dir-changing body {
     opacity: 0.97;
@@ -216,10 +219,10 @@
   color: #f5f3f0;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  --foreground: #f5f3f0;
-  --muted-foreground: #a89e96;
+  --foreground: #ffffff;
+  --muted-foreground: #d4ccc6;
   --card: rgba(42, 26, 27, 0.8);
-  --card-foreground: #f5f3f0;
+  --card-foreground: #ffffff;
   --border: #3d2e30;
   --color-card-bg: #2a1a1b;
   --color-light-bg: #2a1a1b;
@@ -231,10 +234,10 @@
   color: #f5f3f0;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  --foreground: #f5f3f0;
-  --muted-foreground: #a89e96;
+  --foreground: #ffffff;
+  --muted-foreground: #d4ccc6;
   --card: rgba(26, 21, 23, 0.8);
-  --card-foreground: #f5f3f0;
+  --card-foreground: #ffffff;
   --border: #3d2e30;
   --color-card-bg: #1a1517;
   --color-light-bg: #1a1517;
@@ -246,10 +249,10 @@
   color: #1a1517;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  --foreground: #1a1517;
-  --muted-foreground: #6B6B76;
+  --foreground: #0d0a0b;
+  --muted-foreground: #4a4548;
   --card: rgba(255, 255, 255, 0.9);
-  --card-foreground: #1a1517;
+  --card-foreground: #0d0a0b;
   --border: #d4d0cc;
   --color-card-bg: #ffffff;
   --color-light-bg: #f5f3f0;
@@ -261,10 +264,10 @@
   color: #1a1517;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  --foreground: #1a1517;
-  --muted-foreground: #6B6B76;
+  --foreground: #0d0a0b;
+  --muted-foreground: #4a4548;
   --card: rgba(255, 255, 255, 0.9);
-  --card-foreground: #1a1517;
+  --card-foreground: #0d0a0b;
   --border: #d4d0cc;
   --color-card-bg: #ffffff;
   --color-light-bg: #ede9e4;

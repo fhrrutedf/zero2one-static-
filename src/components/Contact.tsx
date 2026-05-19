@@ -68,7 +68,7 @@ export default function Contact() {
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">{t('contact_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{t('contact_subtitle')}</p>
+          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-medium">{t('contact_subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">

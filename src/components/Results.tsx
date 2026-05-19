@@ -174,7 +174,7 @@ export default function Results() {
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('results_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className="leading-relaxed text-sm sm:text-base text-white/60">{t('results_subtitle')}</p>
+          <p className="leading-relaxed text-sm sm:text-base text-white/80 font-medium">{t('results_subtitle')}</p>
         </div>
 
         {/* Filter Tabs */}

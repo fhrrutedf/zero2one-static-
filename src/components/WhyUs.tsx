@@ -50,7 +50,7 @@ export default function WhyUs() {
                   <Icon size={26} className="text-[#bc8934] sm:w-8 sm:h-8" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">{t(feature.titleKey)}</h3>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{t(feature.descKey)}</p>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-medium">{t(feature.descKey)}</p>
               </div>
             );
           })}
