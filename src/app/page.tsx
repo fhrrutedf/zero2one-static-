@@ -18,20 +18,25 @@ export default function Home() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-1">
-            <Hero />
-            <About />
-            <Services />
-            <Portfolio />
-            <Results />
-            <WhyUs />
-            <Stats />
-            <Contact />
-          </main>
-          <Footer />
-          <WhatsAppButton />
+        <div className="saudi-bg-wrapper">
+          {/* Saudi landmarks fixed background image */}
+          <div className="saudi-bg-image" aria-hidden="true" />
+          {/* All page content */}
+          <div className="saudi-bg-content min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-1">
+              <Hero />
+              <About />
+              <Services />
+              <Portfolio />
+              <Results />
+              <WhyUs />
+              <Stats />
+              <Contact />
+            </main>
+            <Footer />
+            <WhatsAppButton />
+          </div>
         </div>
       </LanguageProvider>
     </ThemeProvider>

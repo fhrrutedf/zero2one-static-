@@ -54,3 +54,41 @@ Stage Summary:
 - Features: filter tabs, bento grid layout, lightbox viewer, keyboard navigation
 - All images enhanced from WhatsApp quality
 - Section visible in navigation (header + footer)
+---
+Task ID: 1
+Agent: Brand Redesign Agent
+Task: Complete Brand Color Redesign + Saudi Landmarks Background
+
+Work Log:
+- Rewrote globals.css completely with new gold/dark brand colors:
+  - Primary gold: #bc8934, Light gold: #d4a043, Dark gold: #9a6e2a
+  - Dark backgrounds: #1a1517, #2a1a1b
+  - Light backgrounds: #f5f3f0, #ede9e4
+  - Added Saudi landmarks background CSS classes (.saudi-bg-wrapper, .saudi-bg-image, .saudi-bg-content)
+  - Added section background classes: .section-dark, .section-dark-alt, .section-light, .section-light-alt with semi-transparent backgrounds and CSS variable overrides
+  - Updated all decorative elements to use gold colors (brand gradient, geometric pattern, section divider, service icon, card hover, nav link, form focus)
+  - Added new gold decorative elements: gold-corner-accent, gold-line, gold-frame, gold-dot, section-gold-accent-top/bottom, gold-vbar
+  - Updated animations to use gold rgba values (shimmer, pulse-brand, hero-gradient)
+  - Custom scrollbar with gold theme
+  - Section classes work in BOTH light and dark mode with explicit CSS rules
+- Updated page.tsx with Saudi landmarks background wrapper structure
+- Updated Hero.tsx: replaced hero-gradient with section-dark, removed isDark conditionals, replaced all brand color references with gold hex values
+- Updated Header.tsx: gold accent navigation (#bc8934), dark header bg (#1a1517/95) when scrolled, mobile menu with gold active links
+- Updated About.tsx: section-light + section-gold-accent-top, gold accent colors
+- Updated Services.tsx: section-dark-alt + section-gold-accent-top, gold accents, kept WhatsApp green buttons
+- Updated Portfolio.tsx: section-light-alt + section-gold-accent-top, gold accents
+- Updated Results.tsx: section-dark + section-gold-accent-top, removed isDark conditionals, gold filter buttons and overlays
+- Updated WhyUs.tsx: section-dark-alt + section-gold-accent-top, gold gradient icon backgrounds
+- Updated Stats.tsx: section-light + section-gold-accent-top, removed isDark conditionals, gold stat icons
+- Updated Contact.tsx: section-light-alt + section-gold-accent-top, gold form focus and button colors
+- Updated Footer.tsx: section-dark + section-gold-accent-top, gold headings and social hover
+- Build succeeded with no fatal errors
+- Created zip file: /home/z/my-project/download/zero2one-brand-update.zip
+
+Stage Summary:
+- Complete brand color redesign from red/orange (#e92f08, #e98523) to gold/bronze (#bc8934, #d4a043, #9a6e2a)
+- Saudi landmarks background (saudi-landmarks-bg.png) shows through with 0.18 opacity behind all sections
+- Alternating dark/light sections with semi-transparent backgrounds and backdrop-blur for readability
+- All section classes work in both light and dark mode
+- Gold decorative accents throughout (gradients, lines, corners, dots, frames)
+- All existing functionality preserved (WhatsApp, contact form, lightbox, bilingual support)

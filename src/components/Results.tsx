@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { useTheme } from './ThemeProvider';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import type { TranslationKey } from '@/lib/i18n';
@@ -110,7 +109,6 @@ const filterKeys: { key: ResultCategory; labelKey: TranslationKey }[] = [
 
 export default function Results() {
   const { t, isRTL } = useLanguage();
-  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState<ResultCategory>('all');
@@ -164,19 +162,19 @@ export default function Results() {
   }, [lightboxIndex, closeLightbox, goNext, goPrev]);
 
   return (
-    <section id="results" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-dark relative overflow-hidden">
+    <section id="results" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-dark section-gold-accent-top relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 geometric-pattern opacity-10" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className={`text-center max-w-2xl mx-auto mb-8 sm:mb-12 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 border border-[#bc8934]/20 text-[#d4a043] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('results_tag')}
           </span>
-          <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-foreground'}`}>{t('results_title')}</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('results_title')}</h2>
           <div className="section-divider mb-4 sm:mb-6" />
-          <p className={`leading-relaxed text-sm sm:text-base ${isDark ? 'text-white/60' : 'text-foreground/60'}`}>{t('results_subtitle')}</p>
+          <p className="leading-relaxed text-sm sm:text-base text-white/60">{t('results_subtitle')}</p>
         </div>
 
         {/* Filter Tabs */}
@@ -187,10 +185,8 @@ export default function Results() {
               onClick={() => setActiveFilter(f.key)}
               className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                 activeFilter === f.key
-                  ? 'bg-brand text-white shadow-lg shadow-brand/30'
-                  : isDark
-                    ? 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
-                    : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10 hover:text-foreground border border-foreground/10'
+                  ? 'bg-[#bc8934] text-white shadow-lg shadow-[#bc8934]/30'
+                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
               }`}
             >
               {t(f.labelKey)}
@@ -211,7 +207,7 @@ export default function Results() {
               style={{ animationDelay: `${idx * 80}ms` }}
               onClick={() => openLightbox(idx)}
             >
-              <div className={`relative bg-dark-light ${result.span === 'tall' ? 'aspect-[3/4]' : result.span === 'wide' ? 'aspect-[2/1]' : 'aspect-[4/3]'}`}>
+              <div className={`relative bg-[#2a1a1b] ${result.span === 'tall' ? 'aspect-[3/4]' : result.span === 'wide' ? 'aspect-[2/1]' : 'aspect-[4/3]'}`}>
                 <Image
                   src={result.image}
                   alt={t(result.titleKey)}
@@ -230,14 +226,14 @@ export default function Results() {
 
                 {/* Zoom icon on hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-brand/80 flex items-center justify-center backdrop-blur-sm">
+                  <div className="w-12 h-12 rounded-full bg-[#bc8934]/80 flex items-center justify-center backdrop-blur-sm">
                     <ZoomIn size={20} className="text-white" />
                   </div>
                 </div>
 
                 {/* Bottom info */}
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5">
-                  <span className="inline-block px-2.5 py-1 rounded-full bg-brand/20 text-brand-light text-[10px] sm:text-xs font-medium mb-2">
+                  <span className="inline-block px-2.5 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[10px] sm:text-xs font-medium mb-2">
                     {t(result.catKey)}
                   </span>
                   <h3 className="text-white text-sm sm:text-base lg:text-lg font-bold mb-1">{t(result.titleKey)}</h3>
@@ -265,7 +261,7 @@ export default function Results() {
 
           {/* Previous button */}
           <button
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand transition-colors z-10"
+            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#bc8934] transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); goPrev(); }}
           >
             {isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
@@ -273,7 +269,7 @@ export default function Results() {
 
           {/* Next button */}
           <button
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand transition-colors z-10"
+            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#bc8934] transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); goNext(); }}
           >
             {isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
@@ -296,7 +292,7 @@ export default function Results() {
             </div>
             {/* Image info */}
             <div className="mt-4 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-brand/20 text-brand-light text-xs font-medium mb-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-xs font-medium mb-2">
                 {t(filteredResults[lightboxIndex].catKey)}
               </span>
               <h3 className="text-white text-lg sm:text-xl font-bold">{t(filteredResults[lightboxIndex].titleKey)}</h3>

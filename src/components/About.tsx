@@ -2,13 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { useTheme } from './ThemeProvider';
 import { Award, Users, Clock } from 'lucide-react';
 import Image from 'next/image';
 
 export default function About() {
   const { t, isRTL } = useLanguage();
-  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -22,7 +20,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-light-bg">
+    <section id="about" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-light section-gold-accent-top">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Image Side */}
@@ -38,12 +36,12 @@ export default function About() {
                 />
               </div>
             </div>
-            <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-card-bg rounded-xl shadow-xl ${isDark ? 'shadow-black/40' : 'shadow-black/10'} border ${isDark ? 'border-white/10' : 'border-border'} p-4 items-center gap-3`}>
-              <div className="w-12 h-12 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
-                <Users size={24} className="text-brand" />
+            <div className={`hidden lg:flex absolute -bottom-4 ${isRTL ? '-left-6' : '-right-6'} bg-card-bg rounded-xl shadow-xl shadow-black/10 border border-border p-4 items-center gap-3`}>
+              <div className="w-12 h-12 rounded-full bg-[#bc8934]/10 flex items-center justify-center shrink-0">
+                <Users size={24} className="text-[#bc8934]" />
               </div>
               <div>
-                <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-foreground'}`}>+80</div>
+                <div className="text-2xl font-bold text-foreground">+80</div>
                 <div className="text-xs text-muted-foreground">{t('about_stats_clients')}</div>
               </div>
             </div>
@@ -51,7 +49,7 @@ export default function About() {
 
           {/* Text Side */}
           <div className={`${visible ? (isRTL ? 'animate-fade-in-left' : 'animate-fade-in-right') : 'opacity-0'}`}>
-            <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 text-brand text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+            <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 text-[#bc8934] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               {t('about_tag')}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
@@ -64,28 +62,28 @@ export default function About() {
             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Award size={16} className="text-brand sm:w-5 sm:h-5" />
+                  <Award size={16} className="text-[#bc8934] sm:w-5 sm:h-5" />
                 </div>
                 <div className="text-lg sm:text-2xl font-bold text-foreground">+150</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_projects')}</div>
               </div>
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Users size={16} className="text-brand sm:w-5 sm:h-5" />
+                  <Users size={16} className="text-[#bc8934] sm:w-5 sm:h-5" />
                 </div>
                 <div className="text-lg sm:text-2xl font-bold text-foreground">+80</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_clients')}</div>
               </div>
               <div className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-card-bg">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Clock size={16} className="text-brand sm:w-5 sm:h-5" />
+                  <Clock size={16} className="text-[#bc8934] sm:w-5 sm:h-5" />
                 </div>
                 <div className="text-lg sm:text-2xl font-bold text-foreground">+5</div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">{t('about_stats_experience')}</div>
               </div>
             </div>
 
-            <a href="#services" onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }); }} className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-brand text-white font-semibold text-sm sm:text-base hover:bg-brand-dark transition-all duration-300">
+            <a href="#services" onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }); }} className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#bc8934] text-white font-semibold text-sm sm:text-base hover:bg-[#9a6e2a] transition-all duration-300">
               {t('about_btn')}
             </a>
           </div>

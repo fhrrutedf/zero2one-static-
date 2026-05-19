@@ -57,19 +57,19 @@ export default function Header() {
   // Theme-aware header background
   const headerBg = isScrolled
     ? isDark
-      ? 'bg-black/95 backdrop-blur-md shadow-lg shadow-black/50'
-      : 'bg-white/95 backdrop-blur-md shadow-lg shadow-black/5'
+      ? 'bg-[#1a1517]/95 backdrop-blur-md shadow-lg shadow-black/30'
+      : 'bg-[#1a1517]/95 backdrop-blur-md shadow-lg shadow-black/30'
     : 'bg-transparent';
 
-  // Theme-aware text colors
-  const navTextActive = 'text-brand';
-  const navTextDefault = isDark ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-foreground';
-  const mobileMenuBg = isDark ? 'bg-dark' : 'bg-white';
-  const mobileMenuText = isDark ? 'text-white' : 'text-foreground';
-  const mobileMenuMuted = isDark ? 'text-white/70 hover:bg-white/5 hover:text-white' : 'text-foreground/70 hover:bg-foreground/5 hover:text-foreground';
-  const borderMuted = isDark ? 'border-white/20' : 'border-foreground/20';
-  const hoverBg = isDark ? 'hover:bg-white/10' : 'hover:bg-foreground/10';
-  const overlayBg = isDark ? 'bg-black/50' : 'bg-black/30';
+  // Theme-aware text colors - gold accent for active, light text on dark header
+  const navTextActive = 'text-[#bc8934]';
+  const navTextDefault = isDark ? 'text-white/80 hover:text-white' : 'text-white/80 hover:text-white';
+  const mobileMenuBg = 'bg-[#1a1517]';
+  const mobileMenuText = 'text-white';
+  const mobileMenuMuted = 'text-white/70 hover:bg-white/5 hover:text-white';
+  const borderMuted = 'border-white/20';
+  const hoverBg = 'hover:bg-white/10';
+  const overlayBg = 'bg-black/50';
 
   return (
     <header
@@ -84,7 +84,7 @@ export default function Header() {
             className="flex items-center gap-2 shrink-0"
           >
             <Image
-              src={isDark ? "/logo-white.png" : "/logo-black.png"}
+              src={isScrolled || isDark ? "/logo-white.png" : "/logo-white.png"}
               alt="ZERO 2 ONE"
               width={120}
               height={40}
@@ -118,18 +118,16 @@ export default function Header() {
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? (
-                <Sun size={14} className="text-brand sm:w-4 sm:h-4" />
+                <Sun size={14} className="text-[#bc8934] sm:w-4 sm:h-4" />
               ) : (
-                <Moon size={14} className="text-brand sm:w-4 sm:h-4" />
+                <Moon size={14} className="text-[#bc8934] sm:w-4 sm:h-4" />
               )}
             </button>
 
             {/* Language Toggle */}
             <button
               onClick={toggleLang}
-              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border min-w-[40px] justify-center ${borderMuted} ${
-                isDark ? 'text-white/80 hover:bg-white/10' : 'text-foreground/80 hover:bg-foreground/10'
-              }`}
+              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border min-w-[40px] justify-center ${borderMuted} text-white/80 hover:bg-white/10`}
               aria-label="Toggle Language"
             >
               <Globe size={12} className="sm:w-3.5 sm:h-3.5 shrink-0" />
@@ -141,9 +139,7 @@ export default function Header() {
               href="https://wa.me/966530307054"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                'bg-brand text-white hover:bg-brand-dark'
-              }`}
+              className="hidden sm:flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 bg-[#bc8934] text-white hover:bg-[#9a6e2a]"
             >
               <Phone size={14} />
               <span>{t('cta_contact')}</span>
@@ -152,9 +148,7 @@ export default function Header() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                isDark ? 'text-white hover:bg-white/10' : 'text-foreground hover:bg-foreground/10'
-              }`}
+              className="lg:hidden p-2 rounded-lg transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center text-white hover:bg-white/10"
               aria-label={lang === 'ar' ? 'القائمة' : 'Menu'}
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -174,7 +168,7 @@ export default function Header() {
         <div className="p-5 sm:p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
             <Image
-              src={isDark ? "/logo-white.png" : "/logo-black.png"}
+              src="/logo-white.png"
               alt="ZERO 2 ONE"
               width={100}
               height={32}
@@ -182,9 +176,7 @@ export default function Header() {
             />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                isDark ? 'text-white/60 hover:text-white' : 'text-foreground/60 hover:text-foreground'
-              }`}
+              className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/60 hover:text-white"
               aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}
             >
               <X size={22} />
@@ -198,7 +190,7 @@ export default function Header() {
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 className={`px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[48px] flex items-center ${
                   activeSection === link.href.slice(1)
-                    ? 'bg-brand/10 text-brand'
+                    ? 'bg-[#bc8934]/10 text-[#bc8934]'
                     : mobileMenuMuted
                 }`}
               >
@@ -206,12 +198,12 @@ export default function Header() {
               </a>
             ))}
           </nav>
-          <div className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t ${isDark ? 'border-white/10' : 'border-foreground/10'} space-y-3`}>
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 space-y-3">
             <a
               href="https://wa.me/966530307054"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-brand text-white font-semibold hover:bg-brand-dark transition-colors min-h-[48px]"
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#bc8934] text-white font-semibold hover:bg-[#9a6e2a] transition-colors min-h-[48px]"
             >
               <Phone size={16} />
               {t('cta_contact')}
@@ -220,11 +212,7 @@ export default function Header() {
             {/* Theme Toggle in Mobile Menu */}
             <button
               onClick={toggleTheme}
-              className={`flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border font-semibold transition-colors min-h-[48px] ${
-                isDark
-                  ? 'border-white/20 text-white hover:bg-white/10'
-                  : 'border-foreground/20 text-foreground hover:bg-foreground/10'
-              }`}
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border font-semibold transition-colors min-h-[48px] border-white/20 text-white hover:bg-white/10"
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
               {isDark ? (lang === 'ar' ? 'الوضع الفاتح' : 'Light Mode') : (lang === 'ar' ? 'الوضع الداكن' : 'Dark Mode')}
@@ -232,11 +220,7 @@ export default function Header() {
 
             <button
               onClick={toggleLang}
-              className={`flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border font-semibold transition-colors min-h-[48px] ${
-                isDark
-                  ? 'border-white/20 text-white hover:bg-white/10'
-                  : 'border-foreground/20 text-foreground hover:bg-foreground/10'
-              }`}
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full border font-semibold transition-colors min-h-[48px] border-white/20 text-white hover:bg-white/10"
             >
               <Globe size={16} />
               {lang === 'ar' ? 'English' : 'العربية'}

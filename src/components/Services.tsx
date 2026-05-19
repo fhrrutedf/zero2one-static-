@@ -33,10 +33,10 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-dark">
+    <section id="services" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-dark-alt section-gold-accent-top">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 text-brand text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 text-[#bc8934] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('services_tag')}
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">{t('services_title')}</h2>
@@ -50,7 +50,7 @@ export default function Services() {
             return (
               <div key={service.titleKey} className={`card-hover bg-card-bg rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 100}ms` }}>
                 <div className="service-icon mb-4 sm:mb-5">
-                  <Icon size={24} className="text-brand sm:w-8 sm:h-8" />
+                  <Icon size={24} className="text-[#bc8934] sm:w-8 sm:h-8" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3">{t(service.titleKey)}</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm">{t(service.descKey)}</p>

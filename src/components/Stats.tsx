@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { useTheme } from './ThemeProvider';
 import { Briefcase, Users, Clock, ThumbsUp } from 'lucide-react';
 
 interface StatItem {
@@ -52,7 +51,6 @@ function AnimatedCounter({ target, suffix }: { target: number; suffix: string })
 
 export default function Stats() {
   const { t } = useLanguage();
-  const { isDark } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -66,14 +64,14 @@ export default function Stats() {
   }, []);
 
   return (
-    <section id="stats" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 hero-gradient relative overflow-hidden">
+    <section id="stats" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-light section-gold-accent-top relative overflow-hidden">
       <div className="absolute inset-0 geometric-pattern opacity-20" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 border border-[#bc8934]/20 text-[#d4a043] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('stats_tag')}
           </span>
-          <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-foreground'}`}>{t('stats_title')}</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-foreground">{t('stats_title')}</h2>
           <div className="section-divider" />
         </div>
 
@@ -81,18 +79,14 @@ export default function Stats() {
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={stat.labelKey} className={`text-center p-5 sm:p-8 rounded-xl sm:rounded-2xl backdrop-blur-sm border ${
-                isDark
-                  ? 'bg-white/5 border-white/10'
-                  : 'bg-white/70 border-foreground/10 shadow-sm'
-              } ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 150}ms` }}>
-                <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-brand/20 flex items-center justify-center">
-                  <Icon size={18} className="text-brand sm:w-6 sm:h-6" />
+              <div key={stat.labelKey} className={`text-center p-5 sm:p-8 rounded-xl sm:rounded-2xl backdrop-blur-sm border bg-card-bg border-border ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 150}ms` }}>
+                <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-full bg-[#bc8934]/20 flex items-center justify-center">
+                  <Icon size={18} className="text-[#bc8934] sm:w-6 sm:h-6" />
                 </div>
-                <div className={`text-2xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-foreground'}`}>
+                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 text-foreground">
                   <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                 </div>
-                <div className={`text-[10px] sm:text-sm font-medium ${isDark ? 'text-white/60' : 'text-foreground/60'}`}>{t(stat.labelKey)}</div>
+                <div className="text-[10px] sm:text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</div>
               </div>
             );
           })}

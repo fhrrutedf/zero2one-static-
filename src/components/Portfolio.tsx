@@ -32,10 +32,10 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <section id="portfolio" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 bg-light-bg">
+    <section id="portfolio" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-light-alt section-gold-accent-top">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center max-w-2xl mx-auto mb-10 sm:mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand/10 text-brand text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 text-[#bc8934] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('portfolio_tag')}
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">{t('portfolio_title')}</h2>
@@ -46,7 +46,7 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {projects.map((project, idx) => (
             <div key={project.titleKey} className={`portfolio-card group relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg cursor-pointer ${visible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${idx * 100}ms` }}>
-              <div className="portfolio-image aspect-[4/3] relative bg-dark">
+              <div className="portfolio-image aspect-[4/3] relative bg-[#1a1517]">
                 <Image
                   src={project.image}
                   alt={t(project.titleKey)}
@@ -55,16 +55,16 @@ export default function Portfolio() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="portfolio-overlay absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-transparent flex flex-col justify-end p-4 sm:p-6">
-                <span className="text-brand text-xs sm:text-sm font-semibold mb-1">{t(project.catKey)}</span>
+              <div className="portfolio-overlay absolute inset-0 bg-gradient-to-t from-[#1a1517] via-[#1a1517]/60 to-transparent flex flex-col justify-end p-4 sm:p-6">
+                <span className="text-[#bc8934] text-xs sm:text-sm font-semibold mb-1">{t(project.catKey)}</span>
                 <h3 className="text-white text-base sm:text-lg font-bold mb-2 sm:mb-3">{t(project.titleKey)}</h3>
-                <span className="inline-flex items-center gap-1 text-brand-light text-xs sm:text-sm font-medium">
+                <span className="inline-flex items-center gap-1 text-[#d4a043] text-xs sm:text-sm font-medium">
                   {t('portfolio_view')}
                   <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
                 </span>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-dark/80 to-transparent group-hover:opacity-0 transition-opacity duration-300">
-                <span className="text-brand/80 text-[10px] sm:text-xs font-medium">{t(project.catKey)}</span>
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-[#1a1517]/80 to-transparent group-hover:opacity-0 transition-opacity duration-300">
+                <span className="text-[#bc8934]/80 text-[10px] sm:text-xs font-medium">{t(project.catKey)}</span>
                 <h3 className="text-white text-xs sm:text-sm font-bold">{t(project.titleKey)}</h3>
               </div>
             </div>
