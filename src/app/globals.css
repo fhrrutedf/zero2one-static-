@@ -199,7 +199,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  opacity: 0.18;
+  opacity: 0.35;
   pointer-events: none;
 }
 
@@ -216,10 +216,10 @@
 
 /* Dark section - primary dark background */
 .section-dark {
-  background: rgba(26, 21, 23, 0.92);
+  background: rgba(26, 21, 23, 0.80);
   color: #f5f3f0;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   --foreground: #ffffff;
   --muted-foreground: #e8e2dc;
   --card: rgba(42, 26, 27, 0.8);
@@ -231,10 +231,10 @@
 
 /* Dark-alt section - alternate dark background */
 .section-dark-alt {
-  background: rgba(42, 26, 27, 0.92);
+  background: rgba(42, 26, 27, 0.80);
   color: #f5f3f0;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   --foreground: #ffffff;
   --muted-foreground: #e8e2dc;
   --card: rgba(26, 21, 23, 0.8);
@@ -246,10 +246,10 @@
 
 /* Light section - primary light background */
 .section-light {
-  background: rgba(245, 243, 240, 0.95);
+  background: rgba(245, 243, 240, 0.85);
   color: #1a1517;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   --foreground: #0d0a0b;
   --muted-foreground: #3a3538;
   --card: rgba(255, 255, 255, 0.9);
@@ -261,10 +261,10 @@
 
 /* Light-alt section - alternate light background */
 .section-light-alt {
-  background: rgba(237, 233, 228, 0.95);
+  background: rgba(237, 233, 228, 0.85);
   color: #1a1517;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   --foreground: #0d0a0b;
   --muted-foreground: #3a3538;
   --card: rgba(255, 255, 255, 0.9);
@@ -276,42 +276,42 @@
 
 /* Force section classes to work in BOTH light and dark mode */
 .dark .section-dark {
-  background: rgba(26, 21, 23, 0.92);
+  background: rgba(26, 21, 23, 0.80);
   color: #f5f3f0;
 }
 
 .dark .section-dark-alt {
-  background: rgba(42, 26, 27, 0.92);
+  background: rgba(42, 26, 27, 0.80);
   color: #f5f3f0;
 }
 
 .dark .section-light {
-  background: rgba(245, 243, 240, 0.95);
+  background: rgba(245, 243, 240, 0.85);
   color: #1a1517;
 }
 
 .dark .section-light-alt {
-  background: rgba(237, 233, 228, 0.95);
+  background: rgba(237, 233, 228, 0.85);
   color: #1a1517;
 }
 
 :root .section-dark {
-  background: rgba(26, 21, 23, 0.92);
+  background: rgba(26, 21, 23, 0.80);
   color: #f5f3f0;
 }
 
 :root .section-dark-alt {
-  background: rgba(42, 26, 27, 0.92);
+  background: rgba(42, 26, 27, 0.80);
   color: #f5f3f0;
 }
 
 :root .section-light {
-  background: rgba(245, 243, 240, 0.95);
+  background: rgba(245, 243, 240, 0.85);
   color: #1a1517;
 }
 
 :root .section-light-alt {
-  background: rgba(237, 233, 228, 0.95);
+  background: rgba(237, 233, 228, 0.85);
   color: #1a1517;
 }
 
