@@ -14,7 +14,6 @@ interface ResultItem {
   catKey: TranslationKey;
   image: string;
   filter: ResultCategory;
-  span: 'normal' | 'wide' | 'tall';
 }
 
 const results: ResultItem[] = [
@@ -24,7 +23,6 @@ const results: ResultItem[] = [
     catKey: 'results_1_cat',
     image: '/images/results/food/burger-stack.jpg',
     filter: 'product',
-    span: 'tall',
   },
   {
     titleKey: 'results_2_title',
@@ -32,7 +30,6 @@ const results: ResultItem[] = [
     catKey: 'results_2_cat',
     image: '/images/results/food/burger-hands.jpg',
     filter: 'product',
-    span: 'normal',
   },
   {
     titleKey: 'results_3_title',
@@ -40,7 +37,6 @@ const results: ResultItem[] = [
     catKey: 'results_3_cat',
     image: '/images/results/travel/damasquino-travel.jpg',
     filter: 'ads',
-    span: 'wide',
   },
   {
     titleKey: 'results_4_title',
@@ -48,7 +44,6 @@ const results: ResultItem[] = [
     catKey: 'results_4_cat',
     image: '/images/results/engineering/engtech-maintenance.jpg',
     filter: 'ads',
-    span: 'normal',
   },
   {
     titleKey: 'results_5_title',
@@ -56,7 +51,6 @@ const results: ResultItem[] = [
     catKey: 'results_5_cat',
     image: '/images/results/watches/quantum-watch.jpg',
     filter: 'product',
-    span: 'normal',
   },
   {
     titleKey: 'results_6_title',
@@ -64,7 +58,6 @@ const results: ResultItem[] = [
     catKey: 'results_6_cat',
     image: '/images/results/watches/quantum-watches-desert.jpg',
     filter: 'ads',
-    span: 'wide',
   },
   {
     titleKey: 'results_7_title',
@@ -72,7 +65,6 @@ const results: ResultItem[] = [
     catKey: 'results_7_cat',
     image: '/images/results/perfume/allure-azzaro.jpg',
     filter: 'branding',
-    span: 'normal',
   },
   {
     titleKey: 'results_8_title',
@@ -80,7 +72,6 @@ const results: ResultItem[] = [
     catKey: 'results_8_cat',
     image: '/images/results/media/milla-media.jpg',
     filter: 'ads',
-    span: 'normal',
   },
   {
     titleKey: 'results_9_title',
@@ -88,7 +79,6 @@ const results: ResultItem[] = [
     catKey: 'results_9_cat',
     image: '/images/results/engineering/engtech-elevator.jpg',
     filter: 'ads',
-    span: 'normal',
   },
   {
     titleKey: 'results_10_title',
@@ -96,7 +86,6 @@ const results: ResultItem[] = [
     catKey: 'results_10_cat',
     image: '/images/results/engineering/engtech-panel.jpg',
     filter: 'branding',
-    span: 'normal',
   },
 ];
 
@@ -113,6 +102,9 @@ export default function Results() {
   const [visible, setVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState<ResultCategory>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  // Track which cards are visible for individual animations
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -124,6 +116,27 @@ export default function Results() {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  // Individual card animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-idx'));
+            if (!isNaN(idx)) {
+              setVisibleCards((prev) => new Set(prev).add(idx));
+            }
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    cardsRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [activeFilter]);
 
   const filteredResults = activeFilter === 'all'
     ? results
@@ -181,7 +194,7 @@ export default function Results() {
           {filterKeys.map((f) => (
             <button
               key={f.key}
-              onClick={() => setActiveFilter(f.key)}
+              onClick={() => { setActiveFilter(f.key); setVisibleCards(new Set()); }}
               className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeFilter === f.key
                   ? 'bg-[#bc8934] text-white shadow-lg shadow-[#bc8934]/30'
@@ -193,56 +206,58 @@ export default function Results() {
           ))}
         </div>
 
-        {/* Results Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {filteredResults.map((result, idx) => (
-            <div
-              key={`${result.titleKey}-${activeFilter}`}
-              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer ${
-                result.span === 'wide' ? 'sm:col-span-2' : ''
-              } ${result.span === 'tall' ? 'sm:row-span-2' : ''} ${
-                visible ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: `${idx * 80}ms` }}
-              onClick={() => openLightbox(idx)}
-            >
-              <div className={`relative bg-[#2a1a1b] ${result.span === 'tall' ? 'aspect-[3/4]' : result.span === 'wide' ? 'aspect-[2/1]' : 'aspect-[4/3]'}`}>
-                <Image
-                  src={result.image}
-                  alt={t(result.titleKey)}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes={
-                    result.span === 'wide'
-                      ? '(max-width: 640px) 100vw, 50vw'
-                      : result.span === 'tall'
-                      ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
-                      : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
-                  }
-                />
+        {/* Results Grid - Uniform 2 cols on mobile, 3 on tablet, 5 on desktop */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5">
+          {filteredResults.map((result, idx) => {
+            const isCardVisible = visibleCards.has(idx);
 
-                {/* Hover overlay with animated text - slides up from bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col justify-end p-4 sm:p-5">
-                  {/* Category badge - slides in */}
-                  <span className="inline-block self-start px-3 py-1 rounded-full bg-[#bc8934]/30 text-[#d4a043] text-[10px] sm:text-xs font-semibold mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {t(result.catKey)}
-                  </span>
-                  {/* Title - slides in with delay */}
-                  <h3 className="text-white text-sm sm:text-base lg:text-lg font-bold mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                    {t(result.titleKey)}
-                  </h3>
-                  {/* Client - slides in with more delay */}
-                  <p className="text-white/70 text-[10px] sm:text-xs font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">
-                    {t(result.clientKey)}
-                  </p>
-                  {/* Zoom icon */}
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#bc8934]/70 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-200">
-                    <ZoomIn size={16} className="text-white" />
+            return (
+              <div
+                key={`${result.titleKey}-${activeFilter}`}
+                ref={(el) => { cardsRef.current[idx] = el; }}
+                data-idx={idx}
+                className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-white/5 transition-all duration-500 hover:border-[#bc8934]/30 ${
+                  isCardVisible ? 'animate-scale-up' : 'opacity-0'
+                }`}
+                style={{ animationDelay: `${idx * 60}ms` }}
+                onClick={() => openLightbox(idx)}
+              >
+                {/* Image container - uses object-contain to show FULL image */}
+                <div className="relative aspect-square bg-[#1a1517]">
+                  <Image
+                    src={result.image}
+                    alt={t(result.titleKey)}
+                    fill
+                    className="object-contain p-2 sm:p-3 transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  />
+                  {/* Zoom icon on hover */}
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#bc8934]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ZoomIn size={14} className="text-white sm:w-4 sm:h-4" />
                   </div>
                 </div>
+
+                {/* Title area - ALWAYS visible */}
+                <div className="p-2.5 sm:p-3.5 border-t border-white/5">
+                  {/* Category badge with animation */}
+                  <span
+                    className={`inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5 transition-all duration-500 ${
+                      isCardVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                    }`}
+                    style={{ transitionDelay: `${idx * 60 + 200}ms` }}
+                  >
+                    {t(result.catKey)}
+                  </span>
+                  <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight mb-0.5 line-clamp-2">
+                    {t(result.titleKey)}
+                  </h3>
+                  <p className="text-white/50 text-[9px] sm:text-xs font-semibold">
+                    {t(result.clientKey)}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
