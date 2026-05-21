@@ -6,7 +6,6 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Services from '@/components/Services';
-import Portfolio from '@/components/Portfolio';
 import Results from '@/components/Results';
 import WhyUs from '@/components/WhyUs';
 import Stats from '@/components/Stats';
@@ -28,7 +27,6 @@ export default function Home() {
               <Hero />
               <About />
               <Services />
-              <Portfolio />
               <Results />
               <WhyUs />
               <Stats />
