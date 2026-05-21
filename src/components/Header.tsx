@@ -84,12 +84,12 @@ export default function Header() {
             <Image
               src="/logo-hq.png"
               alt={t('company_name') || 'ZERO 2 ONE'}
-              width={44}
-              height={44}
-              className="h-8 sm:h-10 w-auto"
+              width={52}
+              height={52}
+              className="h-9 sm:h-12 w-auto"
               priority
             />
-            <span className="text-white font-bold text-sm sm:text-base tracking-wide">{t('company_name')}</span>
+            <span className="text-white font-bold text-base sm:text-lg tracking-wide">{t('company_name')}</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -166,15 +166,15 @@ export default function Header() {
       >
         <div className="p-5 sm:p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <Image
                 src="/logo-hq.png"
                 alt={t('company_name') || 'ZERO 2 ONE'}
-                width={36}
-                height={36}
-                className="h-7 sm:h-8 w-auto"
+                width={44}
+                height={44}
+                className="h-9 sm:h-10 w-auto"
               />
-              <span className="text-white font-bold text-xs sm:text-sm">{t('company_name')}</span>
+              <span className="text-white font-bold text-sm sm:text-base tracking-wide">{t('company_name')}</span>
             </div>
             <button
               onClick={() => setIsMobileMenuOpen(false)}

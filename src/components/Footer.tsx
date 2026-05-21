@@ -43,15 +43,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2.5 mb-4">
               <Image
                 src="/logo-hq.png"
                 alt={t('company_name') || 'ZERO 2 ONE'}
-                width={40}
-                height={40}
-                className="h-9 w-auto"
+                width={48}
+                height={48}
+                className="h-10 sm:h-12 w-auto"
               />
-              <span className="text-white font-bold text-sm tracking-wide">{t('company_name')}</span>
+              <span className="text-white font-bold text-base sm:text-lg tracking-wide">{t('company_name')}</span>
             </div>
             <p className="text-[#f5f3f0]/75 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-6 font-semibold">{t('footer_desc')}</p>
             <div className="flex items-center gap-2 sm:gap-3">
