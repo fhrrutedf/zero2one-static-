@@ -83,7 +83,7 @@ export default function Header() {
           >
             <Image
               src="/logo-hq.png"
-              alt={t('company_name')}
+              alt={t('company_name') || 'ZERO 2 ONE'}
               width={44}
               height={44}
               className="h-8 sm:h-10 w-auto"
@@ -169,7 +169,7 @@ export default function Header() {
             <div className="flex items-center gap-2">
               <Image
                 src="/logo-hq.png"
-                alt={t('company_name')}
+                alt={t('company_name') || 'ZERO 2 ONE'}
                 width={36}
                 height={36}
                 className="h-7 sm:h-8 w-auto"

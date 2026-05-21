@@ -2,6 +2,9 @@ export type Language = 'ar' | 'en';
 
 export const translations = {
   ar: {
+    // Company Name
+    company_name: 'من الصفر إلى الواحد',
+
     // Header
     nav_home: 'الرئيسية',
     nav_about: 'من نحن',
@@ -167,6 +170,9 @@ export const translations = {
     whatsapp_tooltip: 'تواصل معنا عبر واتساب',
   },
   en: {
+    // Company Name
+    company_name: 'ZERO 2 ONE',
+
     // Header
     nav_home: 'Home',
     nav_about: 'About Us',

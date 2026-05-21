@@ -46,7 +46,7 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-3">
               <Image
                 src="/logo-hq.png"
-                alt={t('company_name')}
+                alt={t('company_name') || 'ZERO 2 ONE'}
                 width={40}
                 height={40}
                 className="h-9 w-auto"
