@@ -92,3 +92,27 @@ Stage Summary:
 - All section classes work in both light and dark mode
 - Gold decorative accents throughout (gradients, lines, corners, dots, frames)
 - All existing functionality preserved (WhatsApp, contact form, lightbox, bilingual support)
+
+---
+Task ID: 1
+Agent: Main Agent
+Task: Add "باقي أعمالنا" card with FlipHTML5 embedded viewer
+
+Work Log:
+- Analyzed user screenshot showing the "باقي أعمالنا" card design reference
+- Added "باقي أعمالنا" card at the end of the works grid in Results.tsx
+- Card design: gradient background with gold accent, ExternalLink icon, decorative circles, matching card style
+- When clicked: opens full-screen iframe viewer with the FlipHTML5 portfolio embedded
+- The iframe viewer has a top bar with logo, "باقي أعمالنا" title, and "رجوع/Back" close button
+- The viewer looks native/branded - no indication it's an external website
+- Added translation keys: more_works_title (باقي أعمالنا/More of Our Work), more_works_subtitle, more_works_badge
+- Card only appears when filter is "all" 
+- Also merged all portfolio items into Results section (development filter added)
+- Build succeeded
+- Compressed file: zero2one-website-21-5-2026.zip (8.2MB)
+
+Stage Summary:
+- "باقي أعمالنا" card added at end of works grid
+- FlipHTML5 portfolio opens seamlessly in branded full-screen viewer
+- No external website indicators - looks like part of the site
+- Portfolio and Results fully merged into single section
