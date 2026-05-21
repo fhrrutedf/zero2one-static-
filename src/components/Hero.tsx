@@ -79,7 +79,7 @@ export default function Hero() {
             <a href="#services" onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#bc8934] text-white font-semibold text-base sm:text-lg hover:bg-[#9a6e2a] transition-all duration-300 shadow-lg shadow-[#bc8934]/25 hover:shadow-[#bc8934]/40 text-center">
               {t('hero_btn_services')}
             </a>
-            <a href="#portfolio" onClick={(e) => { e.preventDefault(); document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-[#bc8934]/30 text-[#bc8934] font-semibold text-base sm:text-lg hover:bg-[#bc8934]/10 transition-all duration-300 text-center">
+            <a href="#results" onClick={(e) => { e.preventDefault(); document.querySelector('#results')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-[#bc8934]/30 text-[#bc8934] font-semibold text-base sm:text-lg hover:bg-[#bc8934]/10 transition-all duration-300 text-center">
               {t('hero_btn_portfolio')}
             </a>
           </div>

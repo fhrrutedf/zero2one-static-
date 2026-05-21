@@ -310,18 +310,26 @@ export default function Results() {
           {/* "باقي أعمالنا" Card - same style as other cards */}
           {activeFilter === 'all' && (
             <div
-              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-[#bc8934]/30 hover:border-[#bc8934]/60 transition-all duration-500 hover:shadow-lg hover:shadow-[#bc8934]/20 ${visible ? 'animate-scale-up' : 'opacity-0'}`}
+              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-white/5 transition-all duration-500 hover:border-[#bc8934]/30 ${visible ? 'animate-scale-up' : 'opacity-0'}`}
               style={{ animationDelay: `${filteredWorks.length * 60}ms` }}
               onClick={openPortfolioViewer}
             >
-              {/* Image area - matching other cards with centered icon */}
-              <div className="relative aspect-square bg-[#1a1517] flex items-center justify-center">
-                <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-full bg-[#bc8934]/15 flex items-center justify-center group-hover:bg-[#bc8934]/25 group-hover:scale-110 transition-all duration-500">
-                  <ExternalLink size={24} className="text-[#bc8934] sm:w-7 sm:h-7" />
+              {/* Image area - gradient background like other cards */}
+              <div className="relative aspect-square bg-gradient-to-br from-[#2a1a1b] via-[#1a1517] to-[#2a1a1b] flex items-center justify-center">
+                {/* Subtle decorative lines like other project images */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute top-1/4 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-[#bc8934]/40 to-transparent" />
+                  <div className="absolute top-1/2 left-1/6 w-2/3 h-px bg-gradient-to-r from-transparent via-[#bc8934]/30 to-transparent" />
+                  <div className="absolute bottom-1/4 left-1/3 w-1/3 h-px bg-gradient-to-r from-transparent via-[#bc8934]/20 to-transparent" />
                 </div>
-                {/* Hover indicator */}
+                {/* Icon without circle */}
+                <div className="flex flex-col items-center gap-2 group-hover:scale-110 transition-transform duration-500">
+                  <ExternalLink size={28} className="text-[#bc8934] sm:w-8 sm:h-8" />
+                  <span className="text-[#bc8934]/60 text-[9px] sm:text-[10px] font-bold">{isRTL ? 'تصفح المزيد' : 'Browse More'}</span>
+                </div>
+                {/* Zoom icon on hover - same as other cards */}
                 <div className="absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#bc8934]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {isRTL ? <ArrowLeft size={14} className="text-white sm:w-4 sm:h-4" /> : <ChevronRight size={14} className="text-white sm:w-4 sm:h-4" />}
+                  <ZoomIn size={14} className="text-white sm:w-4 sm:h-4" />
                 </div>
               </div>
 
