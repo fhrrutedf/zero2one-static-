@@ -18,8 +18,14 @@ export default function Home() {
     <ThemeProvider>
       <LanguageProvider>
         <div className="saudi-bg-wrapper">
-          {/* Saudi landmarks fixed background image */}
-          <div className="saudi-bg-image" aria-hidden="true" />
+          {/* Saudi landmarks background image - using img tag for max browser compatibility */}
+          <img
+            src="/images/saudi-landmarks-bg.jpg"
+            alt=""
+            aria-hidden="true"
+            className="saudi-bg-image"
+            fetchPriority="high"
+          />
           {/* All page content */}
           <div className="saudi-bg-content min-h-screen flex flex-col">
             <Header />

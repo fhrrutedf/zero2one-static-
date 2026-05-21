@@ -182,53 +182,82 @@
 
 /* ========================================
    SAUDI LANDMARKS BACKGROUND
-   Fixed background image showing through
-   with semi-transparent section overlays
+   Background image using <img> tag for
+   maximum cross-browser compatibility.
+   Falls back to solid color if image fails.
    ======================================== */
 .saudi-bg-wrapper {
   position: relative;
   min-height: 100vh;
+  /* Solid color fallback in case image doesn't load */
+  background-color: #1a1517;
 }
 
+/* The background image - works on ALL browsers including mobile */
 .saudi-bg-image {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
-  background-image: url('/images/saudi-landmarks-bg.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  object-fit: cover;
+  object-position: center center;
   opacity: 0.45;
   pointer-events: none;
   will-change: transform;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  /* Prevent any flickering */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-/* Fallback for iOS Safari and mobile browsers that don't support position:fixed backgrounds */
-@supports not (background-attachment: fixed) {
-  .saudi-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    min-height: 100%;
-  }
-}
+/* ========================================
+   MOBILE BROWSER FIXES
+   position:fixed doesn't work well on many
+   mobile browsers. Use absolute instead.
+   ======================================== */
 
-/* iOS Safari specific fix - use absolute positioning */
+/* iOS Safari - position:fixed behaves unpredictably */
 @supports (-webkit-touch-callout: none) {
   .saudi-bg-image {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
   }
   .saudi-bg-wrapper {
     position: relative;
     overflow-x: hidden;
+  }
+}
+
+/* All mobile devices - screen width below 768px likely mobile */
+@media (max-width: 768px) {
+  .saudi-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+/* Chrome on iOS (uses WebKit but doesn't support -webkit-touch-callout) */
+@media (hover: none) and (pointer: coarse) {
+  .saudi-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+/* Fallback for browsers that don't support object-fit */
+@supports not (object-fit: cover) {
+  .saudi-bg-image {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: unset;
   }
 }
 
