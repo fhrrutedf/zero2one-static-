@@ -307,47 +307,27 @@ export default function Results() {
             );
           })}
 
-          {/* "باقي أعمالنا" Card - always visible at the end */}
+          {/* "باقي أعمالنا" Card - same style as other cards */}
           {activeFilter === 'all' && (
             <div
-              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-gradient-to-br from-[#bc8934]/20 to-[#9a6e2a]/10 border border-[#bc8934]/30 hover:border-[#bc8934]/60 transition-all duration-500 hover:shadow-lg hover:shadow-[#bc8934]/20 ${visible ? 'animate-scale-up' : 'opacity-0'}`}
+              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-[#bc8934]/30 hover:border-[#bc8934]/60 transition-all duration-500 hover:shadow-lg hover:shadow-[#bc8934]/20 ${visible ? 'animate-scale-up' : 'opacity-0'}`}
               style={{ animationDelay: `${filteredWorks.length * 60}ms` }}
               onClick={openPortfolioViewer}
             >
-              {/* Card content - centered CTA style */}
-              <div className="relative aspect-square bg-[#1a1517]/50 flex flex-col items-center justify-center p-4 sm:p-6 text-center">
-                {/* Decorative circle behind icon */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-[#bc8934]" />
+              {/* Image area - matching other cards with centered icon */}
+              <div className="relative aspect-square bg-[#1a1517] flex items-center justify-center">
+                <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-full bg-[#bc8934]/15 flex items-center justify-center group-hover:bg-[#bc8934]/25 group-hover:scale-110 transition-all duration-500">
+                  <ExternalLink size={24} className="text-[#bc8934] sm:w-7 sm:h-7" />
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-5">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-[#bc8934] translate-x-4 translate-y-4" />
-                </div>
-
-                {/* Icon */}
-                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#bc8934]/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-[#bc8934]/30 group-hover:scale-110 transition-all duration-500">
-                  <ExternalLink size={20} className="text-[#bc8934] sm:w-6 sm:h-6" />
-                </div>
-
-                {/* Title */}
-                <h3 className="text-white text-sm sm:text-base font-bold leading-tight mb-1 sm:mb-2">
-                  {t('more_works_title')}
-                </h3>
-
-                {/* Subtitle */}
-                <p className="text-[#d4a043] text-[10px] sm:text-xs font-semibold">
-                  {t('more_works_subtitle')}
-                </p>
-
-                {/* Arrow indicator */}
-                <div className="mt-3 sm:mt-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#bc8934] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  {isRTL ? <ArrowLeft size={16} className="text-white sm:w-5 sm:h-5" /> : <ChevronRight size={16} className="text-white sm:w-5 sm:h-5" />}
+                {/* Hover indicator */}
+                <div className="absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#bc8934]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {isRTL ? <ArrowLeft size={14} className="text-white sm:w-4 sm:h-4" /> : <ChevronRight size={14} className="text-white sm:w-4 sm:h-4" />}
                 </div>
               </div>
 
-              {/* Bottom area matching other cards */}
-              <div className="p-2.5 sm:p-3.5 border-t border-[#bc8934]/20">
-                <span className="inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/30 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5">
+              {/* Title area - same as other cards */}
+              <div className="p-2.5 sm:p-3.5 border-t border-white/5">
+                <span className="inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5">
                   {t('more_works_badge')}
                 </span>
                 <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight">
