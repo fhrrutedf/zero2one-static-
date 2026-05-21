@@ -2,21 +2,47 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useLanguage } from './LanguageProvider';
-import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ZoomIn, ChevronLeft, ChevronRight, ArrowLeft, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import type { TranslationKey } from '@/lib/i18n';
 
-type ResultCategory = 'all' | 'branding' | 'ads' | 'product';
+type WorkCategory = 'all' | 'branding' | 'ads' | 'product' | 'development';
 
-interface ResultItem {
+interface WorkItem {
   titleKey: TranslationKey;
-  clientKey: TranslationKey;
+  clientKey?: TranslationKey;
   catKey: TranslationKey;
   image: string;
-  filter: ResultCategory;
+  filter: WorkCategory;
 }
 
-const results: ResultItem[] = [
+const works: WorkItem[] = [
+  // Portfolio items (development/branding/ads)
+  {
+    titleKey: 'portfolio_1_title',
+    catKey: 'portfolio_1_cat',
+    image: '/images/projects/doctor/poster-1.png',
+    filter: 'development',
+  },
+  {
+    titleKey: 'portfolio_2_title',
+    catKey: 'portfolio_2_cat',
+    image: '/images/projects/Logistics-Delivery-App/3.png',
+    filter: 'development',
+  },
+  {
+    titleKey: 'portfolio_3_title',
+    catKey: 'portfolio_3_cat',
+    image: '/images/projects/branding-coffee/poster.png',
+    filter: 'branding',
+  },
+  {
+    titleKey: 'portfolio_4_title',
+    catKey: 'portfolio_4_cat',
+    image: '/images/projects/osool/d-three.png',
+    filter: 'ads',
+  },
+  // Results items (product/ads/branding)
   {
     titleKey: 'results_1_title',
     clientKey: 'results_1_client',
@@ -89,20 +115,23 @@ const results: ResultItem[] = [
   },
 ];
 
-const filterKeys: { key: ResultCategory; labelKey: TranslationKey }[] = [
+const filterKeys: { key: WorkCategory; labelKey: TranslationKey }[] = [
   { key: 'all', labelKey: 'results_filter_all' },
+  { key: 'development', labelKey: 'results_filter_dev' },
   { key: 'branding', labelKey: 'results_filter_branding' },
   { key: 'ads', labelKey: 'results_filter_ads' },
   { key: 'product', labelKey: 'results_filter_product' },
 ];
 
+const PORTFOLIO_EXTERNAL_URL = 'https://online.fliphtml5.com/Moayaduae/jhac/#p=1';
+
 export default function Results() {
   const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<ResultCategory>('all');
+  const [activeFilter, setActiveFilter] = useState<WorkCategory>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  // Track which cards are visible for individual animations
+  const [showPortfolio, setShowPortfolio] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -117,7 +146,6 @@ export default function Results() {
     return () => observer.disconnect();
   }, []);
 
-  // Individual card animation observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -130,7 +158,7 @@ export default function Results() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     cardsRef.current.forEach((el) => {
       if (el) observer.observe(el);
@@ -138,9 +166,9 @@ export default function Results() {
     return () => observer.disconnect();
   }, [activeFilter]);
 
-  const filteredResults = activeFilter === 'all'
-    ? results
-    : results.filter((r) => r.filter === activeFilter);
+  const filteredWorks = activeFilter === 'all'
+    ? works
+    : works.filter((w) => w.filter === activeFilter);
 
   const openLightbox = useCallback((idx: number) => {
     setLightboxIndex(idx);
@@ -154,13 +182,23 @@ export default function Results() {
 
   const goNext = useCallback(() => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex + 1) % filteredResults.length);
-  }, [lightboxIndex, filteredResults.length]);
+    setLightboxIndex((lightboxIndex + 1) % filteredWorks.length);
+  }, [lightboxIndex, filteredWorks.length]);
 
   const goPrev = useCallback(() => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex - 1 + filteredResults.length) % filteredResults.length);
-  }, [lightboxIndex, filteredResults.length]);
+    setLightboxIndex((lightboxIndex - 1 + filteredWorks.length) % filteredWorks.length);
+  }, [lightboxIndex, filteredWorks.length]);
+
+  const openPortfolioViewer = useCallback(() => {
+    setShowPortfolio(true);
+    document.body.style.overflow = 'hidden';
+  }, []);
+
+  const closePortfolioViewer = useCallback(() => {
+    setShowPortfolio(false);
+    document.body.style.overflow = '';
+  }, []);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -173,20 +211,29 @@ export default function Results() {
     return () => window.removeEventListener('keydown', handler);
   }, [lightboxIndex, closeLightbox, goNext, goPrev]);
 
+  useEffect(() => {
+    if (!showPortfolio) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closePortfolioViewer();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [showPortfolio, closePortfolioViewer]);
+
   return (
     <section id="results" ref={sectionRef} className="py-14 sm:py-20 lg:py-28 section-dark section-gold-accent-top relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 geometric-pattern opacity-10" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Section Header - unified title */}
         <div className={`text-center max-w-2xl mx-auto mb-8 sm:mb-12 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 border border-[#bc8934]/20 text-[#d4a043] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('results_tag')}
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('results_title')}</h2>
-          <div className="section-divider mb-4 sm:mb-6" />
-          <p className="leading-relaxed text-sm sm:text-base text-white/90 font-semibold">{t('results_subtitle')}</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('portfolio_title')}</h2>
+          <div className="section-divider" />
+          <p className="leading-relaxed text-sm sm:text-base text-white/90 font-semibold mt-4">{t('portfolio_subtitle')}</p>
         </div>
 
         {/* Filter Tabs */}
@@ -206,14 +253,14 @@ export default function Results() {
           ))}
         </div>
 
-        {/* Results Grid - Uniform 2 cols on mobile, 3 on tablet, 5 on desktop */}
+        {/* Works Grid - 2 cols mobile, 3 tablet, 5 desktop */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5">
-          {filteredResults.map((result, idx) => {
+          {filteredWorks.map((work, idx) => {
             const isCardVisible = visibleCards.has(idx);
 
             return (
               <div
-                key={`${result.titleKey}-${activeFilter}`}
+                key={`${work.titleKey}-${activeFilter}`}
                 ref={(el) => { cardsRef.current[idx] = el; }}
                 data-idx={idx}
                 className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-white/5 transition-all duration-500 hover:border-[#bc8934]/30 ${
@@ -222,11 +269,11 @@ export default function Results() {
                 style={{ animationDelay: `${idx * 60}ms` }}
                 onClick={() => openLightbox(idx)}
               >
-                {/* Image container - uses object-contain to show FULL image */}
+                {/* Image container */}
                 <div className="relative aspect-square bg-[#1a1517]">
                   <Image
-                    src={result.image}
-                    alt={t(result.titleKey)}
+                    src={work.image}
+                    alt={t(work.titleKey)}
                     fill
                     className="object-contain p-2 sm:p-3 transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
@@ -246,18 +293,70 @@ export default function Results() {
                     }`}
                     style={{ transitionDelay: `${idx * 60 + 200}ms` }}
                   >
-                    {t(result.catKey)}
+                    {t(work.catKey)}
                   </span>
                   <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight mb-0.5 line-clamp-2">
-                    {t(result.titleKey)}
+                    {t(work.titleKey)}
                   </h3>
-                  <p className="text-white/50 text-[9px] sm:text-xs font-semibold">
-                    {t(result.clientKey)}
-                  </p>
+                  {work.clientKey && (
+                    <p className="text-white/50 text-[9px] sm:text-xs font-semibold">
+                      {t(work.clientKey)}
+                    </p>
+                  )}
                 </div>
               </div>
             );
           })}
+
+          {/* "باقي أعمالنا" Card - always visible at the end */}
+          {activeFilter === 'all' && (
+            <div
+              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-gradient-to-br from-[#bc8934]/20 to-[#9a6e2a]/10 border border-[#bc8934]/30 hover:border-[#bc8934]/60 transition-all duration-500 hover:shadow-lg hover:shadow-[#bc8934]/20 ${visible ? 'animate-scale-up' : 'opacity-0'}`}
+              style={{ animationDelay: `${filteredWorks.length * 60}ms` }}
+              onClick={openPortfolioViewer}
+            >
+              {/* Card content - centered CTA style */}
+              <div className="relative aspect-square bg-[#1a1517]/50 flex flex-col items-center justify-center p-4 sm:p-6 text-center">
+                {/* Decorative circle behind icon */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-[#bc8934]" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-5">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-[#bc8934] translate-x-4 translate-y-4" />
+                </div>
+
+                {/* Icon */}
+                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#bc8934]/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-[#bc8934]/30 group-hover:scale-110 transition-all duration-500">
+                  <ExternalLink size={20} className="text-[#bc8934] sm:w-6 sm:h-6" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-white text-sm sm:text-base font-bold leading-tight mb-1 sm:mb-2">
+                  {t('more_works_title')}
+                </h3>
+
+                {/* Subtitle */}
+                <p className="text-[#d4a043] text-[10px] sm:text-xs font-semibold">
+                  {t('more_works_subtitle')}
+                </p>
+
+                {/* Arrow indicator */}
+                <div className="mt-3 sm:mt-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#bc8934] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  {isRTL ? <ArrowLeft size={16} className="text-white sm:w-5 sm:h-5" /> : <ChevronRight size={16} className="text-white sm:w-5 sm:h-5" />}
+                </div>
+              </div>
+
+              {/* Bottom area matching other cards */}
+              <div className="p-2.5 sm:p-3.5 border-t border-[#bc8934]/20">
+                <span className="inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/30 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5">
+                  {t('more_works_badge')}
+                </span>
+                <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight">
+                  {t('more_works_title')}
+                </h3>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -294,8 +393,8 @@ export default function Results() {
           >
             <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
               <Image
-                src={filteredResults[lightboxIndex].image}
-                alt={t(filteredResults[lightboxIndex].titleKey)}
+                src={filteredWorks[lightboxIndex].image}
+                alt={t(filteredWorks[lightboxIndex].titleKey)}
                 fill
                 className="object-contain"
                 sizes="90vw"
@@ -304,11 +403,50 @@ export default function Results() {
             </div>
             <div className="mt-4 text-center">
               <span className="inline-block px-3 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-xs font-semibold mb-2">
-                {t(filteredResults[lightboxIndex].catKey)}
+                {t(filteredWorks[lightboxIndex].catKey)}
               </span>
-              <h3 className="text-white text-lg sm:text-xl font-bold">{t(filteredResults[lightboxIndex].titleKey)}</h3>
-              <p className="text-white/60 text-sm mt-1 font-semibold">{t(filteredResults[lightboxIndex].clientKey)}</p>
+              <h3 className="text-white text-lg sm:text-xl font-bold">{t(filteredWorks[lightboxIndex].titleKey)}</h3>
+              {filteredWorks[lightboxIndex].clientKey && (
+                <p className="text-white/60 text-sm mt-1 font-semibold">{t(filteredWorks[lightboxIndex].clientKey)}</p>
+              )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Full-screen Portfolio Viewer (iframe) - looks native, not like external site */}
+      {showPortfolio && (
+        <div className="fixed inset-0 z-50 bg-[#1a1517] flex flex-col">
+          {/* Top bar with close button */}
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3 bg-[#1a1517] border-b border-white/10 shrink-0">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo-hq.png"
+                alt={t('company_name')}
+                width={32}
+                height={32}
+                className="h-7 w-auto"
+              />
+              <span className="text-white font-bold text-sm">{t('more_works_title')}</span>
+            </div>
+            <button
+              onClick={closePortfolioViewer}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/80 hover:bg-white/20 hover:text-white transition-colors text-sm font-semibold"
+            >
+              <X size={16} />
+              <span>{isRTL ? 'رجوع' : 'Back'}</span>
+            </button>
+          </div>
+
+          {/* iframe - fills remaining space */}
+          <div className="flex-1 relative">
+            <iframe
+              src={PORTFOLIO_EXTERNAL_URL}
+              className="absolute inset-0 w-full h-full border-0"
+              title={t('more_works_title')}
+              allow="clipboard-write"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            />
           </div>
         </div>
       )}

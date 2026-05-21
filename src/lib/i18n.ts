@@ -158,6 +158,11 @@ export const translations = {
     results_10_client: 'Engineering Technologies',
     results_10_cat: 'هوية تجارية',
 
+    // More Works Card
+    more_works_title: 'باقي أعمالنا',
+    more_works_subtitle: 'اكتشف المزيد من مشاريعنا',
+    more_works_badge: 'المزيد',
+
     // WhatsApp
     whatsapp_tooltip: 'تواصل معنا عبر واتساب',
   },
@@ -317,6 +322,11 @@ export const translations = {
     results_10_title: 'Elevator Control Panel',
     results_10_client: 'Engineering Technologies',
     results_10_cat: 'Branding',
+
+    // More Works Card
+    more_works_title: 'More of Our Work',
+    more_works_subtitle: 'Discover more of our projects',
+    more_works_badge: 'More',
 
     // WhatsApp
     whatsapp_tooltip: 'Contact us via WhatsApp',
