@@ -228,7 +228,7 @@ export default function Results() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header - unified title */}
         <div className={`text-center max-w-2xl mx-auto mb-8 sm:mb-12 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#bc8934]/10 border border-[#bc8934]/20 text-[#d4a043] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg bg-[#bc8934]/10 border border-[#bc8934]/20 text-[#d4a043] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             {t('results_tag')}
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('portfolio_title')}</h2>
@@ -241,7 +241,7 @@ export default function Results() {
             <button
               key={f.key}
               onClick={() => { setActiveFilter(f.key); setVisibleCards(new Set()); }}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeFilter === f.key
                   ? 'bg-[#bc8934] text-white shadow-lg shadow-[#bc8934]/30'
                   : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10'
@@ -287,7 +287,7 @@ export default function Results() {
                 <div className="p-2.5 sm:p-3.5 border-t border-white/5">
                   {/* Category badge with animation */}
                   <span
-                    className={`inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5 transition-all duration-500 ${
+                    className={`inline-block px-2 py-0.5 rounded-md bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5 transition-all duration-500 ${
                       isCardVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                     }`}
                     style={{ transitionDelay: `${idx * 60 + 200}ms` }}
@@ -332,7 +332,7 @@ export default function Results() {
 
               {/* Title area - same as other cards */}
               <div className="p-2.5 sm:p-3.5 border-t border-white/5">
-                <span className="inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5">
+                <span className="inline-block px-2 py-0.5 rounded-md bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5">
                   {t('more_works_badge')}
                 </span>
                 <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight mb-0.5 line-clamp-2">
@@ -386,7 +386,7 @@ export default function Results() {
               />
             </div>
             <div className="mt-4 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-xs font-semibold mb-2">
+              <span className="inline-block px-3 py-1 rounded-md bg-[#bc8934]/20 text-[#d4a043] text-xs font-semibold mb-2">
                 {t(filteredWorks[lightboxIndex].catKey)}
               </span>
               <h3 className="text-white text-lg sm:text-xl font-bold">{t(filteredWorks[lightboxIndex].titleKey)}</h3>
