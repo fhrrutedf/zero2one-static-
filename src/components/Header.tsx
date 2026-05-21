@@ -11,7 +11,6 @@ const navKeys: { href: string; labelKey: TranslationKey }[] = [
   { href: '#hero', labelKey: 'nav_home' },
   { href: '#about', labelKey: 'nav_about' },
   { href: '#services', labelKey: 'nav_services' },
-  { href: '#portfolio', labelKey: 'nav_portfolio' },
   { href: '#results', labelKey: 'nav_results' },
   { href: '#whyus', labelKey: 'nav_whyus' },
   { href: '#contact', labelKey: 'nav_contact' },
@@ -65,7 +64,6 @@ export default function Header() {
   const navTextActive = 'text-[#bc8934]';
   const navTextDefault = isDark ? 'text-white/80 hover:text-white' : 'text-white/80 hover:text-white';
   const mobileMenuBg = 'bg-[#1a1517]';
-  const mobileMenuText = 'text-white';
   const mobileMenuMuted = 'text-white/70 hover:bg-white/5 hover:text-white';
   const borderMuted = 'border-white/20';
   const hoverBg = 'hover:bg-white/10';
@@ -77,20 +75,21 @@ export default function Header() {
     >
       <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
-          {/* Logo */}
+          {/* Logo + Company Name */}
           <a
             href="#hero"
             onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
             className="flex items-center gap-2 shrink-0"
           >
             <Image
-              src={isScrolled || isDark ? "/logo-white.png" : "/logo-white.png"}
-              alt="ZERO 2 ONE"
-              width={120}
-              height={40}
+              src="/logo-hq.png"
+              alt={t('company_name')}
+              width={44}
+              height={44}
               className="h-8 sm:h-10 w-auto"
               priority
             />
+            <span className="text-white font-bold text-sm sm:text-base tracking-wide">{t('company_name')}</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -167,13 +166,16 @@ export default function Header() {
       >
         <div className="p-5 sm:p-6 h-full overflow-y-auto">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
-            <Image
-              src="/logo-white.png"
-              alt="ZERO 2 ONE"
-              width={100}
-              height={32}
-              className="h-8 w-auto"
-            />
+            <div className="flex items-center gap-2">
+              <Image
+                src="/logo-hq.png"
+                alt={t('company_name')}
+                width={36}
+                height={36}
+                className="h-7 sm:h-8 w-auto"
+              />
+              <span className="text-white font-bold text-xs sm:text-sm">{t('company_name')}</span>
+            </div>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/60 hover:text-white"

@@ -9,7 +9,6 @@ const quickLinks: { href: string; labelKey: TranslationKey }[] = [
   { href: '#hero', labelKey: 'nav_home' },
   { href: '#about', labelKey: 'nav_about' },
   { href: '#services', labelKey: 'nav_services' },
-  { href: '#portfolio', labelKey: 'nav_portfolio' },
   { href: '#results', labelKey: 'nav_results' },
   { href: '#whyus', labelKey: 'nav_whyus' },
   { href: '#contact', labelKey: 'nav_contact' },
@@ -44,13 +43,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Image
-              src="/logo-white.png"
-              alt="ZERO 2 ONE"
-              width={140}
-              height={44}
-              className="h-10 w-auto mb-4"
-            />
+            <div className="flex items-center gap-2 mb-3">
+              <Image
+                src="/logo-hq.png"
+                alt={t('company_name')}
+                width={40}
+                height={40}
+                className="h-9 w-auto"
+              />
+              <span className="text-white font-bold text-sm tracking-wide">{t('company_name')}</span>
+            </div>
             <p className="text-[#f5f3f0]/75 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-6 font-semibold">{t('footer_desc')}</p>
             <div className="flex items-center gap-2 sm:gap-3">
               <a href="https://www.instagram.com/zero2onedm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-[#bc8934] hover:text-white transition-all duration-300 min-w-[44px] min-h-[44px]">
@@ -117,8 +119,8 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 sm:gap-3">
                 <Mail size={16} className="text-[#bc8934] mt-0.5 shrink-0 sm:w-[18px] sm:h-[18px]" />
-                <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-[#f5f3f0]/75 hover:text-[#bc8934] transition-colors text-xs sm:text-sm font-semibold">
-                  zero2one012025@gmail.com
+                <a href="mailto:info@zero2one.sa" dir="ltr" className="text-[#f5f3f0]/75 hover:text-[#bc8934] transition-colors text-xs sm:text-sm font-semibold">
+                  info@zero2one.sa
                 </a>
               </li>
             </ul>
@@ -128,12 +130,9 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-center">
           <p className="text-white/75 text-[10px] sm:text-xs font-semibold">
-            &copy; {year} ZERO 2 ONE. {t('footer_rights')}
-          </p>
-          <p className="text-white/75 text-[10px] sm:text-xs font-semibold">
-            من الصفر إلى الواحد
+            &copy; {year} {t('company_name')}. {t('footer_rights')}
           </p>
         </div>
       </div>
