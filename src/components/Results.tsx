@@ -127,7 +127,7 @@ const filterKeys: { key: WorkCategory; labelKey: TranslationKey }[] = [
   { key: 'product', labelKey: 'results_filter_product' },
 ];
 
-const PORTFOLIO_EXTERNAL_URL = 'https://online.fliphtml5.com/Moayaduae/jhac/#p=1';
+const PORTFOLIO_EXTERNAL_URL = 'https://online.fliphtml5.com/Moayaduae/jhac/';
 
 export default function Results() {
   const { t, isRTL } = useLanguage();
@@ -197,6 +197,24 @@ export default function Results() {
   const openPortfolioViewer = useCallback(() => {
     setShowPortfolio(true);
     document.body.style.overflow = 'hidden';
+    // Try opening directly in new tab as fallback for browsers with iframe issues
+    try {
+      const testIframe = document.createElement('iframe');
+      testIframe.style.display = 'none';
+      // If the browser restricts iframes heavily, open in new tab instead
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        window.open(PORTFOLIO_EXTERNAL_URL, '_blank', 'noopener,noreferrer');
+        setShowPortfolio(false);
+        document.body.style.overflow = '';
+        return;
+      }
+    } catch {
+      // fallback - open in new tab
+      window.open(PORTFOLIO_EXTERNAL_URL, '_blank', 'noopener,noreferrer');
+      setShowPortfolio(false);
+      document.body.style.overflow = '';
+      return;
+    }
   }, []);
 
   const closePortfolioViewer = useCallback(() => {
@@ -432,9 +450,22 @@ export default function Results() {
               src={PORTFOLIO_EXTERNAL_URL}
               className="absolute inset-0 w-full h-full border-0"
               title={t('more_works_title')}
-              allow="clipboard-write"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              allow="clipboard-write; fullscreen; autoplay"
+              referrerPolicy="no-referrer-when-downgrade"
+              loading="eager"
             />
+            {/* Fallback button if iframe fails to load */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
+              <a
+                href={PORTFOLIO_EXTERNAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#bc8934] text-white text-sm font-bold shadow-lg hover:bg-[#9a6e2a] transition-colors"
+              >
+                <ExternalLink size={16} />
+                {isRTL ? 'فتح في نافذة جديدة' : 'Open in new tab'}
+              </a>
+            </div>
           </div>
         </div>
       )}
