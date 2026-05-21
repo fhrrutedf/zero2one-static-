@@ -20,24 +20,28 @@ const works: WorkItem[] = [
   // Portfolio items (development/branding/ads)
   {
     titleKey: 'portfolio_1_title',
+    clientKey: 'portfolio_1_client',
     catKey: 'portfolio_1_cat',
     image: '/images/projects/doctor/poster-1.png',
     filter: 'development',
   },
   {
     titleKey: 'portfolio_2_title',
+    clientKey: 'portfolio_2_client',
     catKey: 'portfolio_2_cat',
     image: '/images/projects/Logistics-Delivery-App/3.png',
     filter: 'development',
   },
   {
     titleKey: 'portfolio_3_title',
+    clientKey: 'portfolio_3_client',
     catKey: 'portfolio_3_cat',
     image: '/images/projects/branding-coffee/poster.png',
     filter: 'branding',
   },
   {
     titleKey: 'portfolio_4_title',
+    clientKey: 'portfolio_4_client',
     catKey: 'portfolio_4_cat',
     image: '/images/projects/osool/d-three.png',
     filter: 'ads',

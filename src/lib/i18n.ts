@@ -59,12 +59,16 @@ export const translations = {
     portfolio_subtitle: 'أعمالنا ومشاريعنا السابقة هي قصص بدأت بتحدٍ، ثم تحولت إلى نتيجة نجاح تظهر ثمار مجهوداتنا. كل مشروع نعمل عليه يمر بسؤال أساسي: ما الذي يحتاجه هذا العمل حتى يصبح أوضح، أقوى، وأكثر قدرة على الوصول إلى عميله؟ من تطوير المواقع والمتاجر، إلى بناء الهويات التجارية، وتحسين محركات البحث، والسيو المحلي، نعمل على صناعة حلول تناسب طبيعة كل مشروع، لا قوالب جاهزة تتكرر من عميل لآخر.',
     portfolio_1_title: 'متجر أزياء + لوحة تحكم',
     portfolio_1_cat: 'تطوير متاجر',
+    portfolio_1_client: 'عيادة الدكتور',
     portfolio_2_title: 'نظام لوجستي متكامل',
     portfolio_2_cat: 'أنظمة مخصصة',
+    portfolio_2_client: 'تطبيق توصيل',
     portfolio_3_title: 'هوية محمصة أطايب',
     portfolio_3_cat: 'هوية تجارية',
+    portfolio_3_client: 'محمصة أطايب',
     portfolio_4_title: 'تحسين SEO لشركة أصول',
     portfolio_4_cat: 'SEO',
+    portfolio_4_client: 'شركة أصول',
     portfolio_view: 'عرض المشروع',
 
     // WhyUs
@@ -227,12 +231,16 @@ export const translations = {
     portfolio_subtitle: 'Our previous work and projects are stories that started with a challenge, then turned into success results that showcase our efforts. Every project we work on goes through a fundamental question: What does this business need to become clearer, stronger, and more capable of reaching its customer? From website and store development, to brand identity building, SEO, and local SEO, we craft solutions that suit each project\'s nature — not ready-made templates repeated from one client to another.',
     portfolio_1_title: 'Fashion Store + Dashboard',
     portfolio_1_cat: 'E-Commerce',
+    portfolio_1_client: 'Doctor Clinic',
     portfolio_2_title: 'Integrated Logistics System',
     portfolio_2_cat: 'Custom Systems',
+    portfolio_2_client: 'Delivery App',
     portfolio_3_title: 'Atayab Roastery Identity',
     portfolio_3_cat: 'Brand Identity',
+    portfolio_3_client: 'Atayab Roastery',
     portfolio_4_title: 'SEO for Usul Company',
     portfolio_4_cat: 'SEO',
+    portfolio_4_client: 'Usul Company',
     portfolio_view: 'View Project',
 
     // WhyUs
