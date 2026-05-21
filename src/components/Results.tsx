@@ -307,25 +307,22 @@ export default function Results() {
             );
           })}
 
-          {/* "باقي أعمالنا" Card - same style as other cards */}
+          {/* "باقي أعمالنا" Card - EXACT same style as other work cards */}
           {activeFilter === 'all' && (
             <div
-              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-white/5 transition-all duration-500 hover:border-[#bc8934]/30 ${visible ? 'animate-scale-up' : 'opacity-0'}`}
+              className={`results-card group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer bg-[#2a1a1b] border border-white/5 transition-all duration-500 hover:border-[#bc8934]/30 ${
+                visible ? 'animate-scale-up' : 'opacity-0'
+              }`}
               style={{ animationDelay: `${filteredWorks.length * 60}ms` }}
               onClick={openPortfolioViewer}
             >
-              {/* Image area - gradient background like other cards */}
-              <div className="relative aspect-square bg-gradient-to-br from-[#2a1a1b] via-[#1a1517] to-[#2a1a1b] flex items-center justify-center">
-                {/* Subtle decorative lines like other project images */}
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-1/4 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-[#bc8934]/40 to-transparent" />
-                  <div className="absolute top-1/2 left-1/6 w-2/3 h-px bg-gradient-to-r from-transparent via-[#bc8934]/30 to-transparent" />
-                  <div className="absolute bottom-1/4 left-1/3 w-1/3 h-px bg-gradient-to-r from-transparent via-[#bc8934]/20 to-transparent" />
-                </div>
-                {/* Icon without circle */}
-                <div className="flex flex-col items-center gap-2 group-hover:scale-110 transition-transform duration-500">
-                  <ExternalLink size={28} className="text-[#bc8934] sm:w-8 sm:h-8" />
-                  <span className="text-[#bc8934]/60 text-[9px] sm:text-[10px] font-bold">{isRTL ? 'تصفح المزيد' : 'Browse More'}</span>
+              {/* Image container - same bg as other cards */}
+              <div className="relative aspect-square bg-[#1a1517]">
+                {/* Placeholder image that looks like other project images */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <ExternalLink size={28} className="text-[#bc8934] mx-auto sm:w-8 sm:h-8 group-hover:scale-110 transition-transform duration-500" />
+                  </div>
                 </div>
                 {/* Zoom icon on hover - same as other cards */}
                 <div className="absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#bc8934]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -338,7 +335,7 @@ export default function Results() {
                 <span className="inline-block px-2 py-0.5 rounded-full bg-[#bc8934]/20 text-[#d4a043] text-[9px] sm:text-[10px] font-bold mb-1.5">
                   {t('more_works_badge')}
                 </span>
-                <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight">
+                <h3 className="text-white text-[11px] sm:text-sm font-bold leading-tight mb-0.5 line-clamp-2">
                   {t('more_works_title')}
                 </h3>
               </div>

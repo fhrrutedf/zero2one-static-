@@ -191,7 +191,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-foreground text-xs sm:text-sm">{t('contact_email_addr')}</h4>
-                  <a href="mailto:zero2one012025@gmail.com" dir="ltr" className="text-foreground/60 text-[10px] sm:text-xs mt-0.5 hover:text-[#bc8934] transition-colors font-semibold">zero2one012025@gmail.com</a>
+                  <a href="mailto:info@zero2one.sa" dir="ltr" className="text-foreground/60 text-[10px] sm:text-xs mt-0.5 hover:text-[#bc8934] transition-colors font-semibold">info@zero2one.sa</a>
                 </div>
               </div>
 
