@@ -233,7 +233,6 @@ export default function Results() {
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-white">{t('portfolio_title')}</h2>
           <div className="section-divider" />
-          <p className="leading-relaxed text-sm sm:text-base text-white/90 font-semibold mt-4">{t('portfolio_subtitle')}</p>
         </div>
 
         {/* Filter Tabs */}
