@@ -113,7 +113,7 @@ export const translations = {
     contact_info_title: 'معلومات التواصل',
     contact_address: 'الرياض - العليا، مجمع الكمبيوترات، الدور السابع',
     contact_phone_num: '+966 53 030 7054',
-    contact_email_addr: 'zero2one012025@gmail.com',
+    contact_email_addr: 'info@zero2one.sa',
     contact_working: 'ساعات العمل',
     contact_working_days: 'الأحد - الخميس',
     contact_working_hours: '9:00 ص - 6:00 م',
@@ -176,7 +176,7 @@ export const translations = {
   },
   en: {
     // Company Name
-    company_name: 'ZERO 2 ONE',
+    company_name: 'ZERO TO ONE',
 
     // Header
     nav_home: 'Home',
@@ -286,14 +286,14 @@ export const translations = {
     contact_info_title: 'Contact Information',
     contact_address: 'Riyadh - Olaya, Computers Complex, 7th Floor',
     contact_phone_num: '+966 53 030 7054',
-    contact_email_addr: 'zero2one012025@gmail.com',
+    contact_email_addr: 'info@zero2one.sa',
     contact_working: 'Working Hours',
     contact_working_days: 'Sunday - Thursday',
     contact_working_hours: '9:00 AM - 6:00 PM',
     contact_social: 'Follow Us',
 
     // Footer
-    footer_desc: 'ZERO 2 ONE Agency — A digital marketing, development, and branding agency in Saudi Arabia that combines strategic thinking with creative execution. From Zero to One.',
+    footer_desc: 'ZERO TO ONE Agency — A digital marketing, development, and branding agency in Saudi Arabia that combines strategic thinking with creative execution. From Zero to One.',
     footer_links: 'Quick Links',
     footer_services: 'Our Services',
     footer_contact: 'Contact Us',

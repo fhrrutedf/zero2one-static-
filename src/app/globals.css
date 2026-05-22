@@ -182,83 +182,37 @@
 
 /* ========================================
    SAUDI LANDMARKS BACKGROUND
-   Background image using <img> tag for
+   Background image on body element for
    maximum cross-browser compatibility.
-   Falls back to solid color if image fails.
+   Image is pre-darkened, no overlay needed.
    ======================================== */
+
+/* Body gets the background - works on ALL devices */
+body {
+  background-image: url('/images/saudi-landmarks-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-color: #1a1517 !important;
+}
+
+/* Parallax effect only on desktop with hover capability */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    background-attachment: fixed !important;
+  }
+}
+
 .saudi-bg-wrapper {
   position: relative;
   min-height: 100vh;
-  /* Solid color fallback in case image doesn't load */
-  background-color: #1a1517;
+  /* No need for separate background - body handles it */
 }
 
-/* The background image - works on ALL browsers including mobile */
+/* Hide the <img> tag - body background handles everything now */
 .saudi-bg-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  object-fit: cover;
-  object-position: center center;
-  opacity: 0.45;
-  pointer-events: none;
-  will-change: transform;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  /* Prevent any flickering */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* ========================================
-   MOBILE BROWSER FIXES
-   position:fixed doesn't work well on many
-   mobile browsers. Use absolute instead.
-   ======================================== */
-
-/* iOS Safari - position:fixed behaves unpredictably */
-@supports (-webkit-touch-callout: none) {
-  .saudi-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .saudi-bg-wrapper {
-    position: relative;
-    overflow-x: hidden;
-  }
-}
-
-/* All mobile devices - screen width below 768px likely mobile */
-@media (max-width: 768px) {
-  .saudi-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-
-/* Chrome on iOS (uses WebKit but doesn't support -webkit-touch-callout) */
-@media (hover: none) and (pointer: coarse) {
-  .saudi-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-
-/* Fallback for browsers that don't support object-fit */
-@supports not (object-fit: cover) {
-  .saudi-bg-image {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: unset;
-  }
+  display: none !important;
 }
 
 .saudi-bg-content {

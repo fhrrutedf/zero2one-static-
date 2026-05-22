@@ -142,7 +142,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               description: "وكالة تسويق رقمي وبرمجة وهوية تجارية في السعودية - من الصفر إلى الواحد",
               url: "https://zero2one.sa",
               logo: "https://zero2one.sa/logo.png",
-              email: "zero2one012025@gmail.com",
+              email: "info@zero2one.sa",
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "SA",
@@ -185,7 +185,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               description: "وكالة تسويق رقمي وتحول رقمي في الرياض، السعودية",
               url: "https://zero2one.sa",
               telephone: "+966530307054",
-              email: "zero2one012025@gmail.com",
+              email: "info@zero2one.sa",
               image: "https://zero2one.sa/logo.png",
               priceRange: "$$",
               address: {
