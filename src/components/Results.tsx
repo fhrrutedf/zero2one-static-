@@ -428,7 +428,7 @@ export default function Results() {
             <div className="flex items-center gap-3">
               <Image
                 src="/logo-hq.png"
-                alt={t('company_name') || 'ZERO 2 ONE'}
+                alt={t('company_name') || 'ZERO TO ONE'}
                 width={32}
                 height={32}
                 className="h-7 w-auto"

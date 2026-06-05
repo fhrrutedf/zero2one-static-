@@ -25,13 +25,13 @@ export async function POST(req: NextRequest) {
 
     // Email content
     const mailOptions = {
-      from: '"ZERO 2 ONE Website" <zero2one012025@gmail.com>',
+      from: '"ZERO TO ONE Website" <zero2one012025@gmail.com>',
       to: 'zero2one012025@gmail.com',
-      subject: `رسالة جديدة من ${from_name} - موقع ZERO 2 ONE`,
+      subject: `رسالة جديدة من ${from_name} - موقع ZERO TO ONE`,
       html: `
         <div style="font-family: Cairo, Arial, sans-serif; direction: rtl; background: #f7f7f6; padding: 20px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #e92f08, #e98523); padding: 20px; border-radius: 12px 12px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 22px;">ZERO 2 ONE</h1>
+            <h1 style="color: white; margin: 0; font-size: 22px;">ZERO TO ONE</h1>
             <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0; font-size: 14px;">رسالة جديدة من الموقع</p>
           </div>
           <div style="background: white; padding: 25px; border-radius: 0 0 12px 12px;">
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
             </table>
           </div>
           <p style="text-align: center; color: #999; font-size: 12px; margin-top: 15px;">
-            هذه الرسالة أُرسلت من نموذج التواصل على موقع ZERO 2 ONE
+            هذه الرسالة أُرسلت من نموذج التواصل على موقع ZERO TO ONE
           </p>
         </div>
       `,
