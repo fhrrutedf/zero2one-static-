@@ -10,6 +10,7 @@ import Results from '@/components/Results';
 import WhyUs from '@/components/WhyUs';
 import Stats from '@/components/Stats';
 import Contact from '@/components/Contact';
+import Certifications from '@/components/Certifications';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
@@ -37,6 +38,7 @@ export default function Home() {
               <WhyUs />
               <Stats />
               <Contact />
+              <Certifications />
             </main>
             <Footer />
             <WhatsAppButton />

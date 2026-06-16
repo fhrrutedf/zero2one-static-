@@ -171,6 +171,17 @@ export const translations = {
     more_works_subtitle: 'اكتشف المزيد من مشاريعنا',
     more_works_badge: 'المزيد',
 
+    // Certifications
+    cert_tag: 'موثوقية معتمدة',
+    cert_title: 'شهاداتنا واعتماداتنا',
+    cert_subtitle: 'فخرنا باعتداد الجهات الرسمية بجودة أعمالنا وموثوقية خدماتنا',
+    cert_maroof_label: 'منصة معروف',
+    cert_maroof_number: 'رقم الشهادة',
+    cert_maroof_number_value: '373430',
+    cert_maroof_desc: 'معتمدون رسمياً في منصة "معروف" السعودية، المنصة الحكومية المعتمدة للتحقق من موثوقية المنشآت التجارية.',
+    cert_verify_link: 'التحقق من الشهادة',
+    cert_badge_trust: 'منشأة موثوقة',
+
     // WhatsApp
     whatsapp_tooltip: 'تواصل معنا عبر واتساب',
   },
@@ -343,6 +354,17 @@ export const translations = {
     more_works_title: 'More of Our Work',
     more_works_subtitle: 'Discover more of our projects',
     more_works_badge: 'More',
+
+    // Certifications
+    cert_tag: 'Verified & Trusted',
+    cert_title: 'Our Certifications & Accreditations',
+    cert_subtitle: 'We are proud to be officially recognized for the quality and reliability of our work',
+    cert_maroof_label: 'Maroof Platform',
+    cert_maroof_number: 'Certificate No.',
+    cert_maroof_number_value: '373430',
+    cert_maroof_desc: 'Officially registered on "Maroof", the Saudi government platform for verifying the credibility of commercial businesses.',
+    cert_verify_link: 'Verify Certificate',
+    cert_badge_trust: 'Trusted Establishment',
 
     // WhatsApp
     whatsapp_tooltip: 'Contact us via WhatsApp',
