@@ -1,15 +1,23 @@
 'use client';
 
 import { useLanguage } from './LanguageProvider';
+import { metaEvents } from '@/lib/meta-pixel';
 
 export default function WhatsAppButton() {
   const { t } = useLanguage();
+
+  const handleClick = () => {
+    // Fire Meta Pixel "Contact" event so Facebook Ads can attribute
+    // this WhatsApp engagement back to the ad click.
+    metaEvents.contact('floating_whatsapp_button');
+  };
 
   return (
     <a
       href="https://wa.me/966530307054"
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className="fixed bottom-4 sm:bottom-6 end-4 sm:end-6 z-50 group"
       aria-label={t('whatsapp_tooltip')}
     >

@@ -116,3 +116,45 @@ Stage Summary:
 - FlipHTML5 portfolio opens seamlessly in branded full-screen viewer
 - No external website indicators - looks like part of the site
 - Portfolio and Results fully merged into single section
+
+---
+Task ID: meta-pixel-integration
+Agent: Main Agent
+Task: تركيب Meta Pixel Code + ربط الموقع بحساب إعلانات فيسبوك/إنستا
+
+Work Log:
+- تم إنشاء ملف src/lib/meta-pixel.ts يحتوي على:
+  * ثابت META_PIXEL_ID = '1017999920890440' (رقم البيكسل الذي زوّده العميل)
+  * دالة trackMetaEvent() لإطلاق الأحداث القياسية (Standard Events)
+  * دالة trackMetaCustomEvent() لإطلاق الأحداث المخصصة
+  * كائن metaEvents يضم ثلاث دوال جاهزة: lead(), contact(), viewContent()
+- تم تعديل src/app/layout.tsx:
+  * إضافة Meta Pixel script tag في <head> مباشرة بعد Google Tag Manager
+  * إضافة <noscript> fallback في <body> يحتوي صورة التتبع (1x1 pixel)
+  * استخدام META_PIXEL_ID من ملف الـ helper (لا تكرار للأرقام)
+- تم تعديل src/components/Contact.tsx:
+  * استيراد metaEvents
+  * إطلاق حدث "Lead" عند نجاح إرسال نموذج التواصل
+  * تمرير source='contact_form' لتمييز مصدر التحويل
+- تم تعديل src/components/WhatsAppButton.tsx:
+  * إضافة معالج onClick على زر WhatsApp العائم
+  * إطلاق حدث "Contact" مع source='floating_whatsapp_button'
+- تم تعديل src/components/Services.tsx:
+  * إضافة معالج onClick على كل زر WhatsApp خاص بالخدمات الست
+  * إطلاق حدث "Contact" مع source='service_N_whatsapp' (N=1..6)
+- تم تعديل src/components/Results.tsx:
+  * إطلاق حدث "ViewContent" عند ظهور قسم "نتائجنا" على الشاشة
+  * source = 'Our Results Section' (لإعادة الاستهداف في حملات Retargeting)
+- تم تشغيل bun install (829 packages) ثم bun run build
+- البناء نجح بدون أي أخطاء (4.6s compile time)
+- ESLint warnings الموجودة في LanguageProvider.tsx و ThemeProvider.tsx موجودة قبل التعديلات وليست مرتبطة بـ Meta Pixel
+
+Stage Summary:
+- Meta Pixel ID 1017999920890440 مركّب ومفعّل على كل صفحات الموقع
+- 4 أنواع من الأحداث يتم تتبعها:
+  1. PageView — تلقائياً مع كل زيارة (في الكود الأساسي)
+  2. Lead — عند إرسال نموذج التواصل بنجاح
+  3. Contact — عند الضغط على أي زر واتساب (عائم أو خاص بخدمة)
+  4. ViewContent — عند تصفح قسم نتائجنا (Retargeting signal)
+- جاهز للربط مع أي حملة إعلانية على فيسبوك/إنستا
+- لا حاجة لتعديلات إضافية من العميل، فقط إنشاء الحملة واختيار البيكسل من Ads Manager

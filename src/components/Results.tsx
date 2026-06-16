@@ -5,6 +5,7 @@ import { useLanguage } from './LanguageProvider';
 import { X, ZoomIn, ChevronLeft, ChevronRight, ArrowLeft, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import type { TranslationKey } from '@/lib/i18n';
+import { metaEvents } from '@/lib/meta-pixel';
 
 type WorkCategory = 'all' | 'branding' | 'ads' | 'product' | 'development';
 
@@ -142,7 +143,13 @@ export default function Results() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
+        if (entry.isIntersecting) {
+          setVisible(true);
+          // Fire Meta Pixel "ViewContent" event once when the Results
+          // section scrolls into view — useful for retargeting visitors
+          // who explored our portfolio.
+          metaEvents.viewContent('Our Results Section');
+        }
       },
       { threshold: 0.05 }
     );

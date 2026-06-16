@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
 import { MapPin, Mail, Clock, Send, Instagram, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { metaEvents } from '@/lib/meta-pixel';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
@@ -46,6 +47,9 @@ export default function Contact() {
 
       if (res.ok && data.success) {
         setStatus('success');
+        // Fire Meta Pixel "Lead" event when the form is successfully submitted.
+        // This lets Facebook Ads attribute this conversion back to the ad click.
+        metaEvents.lead('contact_form');
         setFormData({ from_name: '', from_email: '', from_phone: '', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
