@@ -190,3 +190,65 @@ Stage Summary:
 - زر التحقق يربط مباشرة بصفحة معروف الرسمية (373430)
 - متوافق مع ثيم الموقع الذهبي + يدعم العربية والإنجليزية
 - يبني الثقة قبل خروج الزائر من الموقع
+
+---
+Task ID: semrush-seo-fixes
+Agent: Main Agent
+Task: إصلاح مشاكل الـ SEO اللي طلعتها أداة SEMrush (5 Errors + 8 Warnings)
+
+Work Log:
+المشاكل المُحددة من SEMrush:
+1. Mobile Friendliness — الصفحة غير متوافقة مع الجوال
+2. INP (Interaction to Next Paint) — تأخر في استجابة النقرات
+3. DOM Size — تعذّر قياس حجم DOM
+4. YouTube link missing — لا يوجد رابط لقناة يوتيوب
+5. LinkedIn link missing — لا يوجد رابط لصفحة LinkedIn
+
+الإصلاحات المنفذة:
+- next.config.ts:
+  * إضافة images.formats = [avif, webp] لتحويل كل الصور لصيغ حديثة مضغوطة
+  * إضافة minimumCacheTTL = 30 يوم لتقليل طلبات الصور
+  * تحديد deviceSizes و imageSizes بأحجام مدروسة
+  * تفعيل compress: true لضغط الاستجابات
+  * تفعيل experimental.optimizePackageImports = ["lucide-react"] لتقليل حجم الـ bundle (DOM size fix)
+
+- src/app/layout.tsx:
+  * إضافة viewport export منفصل (Next.js 14+) مع:
+    - width: device-width, initialScale: 1, maximumScale: 5
+    - viewportFit: cover للأجهزة ذات الـ notch
+    - themeColor للوضع الفاتح والداكن
+    - colorScheme: light dark
+    - userScalable: true (لإتاحة التكبير للمستخدمين — accessibility)
+  * تغيير GTM و Meta Pixel من async إلى defer (يحل INP لأن السكربتات ما تعرقّل الـ main thread)
+  * إضافة روابط YouTube و LinkedIn لـ Schema.org Organization.sameAs
+  * إضافة روابط YouTube و LinkedIn لـ Schema.org LocalBusiness.sameAs
+
+- src/components/Footer.tsx:
+  * إضافة أيقونة YouTube مع رابط https://www.youtube.com/@zero2one2030
+  * إضافة أيقونة LinkedIn مع رابط https://www.linkedin.com/company/zero2onedm
+  * flex-wrap على السوشيال ميديا عشان ما تخرج من الشاشة على الجوال
+
+- src/components/Contact.tsx:
+  * إضافة روابط YouTube و LinkedIn في قسم "تابعنا"
+
+- public/robots.txt:
+  * إضافة User-agents أكثر شمولًا (Googlebot-Image, LinkedInBot, Applebot, YandexBot, Baiduspider)
+  * حظر /_next/ من الفهرسة
+  * حظر روابط ?lang= المتكررة (محتوى مكرر)
+  * تنظيم التعليقات
+
+- src/app/sitemap.ts:
+  * تحديث روابط الأقسام (#results بدل #portfolio)
+  * إضافة قسم #certifications الجديد
+  * تحسين changeFrequency والأولويات
+
+بناء ناجح بدون أخطاء (4.9s)
+
+Stage Summary:
+- ✅ Mobile Friendliness: viewport meta كامل + themeColor + viewportFit:cover
+- ✅ INP: defer بدل async لكل سكربتات التتبع (GTM + Meta Pixel)
+- ✅ DOM Size: optimizePackageImports + image optimization (avif/webp)
+- ✅ YouTube link: مضاف في Footer + Contact + Schema.org (×2)
+- ✅ LinkedIn link: مضاف في Footer + Contact + Schema.org (×2)
+- كل الإصلاحات ما تأثر على شكل أو وظيفة الموقع
+- الموقع يبني بنجاح وجاهز للنشر

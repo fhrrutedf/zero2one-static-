@@ -1,10 +1,20 @@
+# robots.txt for ZERO TO ONE — https://zero2one.sa
+# Last updated: 2026-06-16
+
+# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
+User-agent: Googlebot-Image
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
 
 User-agent: Twitterbot
 Allow: /
@@ -12,12 +22,30 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+# Catch-all
 User-agent: *
 Allow: /
 Crawl-delay: 2
 
-# Sitemap
+# Sitemap location
 Sitemap: https://zero2one.sa/sitemap.xml
 
-# Disallow admin/api paths
+# Block backend / API endpoints from being indexed
 Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /*?*lang=  # don't index ?lang= variants — they're for in-page UI only

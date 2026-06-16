@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import { META_PIXEL_ID } from "@/lib/meta-pixel";
@@ -92,6 +92,23 @@ export const metadata: Metadata = {
   },
 };
 
+// Viewport export — required by Next.js 14+ for proper mobile rendering.
+// Fixes the SEMrush "Mobile Friendliness" warning by ensuring the page
+// has a proper responsive viewport meta tag, theme color for the browser
+// chrome, and explicit viewport-fit=cover for notched devices.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5, // allow zoom for accessibility (don't disable)
+  userScalable: true, // accessibility: let users zoom in
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f3f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1517" },
+  ],
+  colorScheme: "light dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -122,24 +139,25 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager — loaded with defer-style strategy so it
+            does not block first paint / INP. The script self-queues. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+j=d.createElement(s);j.defer=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TVKP5KSX');`,
           }}
         />
-        {/* Meta Pixel Code */}
+        {/* Meta Pixel Code — defer-loaded to improve INP score */}
         <script
           dangerouslySetInnerHTML={{
             __html: `!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
+n.queue=[];t=b.createElement(e);t.defer=true;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
@@ -174,6 +192,8 @@ fbq('track', 'PageView');`,
                 "https://www.instagram.com/zero2onedm/",
                 "https://x.com/Zero2OneDM",
                 "https://www.tiktok.com/@zero2one2030",
+                "https://www.youtube.com/@zero2one2030",
+                "https://www.linkedin.com/company/zero2onedm",
               ],
               serviceType: [
                 "التسويق الرقمي",
@@ -228,6 +248,8 @@ fbq('track', 'PageView');`,
                 "https://www.instagram.com/zero2onedm/",
                 "https://x.com/Zero2OneDM",
                 "https://www.tiktok.com/@zero2one2030",
+                "https://www.youtube.com/@zero2one2030",
+                "https://www.linkedin.com/company/zero2onedm",
               ],
             }),
           }}
